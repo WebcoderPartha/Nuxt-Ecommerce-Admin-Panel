@@ -12,10 +12,12 @@
                         <div class="cursor-pointer px-6 py-3 hover:bg-[#262930]">
                             <Icon :name="menu.icon" class="text-2xl mr-3 text-white" />
                             <span :class="`text-white ${menuOpen ? ' visible' : 'hidden'} duration-300`">{{ menu.title }}</span>
-                            <span :class="`${!menuOpen && 'hidden'}`">
+                            <span v-if="submenuIndex  !== i">
                                 <Icon v-if="menu.submenu" :name="menu.plusIcon" :class="` duration-500 text-2xl float-right text-white`" />
                             </span>
-                          
+                            <span v-else>
+                                <Icon v-if="menu.submenu" :name="menu.minusIcon" :class="` duration-500 text-2xl float-right text-white`" />
+                            </span>
                         </div>
                         <ul class="bg-[#282c33]" v-if="menu.submenu && submenuIndex  === i && menuOpen">
                             <li class="cursor-pointer px-16 py-3 hover:bg-[#262930] text-white" v-for="(sbmenu, id) in menu.submenuItems" :key="id">
