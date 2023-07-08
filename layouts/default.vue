@@ -29,7 +29,7 @@
                 
             </nav>
         </div>
-        <div class="flex-1 h-scree bg-gray-900">
+        <div class="flex-1 h-screen bg-gray-900">
             <HeaderTop />
             <slot />
         </div>
