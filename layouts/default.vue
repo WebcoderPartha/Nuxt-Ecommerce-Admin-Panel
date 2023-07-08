@@ -21,7 +21,7 @@
                         </div>
                         <ul class="bg-[#282c33]" v-if="menu.submenu && submenuIndex  === i && menuOpen">
                             <li class="cursor-pointer px-16 py-3 hover:bg-[#262930] text-white" v-for="(sbmenu, id) in menu.submenuItems" :key="id">
-                                {{ sbmenu.title }}
+                                <NuxtLink :to="sbmenu.link">{{ sbmenu.title }}</NuxtLink>
                             </li>
                         </ul>
                     </li>
@@ -59,10 +59,12 @@
         submenu: true,
         submenuItems: [
             {
-                title: 'Add Category'
+                title: 'Add Category',
+                link: '/category'
             },
             {
-                title: 'Category List'
+                title: 'Category List',
+                link: '/category'
             }
         ]
     },
@@ -75,10 +77,12 @@
         submenu: true,
         submenuItems: [
             {
-                title: 'Add Post'
+                title: 'Add Post',
+                link: '/',
             },
             {
-                title: 'List Post'
+                title: 'List Post',
+                link: '/',
             }
         ]
     }
