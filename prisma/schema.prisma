@@ -17,3 +17,13 @@ model Category {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
+
+// User 
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  email String @unique
+  password String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
