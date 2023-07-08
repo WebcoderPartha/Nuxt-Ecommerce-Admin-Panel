@@ -19,6 +19,8 @@
     "tailwindcss": "^3.3.2"
   },
   "dependencies": {
-    "@prisma/client": "^4.16.2"
+    "@prisma/client": "^4.16.2",
+    "noty": "^3.2.0-beta-deprecated",
+    "sweetalert2": "^11.7.12"
   }
 }
