@@ -15,9 +15,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="border">1</td>
-                        <td class="border">Laptop</td>
+                    <tr v-for="(category, idx) in getCategory" :key="category.id">
+                        <td class="border">{{ idx+1 }}</td>
+                        <td class="border">{{ category.name }}</td>
                         <td class="border">
                             <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"><Icon name="fa6-regular:pen-to-square" /></button>&nbsp;
                             <button class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"><Icon name="fa6-regular:trash-can" /></button>
@@ -56,7 +56,10 @@
     });
 // ===========Sweet Alert Use =============//
 
-    
+    const getCategory = useCategory()
+    const {data:categories, refresh, pending} = await useFetch('/api/category/category', {method:'GET'})
+    getCategory.value = categories
+   
 
     const name = ref('');
     const storeData = async (e) => {
@@ -74,6 +77,8 @@
             // Reset Form
             e.target.reset()
             name.value = ''
+            // Reload category
+            refresh()
 
         }else{
             Toast.fire({
