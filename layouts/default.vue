@@ -27,7 +27,8 @@
                 
             </nav>
         </div>
-        <div class="flex-1 h-screen">
+        <div class="flex-1 h-scree bg-gray-900">
+            <HeaderTop />
             <slot />
         </div>
     </div>
