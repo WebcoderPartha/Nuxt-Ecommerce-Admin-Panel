@@ -20,7 +20,7 @@
                         <td class="border">{{ category.name }}</td>
                         <td class="border">
                             <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"><Icon name="fa6-regular:pen-to-square" /></button>&nbsp;
-                            <button class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"><Icon name="fa6-regular:trash-can" /></button>
+                            <button @click="deleteData(category.id)" class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"><Icon name="fa6-regular:trash-can" /></button>
                         </td>
                     </tr>
                     </tbody>
@@ -67,12 +67,12 @@
             const formData = {
                 name: name.value
             }
-            const {data, error} = await useFetch('/api/category/category', {method:'POST', body:JSON.stringify(formData)})
+            const {data:storeDatas, error} = await useFetch('/api/category/category', {method:'POST', body:JSON.stringify(formData)})
 
             // Notification
             Toast.fire({
                 icon: "success",
-                title: data.value.success
+                title: storeDatas.value.success
             });
             // Reset Form
             e.target.reset()
@@ -88,7 +88,23 @@
         }
     
     } 
-
+    
+    const deleteData = async (id) => {
+        const {data:deleteData} = await useFetch('/api/category/category', {
+            method:'DELETE', 
+            body: {
+            id: id
+            }
+    })
+    console.log(id)
+        // Notification
+        Toast.fire({
+                icon: "success",
+                title: deleteData.value.success
+            });
+        // Reload category
+         refresh()
+    }
 </script>
 
 <style lang="scss" scoped>
