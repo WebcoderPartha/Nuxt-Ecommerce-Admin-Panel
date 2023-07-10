@@ -15,6 +15,42 @@
     definePageMeta({
         layout:false
     })
+
+    // ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener("mouseenter", $swal.stopTimer);
+        toast.addEventListener("mouseleave", $swal.resumeTimer);
+    },
+    });
+// ===========Sweet Alert Use =============//
+
+    const username = ref('')
+    const password = ref('')
+    
+    const {signIn} = useAuth() 
+    const loginHandler = async (e) => {
+        if(username.value.length !== 0 || password.value.length !== 0){
+            const {error, url} = await signIn('credentials', {username:username.value, password: password.value, redirect:false })
+            if(error){
+                alert('You have made a terrible mistake while entering your credentials')
+            }else{
+                navigateTo('/')
+            }
+
+        }else{
+            Toast.fire({
+                icon: "warning",
+                title: "Field is required!",
+            });
+        }
+    }
 </script>
 
 <style lang="scss" scoped>

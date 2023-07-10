@@ -1,6 +1,8 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { NuxtAuthHandler } from '#auth'
 
+
+
 export default NuxtAuthHandler({
     pages: {
     
