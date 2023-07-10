@@ -37,7 +37,7 @@
     const {signIn} = useAuth() 
     const loginHandler = async (e) => {
         if(username.value.length > 0 && password.value.length > 0){
-            const {error, url, data} = await signIn('credentials', {username:username.value, password: password.value, redirect:false })
+            const {error, url} = await signIn('credentials', {username:username.value, password: password.value, redirect:false })
             if(error){
                 alert('You have made a terrible mistake while entering your credentials')
             }else{
@@ -45,7 +45,7 @@
                 username.value = '';
                 password.value = '';
                 e.target.reset()
-                console.log(data)
+            
                 Toast.fire({
                     icon: "success",
                     title: "Loggin SuccessfullY!",

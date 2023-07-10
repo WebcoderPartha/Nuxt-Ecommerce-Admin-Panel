@@ -5,11 +5,12 @@ export default defineEventHandler(async (event) => {
     const getBody = await readBody(event);
     const prisma = new PrismaClient()
 
-    const user = await prisma.user.create({
+    const admin = await prisma.user.create({
         data: {
             name: getBody.name,
             email: getBody.email,
-            password: getBody.password
+            password: getBody.password,
+            role: "Admin"
         }
     })
 
