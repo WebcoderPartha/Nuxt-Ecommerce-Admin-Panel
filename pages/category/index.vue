@@ -41,6 +41,13 @@
 </template>
 
 <script setup>
+    definePageMeta({
+        middleware: 'auth',
+        // auth: {
+        //     unauthenticatedOnly: true,
+        //     navigateAuthenticatedTo: '/',
+        // },     
+    })
 // ===========Sweet Alert Use =============//
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
