@@ -25,13 +25,16 @@
                 <input type="text" v-model="discount" @change="discountChange"  class="w-80 bg-gray-900 rounded-md px-3 py-2" placeholder="Discount">
            </div>
            <div class="mb-2">
-                <input type="text" v-model="discount_price" class="w-80 bg-gray-900 rounded-md px-3 py-2" placeholder="discount price">
+                <input type="text" v-model="discount_price" class="w-80 mx-auto bg-gray-900 rounded-md px-3 py-2" placeholder="discount price">
            </div>
            <div class="mb-2">
                 <input type="text" v-model="quantity" class="w-80 bg-gray-900 rounded-md px-3 py-2" placeholder="Quantity">
            </div>
            <div class="mb-2">
-                <input type="file" class="w-80 bg-gray-900 rounded-md px-3 py-2">
+                <input type="file" @change="imageHadler" class="w-80 bg-gray-900 rounded-md px-3 py-2">
+           </div>
+            <div class="mb-2 w-[200px] mx-auto" v-if="image">
+                <img :src="image" class=" rounded" alt="">
            </div>
            <div class="mb-2">
                 <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2" value="Submit">
@@ -90,6 +93,27 @@ const discountChange = (e) => {
         });
         discount.value = ''
     }
+}
+
+const imageHadler = (e) => {
+    const file = e.target.files[0]
+    if(file.size > 1048570){
+        Toast.fire({
+            icon: "warning",
+            title: "File must not be less then 1 MB",
+        });
+    }else{
+
+        const reader = new FileReader()
+        reader.onload = (event) => {
+            image.value = event.target.result
+        }
+
+        reader.readAsDataURL(file)
+
+    }
+    
+
 }
 
 
