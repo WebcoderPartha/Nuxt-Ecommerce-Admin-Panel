@@ -14,7 +14,7 @@
 
            <div class="mb-2">
             <select class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300" v-model="category_id">
-                <option selected>Choose product category</option>
+                <option value="">Choose product category</option>
                 <option v-for="(category, idx) in getCategory" :key="idx" :value="category.id">{{ category.name }}</option>
             </select>
            </div>
@@ -81,8 +81,8 @@ const image = ref('')
 
 const discountChange = (e) => {
     if(regular_price.value.length > 0){
-       const discount = e.target.value
-       discount_price
+       const discountValue = e.target.value
+       discount_price.value = parseFloat(regular_price.value - ((regular_price.value * discountValue) / 100)).toFixed(0)
     }else{
         Toast.fire({
             icon: "warning",
