@@ -29,6 +29,8 @@
         middleware: 'auth',
     })
     const {data:sessionData} = await useFetch('/api/session')
+
+    // Admin 
     onMounted(() => {
         
         if(sessionData.value.user.role != 'Admin'){

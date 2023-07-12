@@ -69,7 +69,7 @@
         ]
     },
     {
-        title: 'Post',
+        title: 'Product',
         link: '/',
         icon: 'mdi:monitor',
         plusIcon: 'ic:round-plus',
@@ -77,11 +77,11 @@
         submenu: true,
         submenuItems: [
             {
-                title: 'Add Post',
-                link: '/',
+                title: 'Add Product',
+                link: '/product',
             },
             {
-                title: 'List Post',
+                title: 'Product List',
                 link: '/',
             }
         ]

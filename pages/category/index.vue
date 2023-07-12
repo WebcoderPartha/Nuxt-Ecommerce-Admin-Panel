@@ -60,6 +60,15 @@
         //     navigateAuthenticatedTo: '/',
         // },     
     })
+    
+    // Admin 
+    onMounted(() => {
+        
+        if(sessionData.value.user.role != 'Admin'){
+            navigateTo('/')
+        }
+       
+    })
 // ===========Sweet Alert Use =============//
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
