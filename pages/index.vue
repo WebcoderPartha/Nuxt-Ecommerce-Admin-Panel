@@ -20,7 +20,7 @@
             <h3 class="text-xl font-semibold pt-4">Total Earn</h3>
             <div class="text-4xl font-semibold pt-4">35</div>
         </div>
-        {{ sessionData }}
+    
     </div>
 </template>
 
@@ -28,8 +28,15 @@
     definePageMeta({
         middleware: 'auth',
     })
-
     const {data:sessionData} = await useFetch('/api/session')
+    onMounted(() => {
+        
+        if(sessionData.value.user.role != 'Admin'){
+            navigateTo('/')
+        }
+       
+    })
+    
 
 </script>
 

@@ -19,7 +19,7 @@
                         <td class="border">{{ idx+1 }}</td>
                         <td class="border">{{ category.name }}</td>
                         <td class="border">
-                            <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"><Icon name="fa6-regular:pen-to-square" /></button>&nbsp;
+                            <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"><Icon name="fa6-regular:pen-to-square" @click="getIdData(category.id)" /></button>&nbsp;
                             <button @click="deleteData(category.id)" class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"><Icon name="fa6-regular:trash-can" /></button>
                         </td>
                     </tr>
@@ -27,7 +27,8 @@
                 </table>
             </div>
         </div>
-        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7">
+        
+        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7" v-if="!getStateIdData">
             <h3 class="text-xl font-semibold pt-4 mb-3">Add Category</h3>
            <form @submit.prevent="storeData">
                 <div class=" flex flex-col gap-3 items-center">
@@ -36,6 +37,17 @@
                 </div>
            </form>
         </div>
+
+        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7" v-else>
+            <h3 class="text-xl font-semibold pt-4 mb-3">Edit Category</h3>
+           <form @submit.prevent="updateData">
+                <div class=" flex flex-col gap-3 items-center">
+                    <input type="text" v-model="name" class="w-80 bg-gray-900 rounded-md px-3 py-2" placeholder="Category name">
+                    <input type="submit" class="bg-blue-400 rounded-md px-5 py-2 cursor-pointer" value="Update">
+                </div>
+           </form>
+        </div>
+        
        
     </div>
 </template>
@@ -103,7 +115,7 @@
             id: id
             }
     })
-    console.log(id)
+  
         // Notification
         Toast.fire({
                 icon: "success",
@@ -111,6 +123,49 @@
             });
         // Reload category
          refresh()
+    }
+
+    const getStateIdData = useState(()=> '')
+    const getIdData = async (idpass) => {
+        const {data:idData} = await useFetch('/api/category/getid', {
+            method: 'POST',
+            body: {
+                id: idpass
+            }
+        })
+        getStateIdData.value = idData
+        name.value = idData.value.name
+    } 
+
+    const updateData = async (e) => {
+        if(name.value.length !== 0){
+            const formData = {
+                name: name.value,
+                id: getStateIdData.value.id
+            }
+            const {data:storeDatas, error} = await useFetch('/api/category/update', {
+                method:'PUT', 
+                body:JSON.stringify(formData)
+            })
+
+            // Notification
+            Toast.fire({
+                icon: "success",
+                title: storeDatas.value.success
+            });
+            // Reset Form
+            e.target.reset()
+            name.value = ''
+            // Reload category
+            refresh()
+            getStateIdData.value = ''
+
+        }else{
+            Toast.fire({
+                icon: "warning",
+                title: "Field is required!",
+            });
+        }
     }
 </script>
 

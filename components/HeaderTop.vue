@@ -28,10 +28,13 @@
     const logOutHandler = async () => {
         const {signOut} = useAuth()
         await signOut({callback:'/'})
+
         Toast.fire({
             icon: "success",
             title: "Logout successfull!",
         });
+     
+      
     }
 
 </script>
