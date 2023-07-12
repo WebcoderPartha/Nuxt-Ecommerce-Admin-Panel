@@ -16,11 +16,11 @@
     "nuxt": "^3.6.2",
     "nuxt-icon": "^0.4.2",
     "postcss": "^8.4.25",
-    "prisma": "^4.16.2",
+    "prisma": "^5.0.0",
     "tailwindcss": "^3.3.2"
   },
   "dependencies": {
-    "@prisma/client": "^4.16.2",
+    "@prisma/client": "^5.0.0",
     "noty": "^3.2.0-beta-deprecated",
     "sweetalert2": "^11.7.12"
   }
