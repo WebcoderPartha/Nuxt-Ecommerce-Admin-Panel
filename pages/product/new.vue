@@ -9,7 +9,7 @@
       <div
         class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7"
       >
-        <h3 class="text-xl font-semibold pt-4 mb-3">Add Category</h3>
+        <h3 class="text-xl font-semibold pt-4 mb-3">Add Product</h3>
         <form @submit.prevent="storeProduct" autocomplete="off">
           <div class="mb-2">
             <input

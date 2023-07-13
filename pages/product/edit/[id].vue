@@ -3,13 +3,13 @@
       class="grid grid-cols-1 md:grid-cols-1 items-center gap-6 text-center my-8 mx-8"
     >
       <Head>
-        <Title>Add Product</Title>
+        <Title>Edit Product</Title>
       </Head>
   
       <div
         class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7"
       >
-        <h3 class="text-xl font-semibold pt-4 mb-3">Add Category</h3>
+        <h3 class="text-xl font-semibold pt-4 mb-3">Update Product</h3>
         <form @submit.prevent="storeProduct" autocomplete="off">
           <div class="mb-2">
             <input
@@ -19,11 +19,11 @@
               placeholder="Product name"
             />
           </div>
-  
+
           <div class="mb-2">
             <select
               class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300"
-              v-model="form.category_id"
+              v-model="form.categoryId"
             >
               <option value="">Choose product category</option>
               <option
@@ -87,7 +87,7 @@
          
           </div>
         </form>
-        {{ route.id }}
+    
       </div>
     </div>
   </template>
@@ -116,29 +116,15 @@
   });
   // ===========Sweet Alert Use =============//
   
-  // Get ID By Product
-  const route = useRoute().params
-  const {data:getIdbyProduct} = await useFetch('/api/product/getidbyproduct', {
-    method: 'POST',
-    body: {
-        id: parseInt(route.id)
-    }
-  })
-
-  console.log(getIdbyProduct.value)
-
-
   const getCategory = useState(() => []);
   const { data: getCtData } = await useFetch("/api/category/category", {
     method: "GET",
   });
   getCategory.value = getCtData;
-  
-  
-  
+    
   const form = useState(()=> ({
     name: '',
-    category_id: '',
+    categoryId: '',
     regular_price: '',
     discount: '',
     discount_price: '',
@@ -146,6 +132,17 @@
     image: '',
   }))
   
+// Get ID By Product
+
+    const route = useRoute().params
+    const {data:idProduct} = await useFetch('/api/product/getidbyproduct', {
+        method: 'POST',
+        body: {
+            id: parseInt(route.id)
+        }
+  })
+ 
+  form.value = idProduct
   
   const discountChange = (e) => {
     if (form.value.regular_price !== '') {
@@ -181,10 +178,10 @@
   
   const storeProduct = async (e) => {
     
-      if(form.value.name.length > 0 && form.value.category_id !== '' && form.value.regular_price !== '' && form.value.discount !== '' && form.value.discount_price !== '' && form.value.quantity !== ''){
+      if(form.value.name.length > 0 && form.value.categoryId !== '' && form.value.regular_price !== '' && form.value.discount !== '' && form.value.discount_price !== '' && form.value.quantity !== ''){
         const formData = {
           name: form.value.name,
-          category_id:  form.value.category_id,
+          categoryId:  form.value.categoryId,
           regular_price:  form.value.regular_price,
           discount: form.value.discount,
           discount_price: form.value.discount_price,
