@@ -35,14 +35,14 @@
               <td class="border">{{ product.discount_price }}</td>
               <td class="border"><img :src="product.image" width="40" alt=""></td>
               <td class="border">
-                <button
+                <NuxtLink
                   class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
+                  :to="`/product/edit/${product.id}`"
                 >
                   <Icon
                     name="fa6-regular:pen-to-square"
                   
-                  /></button
-                >&nbsp;
+                  /></NuxtLink>&nbsp;
                 <button @click="deleteProduct(product.id)"
                  
                   class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"
