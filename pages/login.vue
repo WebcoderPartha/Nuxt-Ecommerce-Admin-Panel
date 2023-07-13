@@ -39,7 +39,11 @@
         if(username.value.length > 0 && password.value.length > 0){
             const {error, url} = await signIn('credentials', {username:username.value, password: password.value, redirect:false })
             if(error){
-                alert('You have made a terrible mistake while entering your credentials')
+              
+                Toast.fire({
+                    icon: "warning",
+                    title: "Invalid credentials!",
+                });
             }else{
                 navigateTo('/')
                 username.value = '';

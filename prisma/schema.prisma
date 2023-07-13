@@ -7,25 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
-  id         Int                @id @default(autoincrement())
+model Category {
+  id         Int       @id @default(autoincrement())
   name       String
-  post       categoryProducts[]
-  created_at DateTime           @default(now())
-  updated_at DateTime           @updatedAt
+  products   Product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 }
 
-model post {
-  id             Int                @id @default(autoincrement())
+model Product {
+  id             Int      @id @default(autoincrement())
   name           String
   regular_price  String
   discount       String
   discount_price String
   quantity       String
-  image          String
-  categories     categoryProducts[]
-  created_at     DateTime           @default(now())
-  updated_at     DateTime           @updatedAt
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  image          String   @db.LongText     
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 }
 
 model user {
@@ -38,12 +39,4 @@ model user {
   updated_at DateTime @updatedAt
 }
 
-model categoryProducts {
-  post       post     @relation(fields: [postId], references: [id])
-  postId     Int      @unique
-  category   category @relation(fields: [categoryId], references: [id])
-  categoryId Int      @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  @@id([postId, categoryId])
-}
+

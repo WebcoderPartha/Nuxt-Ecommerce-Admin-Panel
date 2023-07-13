@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     const getBody = await readBody(event);
     const prisma = new PrismaClient()
 
-    const category = await prisma.post.create({
+    const product = await prisma.product.create({
        data: {
         name : getBody.name,
         regular_price : getBody.regular_price,
@@ -13,15 +13,7 @@ export default defineEventHandler(async (event) => {
         discount_price : getBody.discount_price,
         quantity : getBody.quantity,
         image : getBody.image,
-        categories: {
-            create: {
-                category: {
-                    connect: {
-                        id: getBody.category_id
-                    }
-                }
-            }
-        }
+        categoryId: getBody.category_id
        }
     })
 
