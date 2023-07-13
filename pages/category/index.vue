@@ -48,7 +48,7 @@
            </form>
         </div>
         
-       
+       {{  roleState }}
     </div>
 </template>
 
@@ -62,13 +62,9 @@
     })
     
     // Admin 
-    onMounted(() => {
-        
-        if(sessionData.value.user.role != 'Admin'){
-            navigateTo('/')
-        }
-       
-    })
+    const {data:sessionData} = await useFetch('/api/session')
+  
+   
 // ===========Sweet Alert Use =============//
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
