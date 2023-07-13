@@ -43,6 +43,7 @@ model categoryProducts {
   postId     Int      @unique
   category   category @relation(fields: [categoryId], references: [id])
   categoryId Int      @unique
-
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
   @@id([postId, categoryId])
 }
