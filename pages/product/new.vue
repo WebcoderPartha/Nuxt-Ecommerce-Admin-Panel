@@ -137,6 +137,7 @@
       const disVal = e.target.value
       const discPrice = (form.value.regular_price * disVal) / 100
       form.value.discount_price = parseInt(form.value.regular_price - discPrice).toFixed(0)
+
     } else {
       Toast.fire({
         icon: "warning",

@@ -88,7 +88,6 @@ const { data: ptData, refresh } = await useFetch("/api/product/product", {
 });
 
 getProductState.value = ptData
-console.log(getProductState.value)
 
 
 const discountChange = (e) => {
@@ -106,6 +105,10 @@ const discountChange = (e) => {
     form.value.discount = "";
   }
 };
+
+
+const {data:categoryProduct} = await useFetch('/api/product/categoryproduct')
+console.log(categoryProduct.value)
 </script>
 
 <style lang="scss" scoped></style>
