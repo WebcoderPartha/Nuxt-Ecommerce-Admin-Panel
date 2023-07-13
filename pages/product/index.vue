@@ -43,7 +43,7 @@
                   
                   /></button
                 >&nbsp;
-                <button
+                <button @click="deleteProduct(product.id)"
                  
                   class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"
                 >
@@ -60,6 +60,7 @@
 </template>
 
 <script setup>
+
 definePageMeta({
   middleware: "auth",
   // auth: {
@@ -106,9 +107,23 @@ const discountChange = (e) => {
   }
 };
 
+const deleteProduct = async (productId) => {
+  const {data:delptdata} = await useFetch('/api/product/product', {
+    method: 'DELETE',
+    body: {
+      id: productId
+    }
+  })
 
-const {data:categoryProduct} = await useFetch('/api/product/categoryproduct')
-console.log(categoryProduct.value)
+  Toast.fire({
+      icon: "success",
+      title: delptdata.value.success
+    });
+
+    refresh()
+
+ }
+
 </script>
 
 <style lang="scss" scoped></style>
