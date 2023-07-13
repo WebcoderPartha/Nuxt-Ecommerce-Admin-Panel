@@ -8,7 +8,7 @@
       <Head>
         <Title>Category</Title>
       </Head>
-      <h3 class="text-xl font-semibold pt-4">Category List</h3>
+      <h3 class="text-xl font-semibold pt-4">Product List</h3>
       <div class="px-2 pt-2">
         <table class="table-auto border-collapse w-full">
           <thead>
@@ -25,15 +25,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
-              <td class="border">sdf</td>
+            <tr v-for="(product, idx) in getProductState" :key="product.id">
+              <td class="border">{{ idx + 1 }}</td>
+              <td class="border">{{ product.name }}</td>
+              <td class="border">{{ product.category?.name }}</td>
+              <td class="border">{{ product.quantity }}</td>
+              <td class="border">{{ product.regular_price }}</td>
+              <td class="border">{{ product.discount }}%</td>
+              <td class="border">{{ product.discount_price }}</td>
+              <td class="border"><img :src="product.image" width="40" alt=""></td>
               <td class="border">
                 <button
                   class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"

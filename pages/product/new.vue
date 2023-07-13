@@ -192,6 +192,7 @@
           form.value.discount_price = ''
           form.value.quantity = ''
           form.value.image = ''
+          navigateTo('/product')
   
       }else{
           Toast.fire({
