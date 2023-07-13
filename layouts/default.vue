@@ -78,11 +78,11 @@
         submenuItems: [
             {
                 title: 'Add Product',
-                link: '/product',
+                link: '/product/new',
             },
             {
                 title: 'Product List',
-                link: '/',
+                link: '/product',
             }
         ]
     }
