@@ -9,8 +9,8 @@
       <div
         class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7"
       >
-        <h3 class="text-xl font-semibold pt-4 mb-3">Update Product</h3>
-        <form @submit.prevent="storeProduct" autocomplete="off">
+        <h3 class="text-xl font-semibold pt-4 mb-3">Edit Product</h3>
+        <form @submit.prevent="update" autocomplete="off">
           <div class="mb-2">
             <input
               type="text"
@@ -176,7 +176,7 @@
     }
   };
   
-  const storeProduct = async (e) => {
+  const update = async (e) => {
     
       if(form.value.name.length > 0 && form.value.categoryId !== '' && form.value.regular_price !== '' && form.value.discount !== '' && form.value.discount_price !== '' && form.value.quantity !== ''){
         const formData = {
@@ -187,25 +187,27 @@
           discount_price: form.value.discount_price,
           quantity: form.value.quantity,
           image: form.value.image,
+          id: route.id
         }
   
-        const {data:postData} = await useFetch('/api/product/product', {
-          method: 'POST',
+        const {data:updateData} = await useFetch('/api/product/update', {
+          method: 'PUT',
           body: JSON.stringify(formData)
         })
         Toast.fire({
               icon: "success",
-              title: postData.value.success
+              title: updateData.value.success
           });
           e.target.reset()
           form.value.name = ''
-          form.value.category_id = ''
+          form.value.categoryId = ''
           form.value.regular_price = ''
           form.value.discount = ''
           form.value.discount_price = ''
           form.value.quantity = ''
           form.value.image = ''
           navigateTo('/product')
+          console.log(updateData.value)
   
       }else{
           Toast.fire({

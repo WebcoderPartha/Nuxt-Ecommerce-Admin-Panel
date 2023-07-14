@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex  min-h-screen">
         <div :class="`${menuOpen ? 'w-72' : 'w-24'} duration-500 bg-[#2e323a]`">
             <div class="flex py-4 px-6 bg-black items-center relative">
                 <Icon :class="`${menuOpen && 'rotate-[360deg]'} duration-700 text-white text-2xl mt-1 mr-4`" name="foundation:lightbulb" />
@@ -26,7 +26,6 @@
                         </ul>
                     </li>
                 </ul>
-                
             </nav>
         </div>
         <div class="flex-1 bg-gray-900">
