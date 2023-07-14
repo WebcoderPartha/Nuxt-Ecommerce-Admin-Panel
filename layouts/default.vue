@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <div :class="`${menuOpen ? 'w-72' : 'w-24'} duration-500 h-screen bg-[#2e323a]`">
+        <div :class="`${menuOpen ? 'w-72' : 'w-24'} duration-500 bg-[#2e323a]`">
             <div class="flex py-4 px-6 bg-black items-center relative">
                 <Icon :class="`${menuOpen && 'rotate-[360deg]'} duration-700 text-white text-2xl mt-1 mr-4`" name="foundation:lightbulb" />
                 <h2 :class="`text-white duration-700 text-2xl ${!menuOpen && 'hidden'}`">Admin</h2>
@@ -29,7 +29,7 @@
                 
             </nav>
         </div>
-        <div class="flex-1 h-screen bg-gray-900">
+        <div class="flex-1 bg-gray-900">
             <HeaderTop />
             <slot />
         </div>

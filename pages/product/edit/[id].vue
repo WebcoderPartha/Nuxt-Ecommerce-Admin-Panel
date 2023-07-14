@@ -82,7 +82,7 @@
             <input
               type="submit"
               class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
-              value="Submit"
+              value="Update"
             />
          
           </div>
