@@ -210,10 +210,10 @@
           console.log(updateData.value)
   
       }else{
-          Toast.fire({
-              icon: "warning",
-              title: "Field must not be empty!",
-          });
+        Toast.fire({
+            icon: "warning",
+            title: "Field must not be empty!",
+        });
       }
   }
   
