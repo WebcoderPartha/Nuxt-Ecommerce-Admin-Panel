@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-neutral-900 h-screen overflow-hidden">
         <div class="bg-gray-900 shadow-sm shadow-gray-700 fixed top-0 w-full">
             <header class=" w-[990px] mx-auto">
                 <div class="flex justify-between pt-6">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 
-                <div class="MenuContainer mt-3 pb-3">
+                <div class="MenuContainer pt-4 pb-3">
                     <ul class="flex gap-3 text-white font-semibold">
                         <li class="py-2 px-2"><NuxtLink to="#">Home</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
@@ -30,8 +30,8 @@
                 </div>
             </header>    
         </div>
-        <div class="conta">
-
+        <div class="main mt-32 py-4">
+            <slot/>
         </div>
     </div>
 </template>

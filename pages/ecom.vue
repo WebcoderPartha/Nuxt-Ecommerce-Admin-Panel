@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h2>
-            Ecommerce Template
-        </h2>
+        <h2 class="text-white">ok</h2>
     </div>
 </template>
 
