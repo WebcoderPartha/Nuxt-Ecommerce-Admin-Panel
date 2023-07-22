@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-neutral-900 h-screen overflow-hidden">
-        <div class="bg-gray-900 shadow-sm shadow-gray-700 fixed top-0 w-full">
+    <div class="h-screen overflow-hidden">
+        <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full">
             <header class=" w-[990px] mx-auto">
                 <div class="flex justify-between pt-6">
                     <div>
@@ -10,10 +10,10 @@
                         <input  type="text" class="bg-gray-800 text-white px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                     </div>
                     <div class="flex gap-2">
-                        <div class="text-white pt-1 text-xl hover:rounded-md cursor-pointer">
+                        <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
                             <Icon name="material-symbols:shopping-cart-sharp" />
                         </div>
-                        <div class="text-white px px-2 py-2 hover:rounded-md cursor-pointer">
+                        <div class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
                 
                 <div class="MenuContainer pt-4 pb-3">
-                    <ul class="flex gap-3 text-white font-semibold">
+                    <ul class="flex gap-3 text-stone-950 font-semibold">
                         <li class="py-2 px-2"><NuxtLink to="#">Home</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Account</NuxtLink></li>
