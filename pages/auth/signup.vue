@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Signup Page'
+})
   definePageMeta({
     layout:'ecommerce'
 })
