@@ -1,5 +1,6 @@
 <template>
     <div class="max-w-[1200px] mx-auto">
+        <!-- Category & Banner -->
         <div class="md:flex md:gap-2">
             <div class="bg-[#f3fee3] px-6 py-3 min-w-[300px] mx-auto">
                <h3>Category</h3>
@@ -31,9 +32,39 @@
               </ul>
             </div>
             <div class=" flex-1">
-               <div class="max-w-[900px]">
+               <div class="max-w-[891px]">
                 <Slider />
                </div>
+            </div>
+        </div>
+
+        <!-- All Products -->
+        <div class="allProduct">
+            <div class="text-center py-2 my-2 shadow-md shadow-purple-300 bg-purple-400">
+                <h2 class="text-2xl">All Products</h2>
+            </div>
+            <div class=" grid grid-cols-2 md:grid-cols-4 gap-3 lg:grid-cols-5">
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
+                <div>
+                    <img src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                </div> 
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
-    <div class="h-screen overflow-hidden">
-        <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full">
+    <div class="overflow-hidden">
+        <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full z-10">
             <header class="max-w-[1200px] mx-auto">
                 <div class="md:flex justify-between items-center pt-6">
                     <div>
