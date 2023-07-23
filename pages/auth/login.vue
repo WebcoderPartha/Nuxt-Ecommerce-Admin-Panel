@@ -3,7 +3,7 @@
        <div class="py-10 px-10">
             <form>
                 <div class="mb-6">
-                 <h2 class="text-2xl text-center">Create your Account</h2>
+                 <h2 class="text-2xl text-center">Login your Account</h2>
             </div>
             <div class="flex flex-col gap-4">
                 <label class="">

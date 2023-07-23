@@ -3,7 +3,9 @@
             <header class="max-w-[1200px] mx-auto">
                 <div class="md:flex justify-between items-center pt-6">
                     <div>
-                        <img class="mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" width="150" alt="">
+                        <NuxtLink to="/">
+                            <img class="mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" width="150" alt="">
+                        </NuxtLink>
                     </div>
                     <div class="md:w-[500px] w-[200px] mx-auto mt-3 md:mt-0">
                         <input  type="text" class="bg-gray-800 text-white px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
@@ -21,7 +23,7 @@
                 
                 <div class="MenuContainer pt-4 pb-3">
                     <ul class="flex gap-3 text-stone-950 font-semibold justify-center md:justify-normal">
-                        <li class="py-2 px-2"><NuxtLink to="#">Home</NuxtLink></li>
+                        <li class="py-2 px-2"><NuxtLink to="/">Home</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Account</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Category</NuxtLink></li>
