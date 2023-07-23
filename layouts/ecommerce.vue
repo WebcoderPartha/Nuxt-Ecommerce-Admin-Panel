@@ -1,15 +1,15 @@
 <template>
     <div class="h-screen overflow-hidden">
         <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full">
-            <header class=" w-[990px] mx-auto">
-                <div class="flex justify-between pt-6">
+            <header class="max-w-[1200px] mx-auto">
+                <div class="md:flex justify-between items-center pt-6">
                     <div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" width="150" alt="">
+                        <img class="mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" width="150" alt="">
                     </div>
-                    <div class="w-[500px]">
+                    <div class="md:w-[500px] w-[200px] mx-auto mt-3 md:mt-0">
                         <input  type="text" class="bg-gray-800 text-white px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                     </div>
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 justify-center">
                         <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
                             <Icon name="material-symbols:shopping-cart-sharp" />
                         </div>
@@ -21,7 +21,7 @@
                 </div>
                 
                 <div class="MenuContainer pt-4 pb-3">
-                    <ul class="flex gap-3 text-stone-950 font-semibold">
+                    <ul class="flex gap-3 text-stone-950 font-semibold justify-center md:justify-normal">
                         <li class="py-2 px-2"><NuxtLink to="#">Home</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Account</NuxtLink></li>
@@ -30,7 +30,7 @@
                 </div>
             </header>    
         </div>
-        <div class="main mt-32 py-4">
+        <div class="main mt-[13rem] md:mt-32 py-4">
             <slot/>
         </div>
     </div>

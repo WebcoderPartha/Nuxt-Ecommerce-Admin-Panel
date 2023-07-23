@@ -1,7 +1,7 @@
 <template>
-    <div class="w-[990px] mx-auto">
-        <div class="flex gap-2">
-            <div class="bg-[#f3fee3] px-6 py-3 w-[300px]">
+    <div class="max-w-[1200px] mx-auto">
+        <div class="md:flex md:gap-2">
+            <div class="bg-[#f3fee3] px-6 py-3 min-w-[300px] mx-auto">
                <h3>Category</h3>
               <ul>
                 <li class="py-3 border-b">
@@ -31,7 +31,7 @@
               </ul>
             </div>
             <div class=" flex-1">
-               <div class="w-[690px]">
+               <div class="max-w-[900px]">
                 <Slider />
                </div>
             </div>
