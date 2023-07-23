@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <div class="footer bg-[#111926] py-16">
             <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 text-center gap-4">
                 <div>
@@ -40,6 +41,9 @@
                 <p class=" text-gray-400 text-base">&copy; 2023 Parthadeb Mondal. All rights reserved.</p>
             </div>
         </div>
+
+
+        
     </div>
 </template>
 

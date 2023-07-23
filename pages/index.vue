@@ -1,45 +1,61 @@
 <template>
-    <div class=" grid grid-cols-1 md:grid-cols-4 items-center gap-6 text-center my-8 mx-8">
-        <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Category</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+    <div class="max-w-[1200px] mx-auto">
+        <Head>
+            <Title>Biggest Ecommerce Website</Title>
+        </Head>
+        <!-- Category & Banner -->
+        <div class="md:flex md:gap-2">
+            <div class="bg-[#f3fee3] px-6 py-3 min-w-[300px] mx-auto">
+               <h3>Category</h3>
+              <ul>
+                <li class="py-3 border-b">
+                    <NuxtLink to="#">
+                        <div class="flex items-center justify-between">
+                        <span> Category One</span>
+                        <Icon name="fa6-solid:arrow-right" />
+                    </div>
+                    </NuxtLink>
+                </li>
+                <li class="py-3 border-b">
+                    <NuxtLink to="#">
+                        <div class="flex items-center justify-between">
+                        <span> Category One</span>
+                        <Icon name="fa6-solid:arrow-right" />
+                    </div>
+                    </NuxtLink>
+                </li>
+                <li class="py-3 border-b">
+                    <NuxtLink to="#">
+                        <div class="flex items-center justify-between">
+                        <span> Category One</span>
+                        <Icon name="fa6-solid:arrow-right" />
+                    </div>
+                    </NuxtLink>
+                </li>
+              </ul>
+            </div>
+            <div class=" flex-1">
+               <div class="max-w-[891px]">
+                <Slider />
+               </div>
+            </div>
         </div>
-        <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Product</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+
+        <div class="ProductSlider my-6">
+            <ProductSlider />
         </div>
-        <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Customer</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
-        </div>
-        <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Total Order</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
-        </div>
-        <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Earn</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+        <!-- All Products -->
+        <div class="allProduct">
+            <AllProducts />
         </div>
     
     </div>
 </template>
 
 <script setup>
-    definePageMeta({
-        middleware: 'auth',
-    })
-    const {data:sessionData} = await useFetch('/api/session')
-
-    // Admin 
-    onMounted(() => {
-        
-        if(sessionData.value.user.role != 'Admin'){
-            navigateTo('/')
-        }
-       
-    })
-    
-
+definePageMeta({
+    layout:'ecommerce'
+})
 </script>
 
 <style lang="scss" scoped>
