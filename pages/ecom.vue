@@ -1,5 +1,8 @@
 <template>
     <div class="max-w-[1200px] mx-auto">
+        <Head>
+            <Title>Biggest Ecommerce Website</Title>
+        </Head>
         <!-- Category & Banner -->
         <div class="md:flex md:gap-2">
             <div class="bg-[#f3fee3] px-6 py-3 min-w-[300px] mx-auto">
