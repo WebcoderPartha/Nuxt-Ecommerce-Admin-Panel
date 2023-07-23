@@ -12,10 +12,10 @@
                         <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
                             <Icon name="material-symbols:shopping-cart-sharp" />
                         </div>
-                        <div class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
+                        <NuxtLink to="/auth/login" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
-                        </div>
+                        </NuxtLink>
                     </div>
                 </div>
                 
