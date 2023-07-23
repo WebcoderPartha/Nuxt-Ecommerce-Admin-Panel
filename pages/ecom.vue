@@ -55,9 +55,74 @@
                         <h2 class="text-xl">Product Name</h2>
                         <p class=" text-base"><span class=" line-through text-red-600 text-sm">$246</span> $246</p>
                     </div>
+                    <div class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col">
+                        <button class=" bg-red-500 text-white md:px-2 py-1 rounded-md mb-3">Add to Cart</button>
+                        <button class=" bg-yellow-500 text-white md:px-2 py-1 rounded-md">Buy Now</button>
+                    </div>
+                </div> 
+                <!-- End Product Item -->
+
+                        <!-- Product Item -->
+                        <div class="border rounded-md p-1  ">
+                    <div class=" relative overflow-hidden">
+                        <img class=" hover:scale-125 duration-300" src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                        <span class=" bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0">New</span>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-xl">Product Name</h2>
+                        <p class=" text-base"><span class=" line-through text-red-600 text-sm">$246</span> $246</p>
+                    </div>
                     <div class="flex items-center justify-between mt-4 mb-4 px-3">
-                        <button class=" bg-red-500 text-white px-2 py-1 rounded-md">Add to Cart</button>
-                        <button class=" bg-yellow-500 text-white px-2 py-1 rounded-md">Buy Now</button>
+                        <button class=" bg-red-500 text-white md:px-2 py-1 rounded-md">Add to Cart</button>
+                        <button class=" bg-yellow-500 text-white md:px-2 py-1 rounded-md">Buy Now</button>
+                    </div>
+                </div> 
+                <!-- End Product Item -->
+                        <!-- Product Item -->
+                        <div class="border rounded-md p-1  ">
+                    <div class=" relative overflow-hidden">
+                        <img class=" hover:scale-125 duration-300" src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                        <span class=" bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0">New</span>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-xl">Product Name</h2>
+                        <p class=" text-base"><span class=" line-through text-red-600 text-sm">$246</span> $246</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-4 mb-4 px-3">
+                        <button class=" bg-red-500 text-white md:px-2 py-1 rounded-md">Add to Cart</button>
+                        <button class=" bg-yellow-500 text-white md:px-2 py-1 rounded-md">Buy Now</button>
+                    </div>
+                </div> 
+                <!-- End Product Item -->
+                        <!-- Product Item -->
+                        <div class="border rounded-md p-1  ">
+                    <div class=" relative overflow-hidden">
+                        <img class=" hover:scale-125 duration-300" src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                        <span class=" bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0">New</span>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-xl">Product Name</h2>
+                        <p class=" text-base"><span class=" line-through text-red-600 text-sm">$246</span> $246</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-4 mb-4 px-3">
+                        <button class=" bg-red-500 text-white md:px-2 py-1 rounded-md">Add to Cart</button>
+                        <button class=" bg-yellow-500 text-white md:px-2 py-1 rounded-md">Buy Now</button>
+                    </div>
+                </div> 
+                <!-- End Product Item -->
+                        <!-- Product Item -->
+                        <div class="border rounded-md p-1  ">
+                    <div class=" relative overflow-hidden">
+                        <img class=" hover:scale-125 duration-300" src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250" alt="">
+                        <span class=" bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0">New</span>
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-xl">Product Name</h2>
+                        <p class=" text-base"><span class=" line-through text-red-600 text-sm">$246</span> $246</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-4 mb-4 px-3">
+                        <button class=" bg-red-500 text-white md:px-2 py-1 rounded-md">Add to Cart</button>
+                        <button class=" bg-yellow-500 text-white md:px-2 py-1 rounded-md">Buy Now</button>
                     </div>
                 </div> 
                 <!-- End Product Item -->
