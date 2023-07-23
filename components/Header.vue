@@ -8,7 +8,7 @@
                         </NuxtLink>
                     </div>
                     <div class="md:w-[500px] w-[200px] mx-auto mt-3 md:mt-0">
-                        <input  type="text" class="bg-gray-800 text-white px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
+                        <input  type="text" class="bg-gray-100 text-gray-400 px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                     </div>
                     <div class="flex gap-2 justify-center">
                         <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
