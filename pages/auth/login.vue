@@ -18,6 +18,10 @@
                     </div>
                 </label>
                 <button class="bg-black text-white py-2 rounded-md">Login</button>
+                <div class="flex flex-row items-center mx-auto border rounded-sm px-3 cursor-pointer">
+                    <img src="/assets/img/google.svg" width="35" alt="">
+                    <span>Sign in with Google</span>
+                </div>
             </div>
        </div>
     </div>
