@@ -31,18 +31,25 @@ export default NuxtAuthHandler({
           
             const prisma = new PrismaClient()
             const loggInUser = await prisma.user.findFirst({
-                where: {
-                    email: credentials?.username,
-                    password:credentials?.password,
-                    role: 'Admin'
+                where:  {
+                  OR: [
+                    {
+                      email: credentials?.username,
+                      role: credentials?.role
+                    },
+                    {
+                      username: credentials?.username,
+                      role: credentials?.role
+                    },
+                  ]
                 }
             })
-           
+            
            if(loggInUser){
                 const user = {
                     id: loggInUser.id,
                     role: loggInUser.role,
-                    fullname: loggInUser.fullname,
+                    name: loggInUser.fullname,
                     email: loggInUser.email
                 }
                 return user

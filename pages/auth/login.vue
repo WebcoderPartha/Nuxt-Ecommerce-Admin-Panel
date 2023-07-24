@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ok } from 'assert';
+
 import bcrypt from  'bcryptjs'
 
 useHead({
@@ -47,6 +47,21 @@ definePageMeta({
     layout:'ecommerce',
 
 })
+
+    // ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", $swal.stopTimer);
+            toast.addEventListener("mouseleave", $swal.resumeTimer);
+        },
+    });
+    // ===========Sweet Alert Use =============//
 
 // Form State
 const form = useState(() => ({
@@ -59,6 +74,8 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
+const {signIn} = useAuth()
+ 
 const checkPassword = usePassword()
 
 // Login Method
@@ -71,14 +88,29 @@ const loginHandler =  async (e) => {
     }else if (!form.value.password.length > 0){
         requiredForm.value.password = 'Password is required!'
     }else{
-        console.log(checkPassword.value.password)
-        
-        const check = await bcrypt.compare(form.value.password, checkPassword.value.password)
-        if(check){
-            alert('match')
-        }else{
-            alert("Wrong password")
-        }
+      
+        const hashPassword = await bcrypt.hashSync(form.value.password, 10)
+       
+        const {error, url} = await signIn('credentials', {username:form.value.emailOrUsername, password: form.value.password, role:'customer', redirect:false })
+            if(error){
+              
+                Toast.fire({
+                    icon: "warning",
+                    title: "Invalid credentials!",
+                });
+            }else{
+                navigateTo('/')
+                form.value.emailOrUsername = '';
+                form.value.password = '';
+                requiredForm.emailOrUsername = '';
+                requiredForm.value.password = '';
+                e.target.reset()
+            
+                Toast.fire({
+                    icon: "success",
+                    title: "Loggin Successfully!",
+                });
+            }
         
     }
 }
