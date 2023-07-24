@@ -8,30 +8,15 @@
             <div class="bg-[#f3fee3] px-6 py-3 min-w-[300px] mx-auto hidden md:block">
                <h3 class="text-xl font-semibold">Categories</h3>
               <ul>
-                <li class="py-3 border-b">
+                <li class="py-3 border-b" v-for="(hmcat,idx) in homeCategories" :key="idx">
                     <NuxtLink to="#">
                         <div class="flex items-center justify-between">
-                        <span class="text-sm"> Category One</span>
+                        <span class="text-sm">{{ hmcat.name }}</span>
                         <Icon name="fa6-solid:arrow-right" />
                     </div>
                     </NuxtLink>
                 </li>
-                <li class="py-3 border-b">
-                    <NuxtLink to="#">
-                        <div class="flex items-center justify-between">
-                        <span class="text-sm"> Category One</span>
-                        <Icon name="fa6-solid:arrow-right" />
-                    </div>
-                    </NuxtLink>
-                </li>
-                <li class="py-3 border-b">
-                    <NuxtLink to="#">
-                        <div class="flex items-center justify-between">
-                        <span class="text-sm"> Category One</span>
-                        <Icon name="fa6-solid:arrow-right" />
-                    </div>
-                    </NuxtLink>
-                </li>
+ 
               </ul>
             </div>
             <div class=" flex-1">
@@ -56,6 +41,11 @@
 definePageMeta({
     layout:'ecommerce'
 })
+
+const homeCategories = useHomeCategories()
+const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
+homeCategories.value = hmCategories
+
 </script>
 
 <style lang="scss" scoped>
