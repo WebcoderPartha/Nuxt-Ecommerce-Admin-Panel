@@ -38,8 +38,6 @@
 
 <script setup>
 
-
-
 useHead({
     title: 'Login Page'
 })
@@ -74,8 +72,15 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
-const {signIn} = useAuth()
- 
+const {signIn, status} = useAuth()
+// const isAuthenticated = computed(() =>  status.value == 'authenticated') 
+
+onBeforeMount(() => {
+    if (status.value === 'authenticated') {
+        navigateTo('/')
+    }
+})
+
 const checkPassword = usePassword()
 
 // Login Method
@@ -89,8 +94,7 @@ const loginHandler =  async (e) => {
         requiredForm.value.password = 'Password is required!'
     }else{
       
-       
-       
+    
         const {error, url} = await signIn('credentials', {username:form.value.emailOrUsername, password: form.value.password, role:'customer', redirect:false })
             if(error){
               
