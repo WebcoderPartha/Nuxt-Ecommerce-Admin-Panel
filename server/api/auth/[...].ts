@@ -1,6 +1,8 @@
+import bcrypt from "bcryptjs"
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { NuxtAuthHandler } from '#auth'
 import {PrismaClient} from '@prisma/client'
+
 
 
 export default NuxtAuthHandler({
@@ -44,8 +46,11 @@ export default NuxtAuthHandler({
                   ]
                 }
             })
-            
-           if(loggInUser){
+          
+          // const hashPassword = await bcrypt.hashSync(credentials?.password, 10)
+          const checkedPassword = await bcrypt.compare(credentials?.password, loggInUser?.password)
+
+           if(checkedPassword && loggInUser){
                 const user = {
                     id: loggInUser.id,
                     role: loggInUser.role,

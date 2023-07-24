@@ -38,7 +38,7 @@
 
 <script setup>
 
-import bcrypt from  'bcryptjs'
+
 
 useHead({
     title: 'Login Page'
@@ -89,7 +89,7 @@ const loginHandler =  async (e) => {
         requiredForm.value.password = 'Password is required!'
     }else{
       
-        const hashPassword = await bcrypt.hashSync(form.value.password, 10)
+       
        
         const {error, url} = await signIn('credentials', {username:form.value.emailOrUsername, password: form.value.password, role:'customer', redirect:false })
             if(error){
@@ -102,7 +102,7 @@ const loginHandler =  async (e) => {
                 navigateTo('/')
                 form.value.emailOrUsername = '';
                 form.value.password = '';
-                requiredForm.emailOrUsername = '';
+                requiredForm.value.emailOrUsername = '';
                 requiredForm.value.password = '';
                 e.target.reset()
             
