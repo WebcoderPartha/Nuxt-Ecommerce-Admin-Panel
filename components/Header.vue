@@ -45,7 +45,7 @@
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
         toast: true,
-        position: "top-end",
+        position: "top",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: false,

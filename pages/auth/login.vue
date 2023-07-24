@@ -50,7 +50,7 @@ definePageMeta({
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
         toast: true,
-        position: "top-end",
+        position: "top",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: false,
@@ -79,6 +79,11 @@ onBeforeMount(() => {
     if (status.value === 'authenticated') {
         navigateTo('/')
     }
+    form.value.emailOrUsername = '';
+    form.value.password = '';
+    requiredForm.value.emailOrUsername = '';
+    requiredForm.value.password = '';
+
 })
 
 const checkPassword = usePassword()
@@ -96,25 +101,25 @@ const loginHandler =  async (e) => {
       
     
         const {error, url} = await signIn('credentials', {username:form.value.emailOrUsername, password: form.value.password, role:'customer', redirect:false })
-            if(error){
+        if(error){
               
-                Toast.fire({
-                    icon: "warning",
-                    title: "Invalid credentials!",
-                });
-            }else{
-                navigateTo('/')
-                form.value.emailOrUsername = '';
-                form.value.password = '';
-                requiredForm.value.emailOrUsername = '';
-                requiredForm.value.password = '';
-                e.target.reset()
+            Toast.fire({
+                icon: "warning",
+                title: "Invalid credentials!",
+            });
+        }else{
+            navigateTo('/')
+            form.value.emailOrUsername = '';
+            form.value.password = '';
+            requiredForm.value.emailOrUsername = '';
+            requiredForm.value.password = '';
+            e.target.reset()
             
-                Toast.fire({
-                    icon: "success",
-                    title: "Loggin Successfully!",
-                });
-            }
+            Toast.fire({
+                icon: "success",
+                title: "Loggin Successfully!",
+            });
+        }
         
     }
 }

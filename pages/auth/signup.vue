@@ -68,7 +68,7 @@ definePageMeta({
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "top",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: false,
@@ -104,6 +104,17 @@ onBeforeMount(()=> {
     if (status.value === 'authenticated') {
         navigateTo('/')
     }
+    requiredForm.value.fullname = ''
+    requiredForm.value.username = ''
+    requiredForm.value.email = ''
+    requiredForm.value.password = ''
+    requiredForm.value.conformPassword = ''
+
+    form.value.fullname = ''
+    form.value.username = ''
+    form.value.email = ''
+    form.value.password = ''
+    form.value.conformPassword = ''
 })
 
 // Signup Method
@@ -143,19 +154,34 @@ const signupHandler = async (e) => {
                     title: response.value.success,
             });
            
-            requiredForm.value.fullname = ''
-            requiredForm.value.username = ''
-            requiredForm.value.email = ''
-            requiredForm.value.password = ''
-            requiredForm.value.conformPassword = ''
+            
+            const {error, url} = await signIn('credentials', {username:form.value.username, password: form.value.password, role:'customer', redirect:false })
+            if(error){
+                Toast.fire({
+                    icon: "warning",
+                    title: "Invalid credentials!",
+                });
+            }else{
 
-            form.value.fullname = ''
-            form.value.username = ''
-            form.value.email = ''
-            form.value.password = ''
-            form.value.conformPassword = ''
-            e.target.reset()
-            navigateTo('/')
+                requiredForm.value.fullname = ''
+                requiredForm.value.username = ''
+                requiredForm.value.email = ''
+                requiredForm.value.password = ''
+                requiredForm.value.conformPassword = ''
+
+                form.value.fullname = ''
+                form.value.username = ''
+                form.value.email = ''
+                form.value.password = ''
+                form.value.conformPassword = ''
+                e.target.reset()
+
+                navigateTo('/')   
+                Toast.fire({
+                    icon: "success",
+                    title: "Signup successfully!",
+                });
+            }
           
         }else{
             requiredForm.value.conformPassword = 'Confirm password not match!'
