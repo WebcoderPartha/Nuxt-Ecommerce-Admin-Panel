@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "noty": "^3.2.0-beta-deprecated",
     "sweetalert2": "^11.7.12",
     "swiper": "^10.0.4"

@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-[400px] mx-auto my-10 bg-white rounded-lg border border-slate-300">
        <div class="py-5 px-10">
-            <form @submit.prevent="signupHandler">
+            <form @submit.prevent="signupHandler" autocomplete="off">
                 <div class="mb-6">
                     <h2 class="text-2xl text-center">Create your Account</h2>
                 </div>
@@ -55,6 +55,7 @@
 </template>
 
 <script setup>
+import bcrypt from 'bcryptjs'
 useHead({
     title: 'Sign Up Page'
 })
@@ -62,6 +63,21 @@ definePageMeta({
     layout:'ecommerce',
 
 })
+
+// ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener("mouseenter", $swal.stopTimer);
+        toast.addEventListener("mouseleave", $swal.resumeTimer);
+    },
+    });
+// ===========Sweet Alert Use =============//
 
 // Form State
 const form = useState(() => ({
@@ -81,7 +97,7 @@ const requiredForm = useState(() => ({
 }))
 
 // Signup Method
-const signupHandler = (e) => {
+const signupHandler = async (e) => {
     if(!form.value.fullname.length > 0 && !form.value.email.length > 0 && !form.value.username.length > 0 && !form.value.password.length > 0 && !form.value.conformPassword.length > 0){
         requiredForm.value.fullname = 'Fullname is required!'
         requiredForm.value.email = 'Email is required!'
@@ -99,7 +115,41 @@ const signupHandler = (e) => {
     }else if (!form.value.conformPassword.length > 0){
         requiredForm.value.conformPassword = 'Conform password is required!'
     }else{
-        alert('ok')
+        if (form.value.password === form.value.conformPassword) {
+            const hashPassword = bcrypt.hashSync(form.value.password, 10)
+            const formData = {
+                fullname: form.value.fullname,
+                email: form.value.email,
+                username: form.value.username,
+                password: hashPassword
+            }
+
+            const {data:response} = await useFetch('/api/auth/frontend/user/user', {
+                method: 'POST',
+                body: JSON.stringify(formData)
+            })
+            Toast.fire({
+                    icon: "success",
+                    title: response.value.success,
+            });
+           
+            requiredForm.value.fullname = ''
+            requiredForm.value.username = ''
+            requiredForm.value.email = ''
+            requiredForm.value.password = ''
+            requiredForm.value.conformPassword = ''
+
+            form.value.fullname = ''
+            form.value.username = ''
+            form.value.email = ''
+            form.value.password = ''
+            form.value.conformPassword = ''
+            e.target.reset()
+            navigateTo('/')
+          
+        }else{
+            requiredForm.value.conformPassword = 'Confirm password not match!'
+        }
     }
 }
 

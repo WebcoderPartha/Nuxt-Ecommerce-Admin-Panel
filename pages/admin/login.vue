@@ -45,7 +45,7 @@
                     title: "Invalid credentials!",
                 });
             }else{
-                navigateTo('/')
+                navigateTo('/admin')
                 username.value = '';
                 password.value = '';
                 e.target.reset()

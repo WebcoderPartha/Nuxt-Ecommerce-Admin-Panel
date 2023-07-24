@@ -27,7 +27,7 @@
 
     const logOutHandler = async () => {
         const {signOut} = useAuth()
-        await signOut({callback:'/'})
+        await signOut({callback:'/admin/login'})
 
         Toast.fire({
             icon: "success",

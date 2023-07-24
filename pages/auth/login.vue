@@ -37,6 +37,9 @@
 </template>
 
 <script setup>
+import { ok } from 'assert';
+import bcrypt from  'bcryptjs'
+
 useHead({
     title: 'Login Page'
 })
@@ -56,8 +59,10 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
+const checkPassword = usePassword()
+
 // Login Method
-const loginHandler = (e) => {
+const loginHandler =  async (e) => {
     if(!form.value.emailOrUsername.length > 0 && !form.value.password.length > 0){
         requiredForm.value.emailOrUsername = 'Email or Username is required!'
         requiredForm.value.password = 'Password is required!'
@@ -66,7 +71,15 @@ const loginHandler = (e) => {
     }else if (!form.value.password.length > 0){
         requiredForm.value.password = 'Password is required!'
     }else{
-        alert('ok')
+        console.log(checkPassword.value.password)
+        
+        const check = await bcrypt.compare(form.value.password, checkPassword.value.password)
+        if(check){
+            alert('match')
+        }else{
+            alert("Wrong password")
+        }
+        
     }
 }
 

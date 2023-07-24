@@ -25,17 +25,20 @@
 </template>
 
 <script setup>
-    definePageMeta({
-        middleware: 'auth',
-    })
+    // definePageMeta({
+    //     middleware: 'auth',
+    // })
     const {data:sessionData} = await useFetch('/api/session')
-
+    const {status} = useAuth()
+    const isAuthenticated = computed(()=> status.value !== 'authenticated')
+ 
     // Admin 
-    onMounted(() => {
+    onBeforeMount(() => {
         
-        if(sessionData.value.user.role != 'Admin'){
-            navigateTo('/')
+        if(isAuthenticated){
+            navigateTo("/admin/login")
         }
+      
        
     })
     

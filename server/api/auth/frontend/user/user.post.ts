@@ -7,16 +7,16 @@ export default defineEventHandler(async (event) => {
 
     const admin = await prisma.user.create({
         data: {
-            fullname: getBody.name,
+            fullname: getBody.fullname,
             email: getBody.email,
-            username:getBody.email,
+            username:getBody.username,
             password: getBody.password,
-            role: "admin"
+            role: "customer"
         }
     })
 
     const data = {
-        success: 'Data inserted successfully!'
+        success: 'Signup successfully!'
     }
 
     return data

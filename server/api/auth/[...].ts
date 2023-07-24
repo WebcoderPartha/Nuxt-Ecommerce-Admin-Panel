@@ -6,7 +6,7 @@ import {PrismaClient} from '@prisma/client'
 export default NuxtAuthHandler({
     pages: {
     
-        signIn: '/login'
+        signIn: '/auth/login'
       },
       callbacks: {
         jwt: async ({token, user}) => {
@@ -42,7 +42,7 @@ export default NuxtAuthHandler({
                 const user = {
                     id: loggInUser.id,
                     role: loggInUser.role,
-                    name: loggInUser.name,
+                    fullname: loggInUser.fullname,
                     email: loggInUser.email
                 }
                 return user
