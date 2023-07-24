@@ -96,6 +96,16 @@ const requiredForm = useState(() => ({
     conformPassword: ''
 }))
 
+// Nuxt Auth
+const {status, signIn} = useAuth()
+
+// if Authenticate condition
+onBeforeMount(()=> {
+    if (status.value === 'authenticated') {
+        navigateTo('/')
+    }
+})
+
 // Signup Method
 const signupHandler = async (e) => {
     if(!form.value.fullname.length > 0 && !form.value.email.length > 0 && !form.value.username.length > 0 && !form.value.password.length > 0 && !form.value.conformPassword.length > 0){
