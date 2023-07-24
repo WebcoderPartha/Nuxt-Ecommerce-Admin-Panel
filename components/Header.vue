@@ -14,10 +14,14 @@
                         <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
                             <Icon name="material-symbols:shopping-cart-sharp" />
                         </div>
-                        <NuxtLink to="/auth/login" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
+                        <NuxtLink v-if="!isAuthenticated" to="/auth/login" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
                         </NuxtLink>
+                        <a v-else href="#" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
+                            <Icon name="fa6-regular:user" />
+                            <span class="ml-2">Logout</span>
+                        </a>
                     </div>
                 </div>
                 
@@ -36,7 +40,9 @@
 </template>
 
 <script setup>
-
+    const {status, signOut} = useAuth()
+    const isAuthenticated = computed(()=> status.value === 'authenticated')
+  
 </script>
 
 <style lang="scss" scoped>
