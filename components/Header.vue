@@ -18,7 +18,7 @@
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
                         </NuxtLink>
-                        <a v-else href="#" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
+                        <a v-else @click="logoutHander" href="#" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Logout</span>
                         </a>
@@ -40,9 +40,32 @@
 </template>
 
 <script setup>
+
+    // ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", $swal.stopTimer);
+            toast.addEventListener("mouseleave", $swal.resumeTimer);
+        },
+    });
+    // ===========Sweet Alert Use =============//
+
     const {status, signOut} = useAuth()
     const isAuthenticated = computed(()=> status.value === 'authenticated')
-  
+    const logoutHander = async() => {
+        await signOut({redirect:false})
+        navigateTo('/')
+        Toast.fire({
+            icon: "success",
+            title: "Logout successfully!"
+        });
+    }
 </script>
 
 <style lang="scss" scoped>
