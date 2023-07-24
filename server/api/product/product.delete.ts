@@ -1,6 +1,18 @@
 import {Prisma, PrismaClient} from '@prisma/client'
 
-export default defineEventHandler(async (event) => {
+import {getServerSession} from '#auth'
+
+export default defineEventHandler( async (event) => {
+
+    const session = await getServerSession(event);
+    if(session?.user?.role != 'admin'){
+        return {
+            status: 'Unauthenticated',
+            statusCode: 401
+        }
+    }
+
+
 
     const getBody = await readBody(event);
     const prisma = new PrismaClient()
