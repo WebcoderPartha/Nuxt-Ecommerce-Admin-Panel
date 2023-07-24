@@ -59,11 +59,11 @@
         submenuItems: [
             {
                 title: 'Add Category',
-                link: '/category'
+                link: '/admin/category'
             },
             {
                 title: 'Category List',
-                link: '/category'
+                link: '/admin/category'
             }
         ]
     },
@@ -77,11 +77,11 @@
         submenuItems: [
             {
                 title: 'Add Product',
-                link: '/product/new',
+                link: '/admin/product/new',
             },
             {
                 title: 'Product List',
-                link: '/product',
+                link: '/admin/product',
             }
         ]
     }

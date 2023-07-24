@@ -14,7 +14,7 @@
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "top",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: false,
@@ -27,8 +27,8 @@
 
     const logOutHandler = async () => {
         const {signOut} = useAuth()
-        await signOut({callback:'/admin/login'})
-
+        await signOut({redirect: false})
+        navigateTo('/admin/login')
         Toast.fire({
             icon: "success",
             title: "Logout successfull!",

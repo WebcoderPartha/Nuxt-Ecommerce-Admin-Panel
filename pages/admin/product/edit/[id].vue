@@ -112,13 +112,13 @@
         }
        
     })
-    
+
   // ===========Sweet Alert Use =============//
   
   const { $swal } = useNuxtApp();
   const Toast = $swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "top",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: false,
@@ -219,7 +219,7 @@
           form.value.discount_price = ''
           form.value.quantity = ''
           form.value.image = ''
-          navigateTo('/product')
+          navigateTo('/admin/product')
           console.log(updateData.value)
   
       }else{
