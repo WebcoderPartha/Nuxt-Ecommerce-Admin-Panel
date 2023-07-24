@@ -12,6 +12,9 @@
 </template>
 
 <script setup>
+    useHead({
+        title: 'Admin Panel'
+    })
     definePageMeta({
         layout:false
     })
@@ -37,7 +40,7 @@
     const {signIn} = useAuth() 
     const loginHandler = async (e) => {
         if(username.value.length > 0 && password.value.length > 0){
-            const {error, url} = await signIn('credentials', {username:username.value, password: password.value, redirect:false })
+            const {error, url} = await signIn('credentials', {username:username.value, password: password.value,role:'admin', redirect:false })
             if(error){
               
                 Toast.fire({

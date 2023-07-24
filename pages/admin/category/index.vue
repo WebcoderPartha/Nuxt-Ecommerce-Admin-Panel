@@ -53,16 +53,28 @@
 </template>
 
 <script setup>
-    definePageMeta({
-        middleware: 'auth',
+    // definePageMeta({
+        // middleware: 'auth',
         // auth: {
         //     unauthenticatedOnly: true,
         //     navigateAuthenticatedTo: '/',
         // },     
-    })
+    // })
     
     // Admin 
     const {data:sessionData} = await useFetch('/api/session')
+
+    const {status, data:userData} = useAuth() 
+    // Admin 
+    onBeforeMount(() => {
+    
+        if(status.value === "unauthenticated"){
+            navigateTo("/admin/login")
+        }else if(userData.value.user.role !== 'admin'){
+            navigateTo("/admin/login")
+        }
+       
+    })
   
    
 // ===========Sweet Alert Use =============//
