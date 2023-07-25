@@ -34,15 +34,13 @@
       :modules="[SwiperAutoplay]"
       class="mySwiper"
     >
-      <swiper-slide>
-        <!-- Product Item -->
+      <!-- Product Item -->
+      <swiper-slide v-if="sliderProduct?.length > 0" v-for="(product, idx) in sliderProduct" :key="idx">
         <div class="border rounded-md p-1">
           <div class="relative overflow-hidden">
-            <img
+            <nuxt-img
               class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
+              :src="product.image" preload/>
             <span
               class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
               >New</span
@@ -67,225 +65,17 @@
             </button>
           </div>
         </div>
-        <!-- End Product Item -->
       </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
         <!-- End Product Item -->
-      </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div
-            class="relative overflow-hidden justify-center items-center text-center content-center"
-          >
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
-        <!-- End Product Item -->
-      </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
-        <!-- End Product Item -->
-      </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
-        <!-- End Product Item -->
-      </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
-        <!-- End Product Item -->
-      </swiper-slide>
-      <swiper-slide>
-        <!-- Product Item -->
-        <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <img
-              class="hover:scale-125 duration-300"
-              src="https://media.e-valy.com/cms/products/images/31b4f9fc-0512-405d-9598-aaaba19eb19b?h=250&w=250"
-              alt=""
-            />
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
-          <div
-            class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
-          >
-            <button
-              class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
-            >
-              Add to Cart
-            </button>
-            <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-              Buy Now
-            </button>
-          </div>
-        </div>
-        <!-- End Product Item -->
-      </swiper-slide>
-      >
+
+      
     </swiper>
     <!-- {{ ok }} -->
   </div>
 </template>
 <script setup>
+  const sliderProduct = useHomeSliderProduct()
+  const {data:sliderPt} = await useFetch('/api/frontend/home/sliderproduct', {method: 'GET'})
+  sliderProduct.value = sliderPt 
 
 </script>
