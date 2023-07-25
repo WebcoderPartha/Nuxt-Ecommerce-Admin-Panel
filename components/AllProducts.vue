@@ -11,11 +11,12 @@
       <!-- Product Item -->
       <div class="border rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
         <div class="relative overflow-hidden">
-          <img
+          <!-- <img
             class="hover:scale-125 duration-300"
             :src="hProduct.image"
             alt=""
-          />
+          /> -->
+          <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
           <span
             class="bg-blue-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
             >New</span
