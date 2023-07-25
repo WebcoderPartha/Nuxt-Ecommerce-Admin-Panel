@@ -31,7 +31,7 @@
       }"
       :spaceBetween="4"
       :grabCursor="true"
-      :modules="modules"
+      :modules="[SwiperAutoplay]"
       class="mySwiper"
     >
       <swiper-slide>
@@ -283,29 +283,9 @@
       </swiper-slide>
       >
     </swiper>
+    <!-- {{ ok }} -->
   </div>
 </template>
-<script>
-// Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
+<script setup>
 
-// Import Swiper styles
-import "swiper/css";
-
-import "swiper/css/pagination";
-
-// import required modules
-import { Pagination, Autoplay } from "swiper/modules";
-
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    return {
-      modules: [Pagination, Autoplay],
-    };
-  },
-};
 </script>

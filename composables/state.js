@@ -9,3 +9,7 @@ export const useHomeCategories = () => {
 export const useHomeAllProduct = () => {
     return useState(() => [])
 }
+
+export const useHomeSliderProduct = () => {
+    return useState(() => [])
+}

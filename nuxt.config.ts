@@ -4,11 +4,12 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css'
   ],
-  modules: ['nuxt-icon', '@sidebase/nuxt-auth', '@nuxt/image'],
+  modules: ['nuxt-icon', '@sidebase/nuxt-auth', '@nuxt/image', 'nuxt-swiper'],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
 })
