@@ -5,3 +5,7 @@ export const useCategory = () => {
 export const useHomeCategories = () => {
     return useState(() => [])
 }
+
+export const useHomeAllProduct = () => {
+    return useState(() => [])
+}
