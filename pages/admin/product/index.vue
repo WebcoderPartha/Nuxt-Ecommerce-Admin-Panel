@@ -6,9 +6,12 @@
       class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-5 text-white"
     >
       <Head>
-        <Title>Category</Title>
+        <Title>Product List</Title>
       </Head>
-      <h3 class="text-xl font-semibold pt-4">Product List</h3>
+      <div class="flex justify-between items-center px-6 py-3">
+        <h3 class="text-xl font-semibold pt-4">Product List</h3>
+        <NuxtLink to="/admin/product/new" class=" bg-blue-500 rounded-sm text-white px-3 py-1">Add New</NuxtLink>
+      </div>
       <div class="px-2 pt-2">
         <table class="table-auto border-collapse w-full">
           <thead>
@@ -27,7 +30,7 @@
           <tbody>
             <tr v-for="(product, idx) in getProductState" :key="product.id">
               <td class="border">{{ idx + 1 }}</td>
-              <td class="border">{{ product.name }}</td>
+              <td class="border">{{ product.name.substring(0, 50) + '...' }}</td>
               <td class="border">{{ product.category?.name }}</td>
               <td class="border">{{ product.quantity }}</td>
               <td class="border">{{ product.regular_price }}</td>
@@ -37,7 +40,7 @@
               <td class="border">
                 <NuxtLink
                   class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
-                  :to="`/product/edit/${product.id}`"
+                  :to="`/admin/product/edit/${product.id}`"
                 >
                   <Icon
                     name="fa6-regular:pen-to-square"

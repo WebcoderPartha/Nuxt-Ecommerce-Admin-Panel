@@ -206,7 +206,7 @@
           form.value.discount_price = ''
           form.value.quantity = ''
           form.value.image = ''
-          navigateTo('/product')
+          navigateTo('/admin/product')
   
       }else{
           Toast.fire({

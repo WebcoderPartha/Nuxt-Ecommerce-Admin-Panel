@@ -11,9 +11,9 @@
                         <input  type="text" class="bg-gray-100 text-gray-400 px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                     </div>
                     <div class="flex gap-2 justify-center">
-                        <div class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
+                        <NuxtLink to="/cart" class="text-stone-950 pt-1 text-xl hover:rounded-md cursor-pointer">
                             <Icon name="material-symbols:shopping-cart-sharp" />
-                        </div>
+                        </NuxtLink>
                         <NuxtLink v-if="!isAuthenticated" to="/auth/login" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
