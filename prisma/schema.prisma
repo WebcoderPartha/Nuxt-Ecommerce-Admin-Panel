@@ -9,7 +9,7 @@ datasource db {
 
 model Category {
   id         Int       @id @default(autoincrement())
-  name       String
+  name       String 
   slug       String? @db.LongText
   products   Product[]
   created_at DateTime  @default(now())

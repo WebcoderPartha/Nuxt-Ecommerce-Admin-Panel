@@ -86,7 +86,6 @@ onBeforeMount(() => {
 
 })
 
-const checkPassword = usePassword()
 
 // Login Method
 const loginHandler =  async (e) => {

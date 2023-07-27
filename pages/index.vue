@@ -33,7 +33,6 @@
         <div class="allProduct">
             <AllProducts />
         </div>
-    {{ ok }}
     </div>
 </template>
 

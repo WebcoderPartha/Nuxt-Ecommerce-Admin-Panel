@@ -11,6 +11,7 @@
                         <tr>
                         <th class="border">SL</th>
                         <th class="border">Name</th>
+                        <th class="border">Slug</th>
                         <th class="border">Action</th>
                     </tr>
                     </thead>
@@ -18,6 +19,7 @@
                     <tr v-for="(category, idx) in getCategory" :key="category.id">
                         <td class="border">{{ idx+1 }}</td>
                         <td class="border">{{ category.name }}</td>
+                        <td class="border">{{ category.slug }}</td>
                         <td class="border">
                             <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"><Icon name="fa6-regular:pen-to-square" @click="getIdData(category.id)" /></button>&nbsp;
                             <button @click="deleteData(category.id)" class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"><Icon name="fa6-regular:trash-can" /></button>
@@ -99,17 +101,20 @@
 
     const name = ref('');
     const storeData = async (e) => {
+     
         if(name.value.length !== 0){
+            const uniqueNumber = 100000 + Math.floor(Math.random() * 900000)
             const formData = {
-                name: name.value
+                name: name.value,
+                slug: name.value.replaceAll(' ', '-')+"-"+uniqueNumber
             }
             const {data:storeDatas, error} = await useFetch('/api/category/category', {method:'POST', body:JSON.stringify(formData)})
 
             // Notification
-            Toast.fire({
-                icon: "success",
-                title: storeDatas.value.success
-            });
+            // Toast.fire({
+            //     icon: "success",
+            //     title: storeDatas.value.success
+            // });
             // Reset Form
             e.target.reset()
             name.value = ''
