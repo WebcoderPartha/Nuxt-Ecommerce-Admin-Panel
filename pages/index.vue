@@ -33,7 +33,7 @@
         <div class="allProduct">
             <AllProducts />
         </div>
-    
+    {{ ok }}
     </div>
 </template>
 
@@ -45,6 +45,7 @@ definePageMeta({
 const homeCategories = useHomeCategories()
 const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 homeCategories.value = hmCategories
+// const ok = 100000 + Math.floor(Math.random() * 900000)
 
 </script>
 
