@@ -23,6 +23,7 @@ model Product {
   discount       String
   discount_price String
   quantity       String
+  slug String? @db.LongText
   category Category @relation(fields: [categoryId], references: [id])
   categoryId Int
   image          String   @db.LongText     

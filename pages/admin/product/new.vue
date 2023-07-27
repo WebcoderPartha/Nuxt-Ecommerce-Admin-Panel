@@ -180,6 +180,7 @@
   const storeProduct = async (e) => {
     
       if(form.value.name.length > 0 && form.value.category_id !== '' && form.value.regular_price !== '' && form.value.discount !== '' && form.value.discount_price !== '' && form.value.quantity !== ''){
+        const uniqueNumber = 100000 + Math.floor(Math.random() * 900000)
         const formData = {
           name: form.value.name,
           category_id:  form.value.category_id,
@@ -187,6 +188,7 @@
           discount: form.value.discount,
           discount_price: form.value.discount_price,
           quantity: form.value.quantity,
+          slug: form.value.name.replaceAll(' ', '-')+"-"+uniqueNumber,
           image: form.value.image,
         }
   

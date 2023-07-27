@@ -23,6 +23,7 @@ export default defineEventHandler( async (event) => {
         discount : getBody.discount,
         discount_price : getBody.discount_price,
         quantity : getBody.quantity,
+        slug:getBody.slug,
         image : getBody.image,
         categoryId: getBody.category_id
        }
