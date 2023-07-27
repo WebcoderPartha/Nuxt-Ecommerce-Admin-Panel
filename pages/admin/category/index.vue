@@ -161,9 +161,11 @@
 
     const updateData = async (e) => {
         if(name.value.length !== 0){
+            const uniqueNumber = 100000 + Math.floor(Math.random() * 900000)
             const formData = {
                 name: name.value,
-                id: getStateIdData.value.id
+                id: getStateIdData.value.id,
+                slug: name.value.replaceAll(' ', '-')+"-"+uniqueNumber
             }
             const {data:storeDatas, error} = await useFetch('/api/category/update', {
                 method:'PUT', 

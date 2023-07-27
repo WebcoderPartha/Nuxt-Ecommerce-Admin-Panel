@@ -23,7 +23,8 @@ export default defineEventHandler( async (event) => {
             id: getBody.id
         },
         data: {
-            name: getBody.name
+            name: getBody.name,
+            slug: getBody.slug
         }
     })
 
