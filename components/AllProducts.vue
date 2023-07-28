@@ -10,6 +10,7 @@
     >
       <!-- Product Item -->
       <div class="border rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
+        <NuxtLink :to="`/product/${hProduct.slug}`">
         <div class="relative overflow-hidden">
           <!-- <img
             class="hover:scale-125 duration-300"
@@ -30,7 +31,10 @@
           <p class="text-base font-extrabold" v-else>
             BDT {{ hProduct.regular_price }} 
           </p>
+        
         </div>
+        </NuxtLink>
+   
         <div
           class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
         >
