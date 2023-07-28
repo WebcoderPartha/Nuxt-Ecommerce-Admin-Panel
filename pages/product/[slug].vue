@@ -1,10 +1,18 @@
 <template>
     <div class="my-10 max-w-[1200px] mx-auto">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between">
             <div>
-               hssdfs
+               <img :src="productDetail.image" class=" w-[300px]" alt="">
+               <div class="flex gap-2 items-center justify-center my-3">
+                <img :src="productDetail.image" class=" w-16" alt="">
+                <img :src="productDetail.image" class=" w-16" alt="">
+                <img :src="productDetail.image" class=" w-16" alt="">
+                <img :src="productDetail.image" class=" w-16" alt="">
+               </div>
             </div>
-            <div>sdf</div>
+            <div>
+                <h3 class=" font-semibold text-2xl">{{ productDetail.name  }}</h3>
+            </div>
         </div>
     </div>
 </template>
@@ -22,7 +30,10 @@
             slug: JSON.stringify(productSlug.toString)
         }
     })
-    console.log(ptdetail.value)
+    productDetail.value = ptdetail
+    useHead({
+        title: productDetail.value?.name
+    })
 
 </script>
 
