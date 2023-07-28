@@ -13,7 +13,17 @@
     definePageMeta({
         layout: 'ecommerce'
     })
+    
     const productSlug = useRoute().params.slug
+    const productDetail = usePtDetails()
+    const {data:ptdetail, refresh} = await useFetch('/api/frontend/product/productdetail',{
+        method: 'POST',
+        body: {
+            slug: JSON.stringify(productSlug.toString)
+        }
+    })
+    console.log(ptdetail.value)
+
 </script>
 
 <style lang="scss" scoped>

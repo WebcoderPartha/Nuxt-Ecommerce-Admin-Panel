@@ -17,3 +17,7 @@ export const useHomeSliderProduct = () => {
 export const useHomeCatProduct = () => {
     return useState(() => [])
 }
+
+export const usePtDetails = () => {
+    return useState(() => [])
+}
