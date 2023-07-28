@@ -13,3 +13,7 @@ export const useHomeAllProduct = () => {
 export const useHomeSliderProduct = () => {
     return useState(() => [])
 }
+
+export const useHomeCatProduct = () => {
+    return useState(() => [])
+}
