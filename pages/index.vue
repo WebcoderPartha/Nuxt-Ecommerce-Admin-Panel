@@ -9,7 +9,7 @@
                <h3 class="text-xl font-semibold">Categories</h3>
               <ul>
                 <li class="py-3 border-b" v-for="(hmcat,idx) in homeCategories" :key="idx">
-                    <NuxtLink to="#">
+                    <NuxtLink :to="`/category/${hmcat.slug}`">
                         <div class="flex items-center justify-between">
                         <span class="text-sm">{{ hmcat.name }}</span>
                         <Icon name="fa6-solid:arrow-right" />
