@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="ProductSlider my-6">
+        <div class=" my-6">
             <ProductSlider />
         </div>
         <!-- All Products -->
@@ -49,9 +49,9 @@ homeCategories.value = hmCategories
 
 
 const addcart = useCarts()
-// if(process.client){
-//     addcart.value = JSON.parse(localStorage.getItem('cart')) || []
-// }
+if(process.client){
+    addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+}
 // Add To cart
 const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
@@ -89,12 +89,9 @@ const addToCartHandler =  async (id) => {
         getCartData.push(addData)
         localStorage.setItem('cart', JSON.stringify(getCartData))
         addcart.value = JSON.parse(localStorage.getItem('cart'))
+    
     }
    
-   
-
-
-
 
 
 }
