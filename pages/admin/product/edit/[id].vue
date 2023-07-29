@@ -220,7 +220,7 @@
           form.value.quantity = ''
           form.value.image = ''
           navigateTo('/admin/product')
-          console.log(updateData.value)
+         
   
       }else{
         Toast.fire({

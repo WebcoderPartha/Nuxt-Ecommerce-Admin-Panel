@@ -49,53 +49,52 @@ homeCategories.value = hmCategories
 
 
 const addcart = useCarts()
-if(process.client){
-    addcart.value = JSON.parse(localStorage.getItem('cart')) || []
-}
+// if(process.client){
+//     addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+// }
 // Add To cart
 const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
     })
-    let getCart = []
-    getCart = JSON.parse(localStorage.getItem('cart')) || []
-    const cartData = {
+ 
+    const addData = {
         id: cartProduct.value.id,
         name: cartProduct.value.name,
-        discountPrice: cartProduct.value.discount_price,
-        regular_price: cartProduct.value.discount_price,
+        price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
         quantity: 1,
-        total: discountPrice
+        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
     }
 
-    const findUnique = getCart.find(item => item.id === cartData.id)
-    if(findUnique){
-    
-        for (let i = 0; i < getCart.length; i++) {
-        // Matching specific id session storage data
-            if (getCart[i].id === id) {
-            // Value set specific matched session storage data
-                getCart[i] = {
-                    id: id,
-                    name: "Partha",
-                    quantity: getCart[i].quantity + 1,
-                    regular_price: getCart[i].price,
-                    total: parseInt(getCart[i].price * (getCart[i].qty + 1)),
-                };
+    const getCartData = JSON.parse(localStorage.getItem('cart')) || []
+    const foundCartItem = getCartData.find(item => item.id === id)
 
-                // Value set Session storage
-                sessionStorage.setItem("cart", JSON.stringify(getCart));
+    if(foundCartItem){
+
+        for (let i = 0; i < getCartData.length; i++) {
+            if (getCartData[i].id === foundCartItem.id) {
+                getCartData[i] = {
+                    id: foundCartItem.id,
+                    name: foundCartItem.name,
+                    price: foundCartItem.price,
+                    quantity: foundCartItem.quantity + 1,
+                    total: foundCartItem.price * (foundCartItem.quantity + 1)
+                }
+                localStorage.setItem('cart', JSON.stringify(getCartData));
             }
+            
         }
 
     }else{
-        getCart.push(cartData)
-        localStorage.setItem('cart', JSON.stringify(getCart))
-        console.log('new product')
+        getCartData.push(addData)
+        localStorage.setItem('cart', JSON.stringify(getCartData))
+        addcart.value = JSON.parse(localStorage.getItem('cart'))
     }
-
    
-    
+   
+
+
+
 
 
 }

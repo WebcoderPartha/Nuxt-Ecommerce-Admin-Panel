@@ -36,6 +36,6 @@ export default defineEventHandler( async (event) => {
         success: 'Data updated successfully!'
     }
 
-    return getBody
+    return data
 
 })
