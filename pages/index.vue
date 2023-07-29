@@ -47,12 +47,57 @@ const homeCategories = useHomeCategories()
 const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 homeCategories.value = hmCategories
 
+
+const addcart = useCarts()
+if(process.client){
+    addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+}
 // Add To cart
 const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
     })
-    console.log(cartProduct.value)
+    let getCart = []
+    getCart = JSON.parse(localStorage.getItem('cart')) || []
+    const cartData = {
+        id: cartProduct.value.id,
+        name: cartProduct.value.name,
+        discountPrice: cartProduct.value.discount_price,
+        regular_price: cartProduct.value.discount_price,
+        quantity: 1,
+        total: discountPrice
+    }
+
+    const findUnique = getCart.find(item => item.id === cartData.id)
+    if(findUnique){
+    
+        for (let i = 0; i < getCart.length; i++) {
+        // Matching specific id session storage data
+            if (getCart[i].id === id) {
+            // Value set specific matched session storage data
+                getCart[i] = {
+                    id: id,
+                    name: "Partha",
+                    quantity: getCart[i].quantity + 1,
+                    regular_price: getCart[i].price,
+                    total: parseInt(getCart[i].price * (getCart[i].qty + 1)),
+                };
+
+                // Value set Session storage
+                sessionStorage.setItem("cart", JSON.stringify(getCart));
+            }
+        }
+
+    }else{
+        getCart.push(cartData)
+        localStorage.setItem('cart', JSON.stringify(getCart))
+        console.log('new product')
+    }
+
+   
+    
+
+
 }
 
 
