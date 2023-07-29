@@ -21,3 +21,8 @@ export const useHomeCatProduct = () => {
 export const usePtDetails = () => {
     return useState(() => [])
 }
+
+export const useCarts = () => {
+    return useState(() => [])
+}
+

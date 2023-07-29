@@ -31,12 +31,14 @@
         </div>
         <!-- All Products -->
         <div class="allProduct">
-            <AllProducts />
+            <AllProducts @addToCart="addToCartHandler" />
         </div>
     </div>
 </template>
 
 <script setup>
+
+
 definePageMeta({
     layout:'ecommerce'
 })
@@ -44,7 +46,15 @@ definePageMeta({
 const homeCategories = useHomeCategories()
 const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 homeCategories.value = hmCategories
-// const ok = 100000 + Math.floor(Math.random() * 900000)
+
+// Add To cart
+const addToCartHandler =  async (id) => {
+    const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
+        method: 'GET'
+    })
+    console.log(cartProduct.value)
+}
+
 
 </script>
 

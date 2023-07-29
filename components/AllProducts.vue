@@ -38,7 +38,7 @@
         <div
           class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
         >
-          <button
+          <button @click="$emit('addToCart', hProduct.id)"
             class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
           >
             Add to Cart
@@ -60,8 +60,12 @@
   const allProduct = useHomeAllProduct()
   const {data:allpt} = await useFetch('/api/frontend/home/allproduct', {method: "GET"})
   allProduct.value = allpt
-  // Get All Product
+  // end Get All Product
 
+  // Define Add to cart event
+  const emit = defineEmits(['addToCart'])
+
+ 
 </script>
 
 <style lang="scss" scoped></style>
