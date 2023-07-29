@@ -10,27 +10,29 @@
       >
         <!-- Product Item -->
         <div class="border rounded-md p-1" v-if="catgoryProduct?.products?.length > 0" v-for="(hProduct, hinx) in catgoryProduct?.products" :key="hinx">
-          <div class="relative overflow-hidden">
-            <!-- <img
-              class="hover:scale-125 duration-300"
-              :src="hProduct.image"
-              alt=""
-            /> -->
-            <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
-            <span
-              class="bg-blue-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center flex flex-col gap-4">
-            <h2 class="text-sm">{{ hProduct.name.substring(0,30)+'...' }}</h2>
-            <p class="text-base font-extrabold" v-if="hProduct.discount !== '0'">
-              <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} 
-            </p>
-            <p class="text-base font-extrabold" v-else>
-              BDT {{ hProduct.regular_price }} 
-            </p>
-          </div>
+          <NuxtLink :to="`/product/${hProduct.slug}`">
+            <div class="relative overflow-hidden">
+              <!-- <img
+                class="hover:scale-125 duration-300"
+                :src="hProduct.image"
+                alt=""
+              /> -->
+              <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
+              <span
+                class="bg-blue-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
+                >New</span
+              >
+            </div>
+            <div class="text-center flex flex-col gap-4">
+              <h2 class="text-sm">{{ hProduct.name.substring(0,30)+'...' }}</h2>
+              <p class="text-base font-extrabold" v-if="hProduct.discount !== '0'">
+                <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} 
+              </p>
+              <p class="text-base font-extrabold" v-else>
+                BDT {{ hProduct.regular_price }} 
+              </p>
+            </div>
+          </NuxtLink>
           <div
             class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
           >
