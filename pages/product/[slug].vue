@@ -12,7 +12,29 @@
             </div>
             <div>
                 <h3 class=" font-semibold text-2xl">{{ productDetail.name  }}</h3>
+                <p class=" my-3">Category: <span class=" font-semibold">{{ productDetail.category.name }}</span></p>
+                <span class="my-3 rounded-md bg-red-600 px-2 py-1 text-white" v-if="productDetail.quantity === '0'">
+                    Stock Out
+                </span>
+                <span class=" my-3 rounded-md bg-green-700 px-2 py-1 text-white" v-else>
+                    Available
+                </span>
+                <p class="text-base font-extrabold my-4" v-if="productDetail.discount !== '0'">
+                    <span class="line-through text-red-600 text-sm">BDT {{ productDetail.regular_price }}</span> BDT {{ productDetail.discount_price }} 
+                </p>
+                <p class="text-base font-extrabold my-4" v-else>
+                    BDT {{ productDetail.regular_price }} 
+                </p>
+
+                <div class="flex gap-3 mt-5">
+                    <button class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"> Add to Cart </button>
+                    <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md"> Buy Now </button>
+                </div>
             </div>
+        </div>
+        <!-- Releted Product -->
+        <div class="my-10">
+            <ProductSlider />
         </div>
     </div>
 </template>
