@@ -25,6 +25,7 @@
     "bcryptjs": "^2.4.3",
     "noty": "^3.2.0-beta-deprecated",
     "nuxt-swiper": "^1.2.0",
-    "sweetalert2": "^11.7.12"
+    "sweetalert2": "^11.7.12",
+    "vue-inner-image-zoom": "^2.0.0"
   }
 }

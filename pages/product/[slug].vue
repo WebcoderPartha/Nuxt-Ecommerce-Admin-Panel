@@ -2,12 +2,13 @@
     <div class="my-10 max-w-[1200px] mx-auto">
         <div class="flex justify-between">
             <div>
-               <img :src="productDetail.image" class=" w-[300px]" alt="">
+               <!-- <img :src="productDetail.image" class=" w-[300px]" alt=""> -->
+               <div class="w-[300px]">
+                <inner-image-zoom :src="productDetail.image" zoomScale="0.9" zoomType="hover" :zoomSrc="productDetail.image" />
+               </div>
                <div class="flex gap-2 items-center justify-center my-3">
                 <img :src="productDetail.image" class=" w-16" alt="">
-                <img :src="productDetail.image" class=" w-16" alt="">
-                <img :src="productDetail.image" class=" w-16" alt="">
-                <img :src="productDetail.image" class=" w-16" alt="">
+             
                </div>
             </div>
             <div>
@@ -30,6 +31,7 @@
                     <button class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"> Add to Cart </button>
                     <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md"> Buy Now </button>
                 </div>
+                
             </div>
         </div>
         <!-- Releted Product -->
@@ -40,6 +42,9 @@
 </template>
 
 <script setup>
+    import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css';
+    import InnerImageZoom from 'vue-inner-image-zoom';
+
     definePageMeta({
         layout: 'ecommerce'
     })
