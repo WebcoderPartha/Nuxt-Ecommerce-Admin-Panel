@@ -37,21 +37,23 @@
       <!-- Product Item -->
       <swiper-slide v-if="sliderProduct?.length > 0" v-for="(product, idx) in sliderProduct" :key="idx">
         <div class="border rounded-md p-1">
-          <div class="relative overflow-hidden">
-            <nuxt-img
-              class="hover:scale-125 duration-300"
-              :src="product.image" preload/>
-            <span
-              class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
-              >New</span
-            >
-          </div>
-          <div class="text-center">
-            <h2 class="text-xl">Product Name</h2>
-            <p class="text-base">
-              <span class="line-through text-red-600 text-sm">$246</span> $246
-            </p>
-          </div>
+          <NuxtLink :to="`/product/${product.slug}`">
+            <div class="relative overflow-hidden">
+              <nuxt-img
+                class="hover:scale-125 duration-300"
+                :src="product.image" preload/>
+              <span
+                class="bg-red-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
+                >New</span
+              >
+            </div>
+            <div class="text-center">
+              <h2 class="text-xl">Product Name</h2>
+              <p class="text-base">
+                <span class="line-through text-red-600 text-sm">$246</span> $246
+              </p>
+            </div>
+          </NuxtLink>
           <div
             class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
           >
