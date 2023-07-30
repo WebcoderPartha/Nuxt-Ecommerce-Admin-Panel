@@ -82,7 +82,7 @@
   const {data:sliderPt} = await useFetch('/api/frontend/home/sliderproduct', {method: 'GET'})
   sliderProduct.value = sliderPt 
   // Slider Product
-  console.log(sliderProduct.value)
+
 
   // custom Event
   const emit = defineEmits()

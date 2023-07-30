@@ -67,7 +67,7 @@ definePageMeta({
         }
     })
     catgoryProduct.value = catpt
-    console.log(catpt)
+  
     useHead({
         title: catgoryProduct.value.name
     })
@@ -89,7 +89,8 @@ const addToCartHandler =  async (id) => {
         name: cartProduct.value.name,
         price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
         quantity: 1,
-        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
+        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
+        image: cartProduct.value.image
     }
 
     const getCartData = JSON.parse(localStorage.getItem('cart')) || []
@@ -104,6 +105,7 @@ const addToCartHandler =  async (id) => {
                     name: foundCartItem.name,
                     price: foundCartItem.price,
                     quantity: foundCartItem.quantity + 1,
+                    image: foundCartItem.image,
                     total: foundCartItem.price * (foundCartItem.quantity + 1)
                 }
                 localStorage.setItem('cart', JSON.stringify(getCartData));

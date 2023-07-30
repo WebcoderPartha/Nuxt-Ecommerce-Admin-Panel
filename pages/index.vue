@@ -58,12 +58,14 @@ const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
     })
+
  
     const addData = {
         id: cartProduct.value.id,
         name: cartProduct.value.name,
         price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
         quantity: 1,
+        image: cartProduct.value.image,
         total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
     }
 
@@ -79,6 +81,7 @@ const addToCartHandler =  async (id) => {
                     name: foundCartItem.name,
                     price: foundCartItem.price,
                     quantity: foundCartItem.quantity + 1,
+                    image: foundCartItem.image,
                     total: foundCartItem.price * (foundCartItem.quantity + 1)
                 }
                 localStorage.setItem('cart', JSON.stringify(getCartData));
