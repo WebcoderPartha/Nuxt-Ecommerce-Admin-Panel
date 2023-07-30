@@ -52,7 +52,8 @@ const addcart = useCarts()
 if(process.client){
     addcart.value = JSON.parse(localStorage.getItem('cart')) || []
 }
-// Add To cart
+
+// =============== Add To cart ===============//
 const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
@@ -82,19 +83,17 @@ const addToCartHandler =  async (id) => {
                 }
                 localStorage.setItem('cart', JSON.stringify(getCartData));
             }
-            
         }
 
     }else{
         getCartData.push(addData)
         localStorage.setItem('cart', JSON.stringify(getCartData))
         addcart.value = JSON.parse(localStorage.getItem('cart'))
-    
-    }
-   
-
-
+ 
+    } 
 }
+
+// =============== Add To cart ===============//
 
 
 </script>

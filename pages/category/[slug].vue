@@ -36,7 +36,7 @@
           <div
             class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
           >
-            <button
+            <button @click="addToCartHandler(hProduct.id)"
               class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
             >
               Add to Cart
@@ -71,6 +71,56 @@ definePageMeta({
     useHead({
         title: catgoryProduct.value.name
     })
+
+
+    const addcart = useCarts()
+if(process.client){
+    addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+}
+
+// =============== Add To cart ===============//
+const addToCartHandler =  async (id) => {
+    const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
+        method: 'GET'
+    })
+ 
+    const addData = {
+        id: cartProduct.value.id,
+        name: cartProduct.value.name,
+        price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
+        quantity: 1,
+        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
+    }
+
+    const getCartData = JSON.parse(localStorage.getItem('cart')) || []
+    const foundCartItem = getCartData.find(item => item.id === id)
+
+    if(foundCartItem){
+
+        for (let i = 0; i < getCartData.length; i++) {
+            if (getCartData[i].id === foundCartItem.id) {
+                getCartData[i] = {
+                    id: foundCartItem.id,
+                    name: foundCartItem.name,
+                    price: foundCartItem.price,
+                    quantity: foundCartItem.quantity + 1,
+                    total: foundCartItem.price * (foundCartItem.quantity + 1)
+                }
+                localStorage.setItem('cart', JSON.stringify(getCartData));
+            }
+        }
+
+    }else{
+        getCartData.push(addData)
+        localStorage.setItem('cart', JSON.stringify(getCartData))
+        addcart.value = JSON.parse(localStorage.getItem('cart'))
+ 
+    } 
+}
+
+// =============== Add To cart ===============//
+
+
 </script>
 
 <style lang="scss" scoped>

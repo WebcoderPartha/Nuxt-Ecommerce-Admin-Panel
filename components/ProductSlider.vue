@@ -84,6 +84,7 @@
   // Slider Product
   console.log(sliderProduct.value)
 
+  // custom Event
   const emit = defineEmits()
   const addToCart = (id) => {
     emit('addToCart', id)
