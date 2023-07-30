@@ -2,7 +2,7 @@
    <div>
         <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6">
             <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" />
-            <CartTotalPrice :allCart="allCart"/>
+            <CartTotalPrice />
         </div>
    </div>
 </template>

@@ -59,7 +59,6 @@
 <script setup>
 const { allCart } = defineProps(["allCart"]);
 
-const emit = defineEmits(['clearCart'])
 
 </script>
 
