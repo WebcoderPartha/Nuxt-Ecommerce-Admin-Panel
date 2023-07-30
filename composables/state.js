@@ -26,3 +26,9 @@ export const useCarts = () => {
     return useState(() => [])
 }
 
+export const useCartPrice = () => {
+    return useState(() => ({
+        subtotal: 0
+    }))
+}
+

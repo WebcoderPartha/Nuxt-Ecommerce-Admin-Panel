@@ -92,7 +92,9 @@ const addToCartHandler =  async (id) => {
         getCartData.push(addData)
         localStorage.setItem('cart', JSON.stringify(getCartData))
         addcart.value = JSON.parse(localStorage.getItem('cart'))
- 
+     
+        
+
     } 
 }
 

@@ -1,15 +1,16 @@
 <template>
+  <ClientOnly>
   <div class="lg:col-span-4">
 
     <div class="bg-gray-100 px-6 py-12 flex flex-col gap-3">
       <div class="flex justify-between items-center">
         <h2>Subtotal</h2>
-        <span>BDT 3999</span>
+        <span>BDT {{subTotalPrice}}</span>
       </div>
 
       <div class="flex justify-between items-center mb-5">
         <h2>Total</h2>
-        <span>BDT 3999</span>
+        <span>BDT {{ subTotalPrice }}</span>
       </div>
       <NuxtLink
         to="/checkout"
@@ -18,10 +19,20 @@
       >
     </div>
   </div>
+</ClientOnly>
 </template>
 
 <script setup>
-  
+  const {allCart} = defineProps(['allCart'])
+  const subTotalPrice = useState(()=> '')
+  let price =0
+  allCart.forEach(cart => {
+    price += parseInt(cart.total)
+  })
+  subTotalPrice.value = price
+
+ 
+
 
 </script>
 
