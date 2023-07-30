@@ -9,7 +9,14 @@
 </template>
 
 <script setup>
-
+    useHead({
+        link: [
+            {
+                rel:'icon',
+                href: '/assets/img/google.svg'
+            }
+        ]
+    })
 </script>
 
 <style lang="scss" scoped>

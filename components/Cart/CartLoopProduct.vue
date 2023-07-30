@@ -37,7 +37,7 @@
             <span class="border w-8 h-6 px-1 text-center">{{ cart.quantity }}</span>
             <Icon
               name="ic:twotone-plus"
-              class="border text-2xl bg-white cursor-auto"
+              class="border text-2xl bg-white cursor-pointer"
             />
           </div>
           <Icon

@@ -6,10 +6,7 @@
         <h2>Subtotal</h2>
         <span>BDT 3999</span>
       </div>
-      <div class="flex justify-between items-center">
-        <h2>Shipping Charge</h2>
-        <span>BDT 3999</span>
-      </div>
+
       <div class="flex justify-between items-center mb-5">
         <h2>Total</h2>
         <span>BDT 3999</span>
