@@ -30,7 +30,11 @@
           <p>BDT {{cart.total}}</p>
           <div class="flex items-center gap-2">
             <span>Qty:</span>
-            <Icon
+            <Icon v-if="cart.quantity === 1"
+              name="ic:twotone-minus"
+              class="border text-2xl bg-white cursor-not-allowed"
+            />
+            <Icon v-else
               name="ic:twotone-minus"
               class="border text-2xl bg-white cursor-pointer"
             />
