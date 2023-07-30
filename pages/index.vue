@@ -27,7 +27,7 @@
         </div>
 
         <div class=" my-6">
-            <ProductSlider />
+            <ProductSlider @addToCart="addToCartHandler" />
         </div>
         <!-- All Products -->
         <div class="allProduct">

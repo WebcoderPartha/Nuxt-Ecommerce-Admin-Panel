@@ -48,7 +48,7 @@
               >
             </div>
             <div class="text-center">
-              <h2 class="text-xl">Product Name</h2>
+              <h2 class="text-sm">{{ product.name.substring(0, 30)+'..' }}</h2>
               <p class="text-base">
                 <span class="line-through text-red-600 text-sm">$246</span> $246
               </p>
@@ -57,7 +57,7 @@
           <div
             class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
           >
-            <button
+            <button @click="addToCart(product.id)"
               class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"
             >
               Add to Cart
@@ -76,8 +76,20 @@
   </div>
 </template>
 <script setup>
+
+  // Slider Product
   const sliderProduct = useHomeSliderProduct()
   const {data:sliderPt} = await useFetch('/api/frontend/home/sliderproduct', {method: 'GET'})
   sliderProduct.value = sliderPt 
+  // Slider Product
+  console.log(sliderProduct.value)
+
+  const emit = defineEmits()
+  const addToCart = (id) => {
+    emit('addToCart', id)
+  
+  }
+  
+
 
 </script>
