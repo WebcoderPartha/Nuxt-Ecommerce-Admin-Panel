@@ -7,7 +7,7 @@
     <div v-if="allCart?.length > 0">
         <div class="flex justify-between mb-3">
             <h4 class="text-stone-950">All listed products</h4>
-            <div class="flex gap-2 items-center cursor-pointer">
+            <div class="flex gap-2 items-center cursor-pointer" @click="$emit('clearCart')">
             <Icon class="text-xl" name="mdi:eraser" />
             <span>Clear Cart</span>
             </div>
@@ -58,6 +58,9 @@
 
 <script setup>
 const { allCart } = defineProps(["allCart"]);
+
+const emit = defineEmits(['clearCart'])
+
 </script>
 
 <style lang="scss" scoped></style>
