@@ -20,6 +20,21 @@
                 <span class=" my-3 rounded-md bg-green-700 px-2 py-1 text-white" v-else>
                     Available
                 </span>
+                <div class="flex gap-3 justify-between items-center mt-6">
+                    <div class="flex items-center gap-2">
+                        <span>Qty:</span>
+                        
+                        <Icon 
+                        name="ic:twotone-minus"
+                        class="border text-2xl bg-white cursor-pointer"
+                        />
+                        <span class="border w-8 h-6 px-1 text-center">1</span>
+                        <Icon
+                        name="ic:twotone-plus"
+                        class="border text-2xl bg-white cursor-pointer"
+                        />
+                    </div>
+                </div>
                 <p class="text-base font-extrabold my-4" v-if="productDetail.discount !== '0'">
                     <span class="line-through text-red-600 text-sm">BDT {{ productDetail.regular_price }}</span> BDT {{ productDetail.discount_price }} 
                 </p>
