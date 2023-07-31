@@ -44,7 +44,7 @@
               class="border text-2xl bg-white cursor-pointer"
             />
           </div>
-          <Icon
+          <Icon @click="removeCart(cart.id)"
             name="material-symbols:close"
             class="bg-green-500 text-white text-2xl cursor-pointer"
           />
@@ -62,7 +62,10 @@
 
 <script setup>
 const { allCart } = defineProps(["allCart"]);
-
+const emit = defineEmits()
+const removeCart = (id) => {
+  emit('removeCart', id)
+}
 
 </script>
 
