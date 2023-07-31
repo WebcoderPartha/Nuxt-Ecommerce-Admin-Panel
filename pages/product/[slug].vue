@@ -76,8 +76,9 @@
     const {data:ptdetail, refresh} = await useFetch('/api/frontend/product/productdetail',{
         method: 'POST',
         body: {
-            slug: JSON.stringify(productSlug.toString)
-        }
+            slug: productSlug
+        },
+        key: "data"+productSlug
     })
     productDetail.value = ptdetail
     // GetProductBySlug
