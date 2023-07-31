@@ -4,7 +4,7 @@
             <div>
                <!-- <img :src="productDetail.image" class=" w-[300px]" alt=""> -->
                <div class="w-[300px]">
-                <inner-image-zoom :src="productDetail.image" zoomScale="0.9" zoomType="hover" :zoomSrc="productDetail.image" />
+                <inner-image-zoom :src="productDetail.image" zoomType="hover" :zoomSrc="productDetail.image" />
                </div>
                <div class="flex gap-2 items-center justify-center my-3">
                 <img :src="productDetail.image" class=" w-16" alt="">
@@ -29,11 +29,11 @@
                         class="border text-2xl bg-white cursor-not-allowed"
                         />
                         <Icon v-else
-                        name="ic:twotone-minus"
+                        name="ic:twotone-minus" @click="decrementQty"
                         class="border text-2xl bg-white cursor-pointer"
                         />
                         <span class="border w-8 h-6 px-1 text-center">{{ quantity }}</span>
-                        <Icon
+                        <Icon @click="incrementQty"
                         name="ic:twotone-plus"
                         class="border text-2xl bg-white cursor-pointer"
                         />
@@ -87,6 +87,15 @@
     })
 
     const quantity = ref(1)
+    // Qty Increment 
+    const incrementQty = () => {
+        quantity.value++
+    }
+    // Qty Decrement 
+    const decrementQty = () => {
+        quantity.value--
+    }
+
 
 
 
