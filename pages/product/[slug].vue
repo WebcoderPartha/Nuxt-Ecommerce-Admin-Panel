@@ -47,7 +47,7 @@
                 </p>
 
                 <div class="flex gap-3 mt-5">
-                    <button class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"> Add to Cart </button>
+                    <button @click="addToCart(productDetail.id)" class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0"> Add to Cart </button>
                     <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md"> Buy Now </button>
                 </div>
                 
@@ -97,6 +97,54 @@
         quantity.value--
     }
 
+    const addcart = useCarts()
+    if(process.client){
+        addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+    }
+    // Add To Cart
+    const addToCart = async (id) => {
+        const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
+        method: 'GET'
+        })
+
+    
+        const addData = {
+            id: cartProduct.value.id,
+            name: cartProduct.value.name,
+            price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
+            quantity: quantity.value,
+            image: cartProduct.value.image,
+            total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
+        }
+
+        const getCartData = JSON.parse(localStorage.getItem('cart')) || []
+        const foundCartItem = getCartData.find(item => item.id === id)
+
+        if(foundCartItem){
+
+            for (let i = 0; i < getCartData.length; i++) {
+                if (getCartData[i].id === foundCartItem.id) {
+                    getCartData[i] = {
+                        id: foundCartItem.id,
+                        name: foundCartItem.name,
+                        price: foundCartItem.price,
+                        quantity: foundCartItem.quantity + quantity.value,
+                        image: foundCartItem.image,
+                        total: foundCartItem.price * (foundCartItem.quantity + quantity.value)
+                    }
+                    localStorage.setItem('cart', JSON.stringify(getCartData));
+                    quantity.value = 1
+                }
+            }
+
+        }else{
+            getCartData.push(addData)
+            localStorage.setItem('cart', JSON.stringify(getCartData))
+            addcart.value = JSON.parse(localStorage.getItem('cart'))
+            quantity.value = 1
+        } 
+
+    }
 
 
 
