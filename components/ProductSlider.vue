@@ -47,11 +47,15 @@
                 >New</span
               >
             </div>
-            <div class="text-center">
+            <div class="text-center flex flex-col gap-4">
               <h2 class="text-sm">{{ product.name.substring(0, 30)+'..' }}</h2>
-              <p class="text-base">
-                <span class="line-through text-red-600 text-sm">$246</span> $246
+              <p class="text-base font-extrabold" v-if="product.discount !== '0'">
+                <span class="line-through text-red-600 text-sm">BDT {{ product.regular_price }}</span> BDT {{ product.discount_price }} 
               </p>
+              <p class="text-base font-extrabold" v-else>
+                BDT {{ product.regular_price }} 
+              </p>
+        
             </div>
           </NuxtLink>
           <div
