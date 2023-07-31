@@ -26,11 +26,22 @@ const clearCartHandler = () => {
     
 }
 
+const cartPrice = useCartPrice()
 const rmvCartHandler = (idx) => {
     const getCarts = JSON.parse(localStorage.getItem('cart'))
     getCarts.splice(idx, 1)
     localStorage.setItem('cart', JSON.stringify(getCarts))
     allCart.value = JSON.parse(localStorage.getItem('cart'))
+
+        
+    // Cart Subtotal Count
+    let price = 0
+    allCart.value.forEach(ct => {
+    price += parseInt(ct.total)
+    })
+    localStorage.setItem('subtotal', JSON.stringify(price))
+    cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
+
 }
 
 </script>
