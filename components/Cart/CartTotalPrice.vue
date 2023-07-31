@@ -27,6 +27,9 @@
 
   const addCart = useCarts()
   const cartPrice = useCartPrice() 
+  if(process.client){
+    cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
+  }
   const subTotal = computed(() => cartPrice.value);
 
 

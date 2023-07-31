@@ -53,8 +53,6 @@ if(process.client){
     addcart.value = JSON.parse(localStorage.getItem('cart')) || []
 }
 
-// Cart SubTotal
-const cartPrice = useCartPrice()
 
 // =============== Add To cart ===============//
 const addToCartHandler =  async (id) => {
@@ -90,6 +88,12 @@ const addToCartHandler =  async (id) => {
                 localStorage.setItem('cart', JSON.stringify(getCartData));
             }
         }
+        addcart.value =  JSON.parse(localStorage.getItem('cart'))
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
 
     }else{
         getCartData.push(addData)
@@ -102,7 +106,6 @@ const addToCartHandler =  async (id) => {
             price += parseInt(ct.total)
         })
         localStorage.setItem('subtotal', JSON.stringify(price))
-        cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
     } 
 }
 
