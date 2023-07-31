@@ -26,15 +26,8 @@
 <script setup>
 
   const addCart = useCarts()
-
-
-  let price = 0
-  addCart.value.forEach(cart => {
-    price += parseInt(cart.total)
-  })
-  const subTotal = price
-
- 
+  const cartPrice = useCartPrice() 
+  const subTotal = computed(() => cartPrice.value);
 
 
 </script>

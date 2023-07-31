@@ -27,8 +27,6 @@ export const useCarts = () => {
 }
 
 export const useCartPrice = () => {
-    return useState(() => ({
-        subtotal: 0
-    }))
+    return useState(() =>  0)
 }
 
