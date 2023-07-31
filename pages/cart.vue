@@ -26,8 +26,11 @@ const clearCartHandler = () => {
     
 }
 
-const rmvCartHandler = (id) => {
-    alert(id)
+const rmvCartHandler = (idx) => {
+    const getCarts = JSON.parse(localStorage.getItem('cart'))
+    getCarts.splice(idx, 1)
+    localStorage.setItem('cart', JSON.stringify(getCarts))
+    allCart.value = JSON.parse(localStorage.getItem('cart'))
 }
 
 </script>
