@@ -24,11 +24,15 @@
                     <div class="flex items-center gap-2">
                         <span>Qty:</span>
                         
-                        <Icon 
+                        <Icon v-if="quantity === 1"
+                        name="ic:twotone-minus"
+                        class="border text-2xl bg-white cursor-not-allowed"
+                        />
+                        <Icon v-else
                         name="ic:twotone-minus"
                         class="border text-2xl bg-white cursor-pointer"
                         />
-                        <span class="border w-8 h-6 px-1 text-center">1</span>
+                        <span class="border w-8 h-6 px-1 text-center">{{ quantity }}</span>
                         <Icon
                         name="ic:twotone-plus"
                         class="border text-2xl bg-white cursor-pointer"
@@ -64,8 +68,11 @@
         layout: 'ecommerce'
     })
     
+    // Product page slug
     const productSlug = useRoute().params.slug
+    // Global product detail Composables
     const productDetail = usePtDetails()
+    // GetProductBySlug
     const {data:ptdetail, refresh} = await useFetch('/api/frontend/product/productdetail',{
         method: 'POST',
         body: {
@@ -73,9 +80,15 @@
         }
     })
     productDetail.value = ptdetail
+    // GetProductBySlug
+    // Page Title
     useHead({
         title: productDetail.value?.name
     })
+
+    const quantity = ref(1)
+
+
 
 </script>
 
