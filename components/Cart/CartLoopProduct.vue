@@ -36,7 +36,7 @@
             />
             <Icon v-else
               name="ic:twotone-minus"
-              class="border text-2xl bg-white cursor-pointer"
+              class="border text-2xl bg-white cursor-pointer"  @click="$emit('cartQtyReduce',cart.id)"
             />
             <span class="border w-8 h-6 px-1 text-center">{{ cart.quantity }}</span>
             <Icon
@@ -62,7 +62,7 @@
 
 <script setup>
 const { allCart } = defineProps(["allCart"]);
-const emit = defineEmits(['cartQtyUpdate', 'removeCart'])
+const emit = defineEmits(['cartQtyUpdate', 'removeCart', 'cartQtyReduce'])
 const removeCart = (index) => {
   emit('removeCart', index)
 }

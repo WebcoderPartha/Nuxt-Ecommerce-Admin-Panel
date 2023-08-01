@@ -1,7 +1,7 @@
 <template>
    <div>
         <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6">
-            <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" @cartQtyUpdate="cartQtyUpdateHandler" />
+            <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" @cartQtyUpdate="cartQtyUpdateHandler" @cartQtyReduce="cartQtyReduceHandler" />
             <CartTotalPrice />
         </div>
    </div>
@@ -70,9 +70,33 @@ const cartQtyUpdateHandler = (id) => {
     localStorage.setItem('subtotal', JSON.stringify(price))
     cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
     allCart.value = JSON.parse(localStorage.getItem('cart'))
-    
 }
+// End Update Qty 
 
+// Cart Qty Reduce Handler 
+const cartQtyReduceHandler = (id) => {
+    const getCartStorage = JSON.parse(localStorage.getItem('cart'))
+    for (let i = 0; i < getCartStorage.length; i++) {
+        if (getCartStorage[i].id === id) {
+            getCartStorage[i] = {
+                id: getCartStorage[i].id,
+                name: getCartStorage[i].name,
+                quantity: getCartStorage[i].quantity - 1,
+                price: getCartStorage[i].price,
+                image: getCartStorage[i].image,
+                total: getCartStorage[i].price * (getCartStorage[i].quantity - 1)
+            }
+            localStorage.setItem('cart', JSON.stringify(getCartStorage))
+        }
+    }
+    let price = 0
+    getCartStorage.forEach(item => {
+        price += parseInt(item.total)
+    })
+    localStorage.setItem('subtotal', JSON.stringify(price))
+    cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
+    allCart.value = JSON.parse(localStorage.getItem('cart'))
+}
 
 
 </script>
