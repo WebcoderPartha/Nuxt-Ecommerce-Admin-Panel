@@ -69,6 +69,8 @@ const cartQtyUpdateHandler = (id) => {
     })
     localStorage.setItem('subtotal', JSON.stringify(price))
     cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
+    allCart.value = JSON.parse(localStorage.getItem('cart'))
+    
 }
 
 
