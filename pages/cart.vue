@@ -1,7 +1,7 @@
 <template>
    <div>
         <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6">
-            <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" />
+            <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" @cartQtyUpdate="cartQtyUpdateHandler" />
             <CartTotalPrice />
         </div>
    </div>
@@ -27,6 +27,7 @@ const clearCartHandler = () => {
 }
 
 const cartPrice = useCartPrice()
+// Remove Cart
 const rmvCartHandler = (idx) => {
     const getCarts = JSON.parse(localStorage.getItem('cart'))
     getCarts.splice(idx, 1)
@@ -41,8 +42,16 @@ const rmvCartHandler = (idx) => {
     })
     localStorage.setItem('subtotal', JSON.stringify(price))
     cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
-
 }
+// End Remove Cart
+
+// Update Qty 
+const cartQtyUpdateHandler = (id, qty) => {
+    const ok = id
+    console.log(qty)
+}
+
+
 
 </script>
 

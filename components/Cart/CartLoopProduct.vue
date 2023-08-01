@@ -41,7 +41,7 @@
             <span class="border w-8 h-6 px-1 text-center">{{ cart.quantity }}</span>
             <Icon
               name="ic:twotone-plus"
-              class="border text-2xl bg-white cursor-pointer"
+              class="border text-2xl bg-white cursor-pointer" @click="$emit('cartQtyUpdate',cart.id, cart.quantity)"
             />
           </div>
           <Icon @click="removeCart(index)"
@@ -62,7 +62,7 @@
 
 <script setup>
 const { allCart } = defineProps(["allCart"]);
-const emit = defineEmits()
+const emit = defineEmits(['cartQtyUpdate', 'removeCart'])
 const removeCart = (index) => {
   emit('removeCart', index)
 }
