@@ -8,6 +8,8 @@
 </template>
 
 <script setup>
+
+
 useHead({
     title: 'Cart Page'
 })
@@ -46,9 +48,27 @@ const rmvCartHandler = (idx) => {
 // End Remove Cart
 
 // Update Qty 
-const cartQtyUpdateHandler = (id, qty) => {
-    const ok = id
-    console.log(qty)
+const cartQtyUpdateHandler = (id) => {
+    const getCartStorage = JSON.parse(localStorage.getItem('cart'))
+    for (let i = 0; i < getCartStorage.length; i++) {
+        if (getCartStorage[i].id === id) {
+            getCartStorage[i] = {
+                id: getCartStorage[i].id,
+                name: getCartStorage[i].name,
+                quantity: getCartStorage[i].quantity + 1,
+                price: getCartStorage[i].price,
+                image: getCartStorage[i].image,
+                total: getCartStorage[i].price * (getCartStorage[i].quantity + 1)
+            }
+            localStorage.setItem('cart', JSON.stringify(getCartStorage))
+        }
+    }
+    let price = 0
+    getCartStorage.forEach(item => {
+        price += parseInt(item.total)
+    })
+    localStorage.setItem('subtotal', JSON.stringify(price))
+    cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
 }
 
 

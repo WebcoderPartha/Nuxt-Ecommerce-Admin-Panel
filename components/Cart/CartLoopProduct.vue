@@ -41,7 +41,7 @@
             <span class="border w-8 h-6 px-1 text-center">{{ cart.quantity }}</span>
             <Icon
               name="ic:twotone-plus"
-              class="border text-2xl bg-white cursor-pointer" @click="$emit('cartQtyUpdate',cart.id, cart.quantity)"
+              class="border text-2xl bg-white cursor-pointer" @click="$emit('cartQtyUpdate',cart.id)"
             />
           </div>
           <Icon @click="removeCart(index)"
