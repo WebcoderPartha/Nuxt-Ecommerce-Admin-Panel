@@ -32,22 +32,22 @@ model Product {
 }
 
 model user {
-  id         Int      @id @default(autoincrement())
-  fullname   String
-  email      String   @unique()
-  username   String?
-  password   String
-  role       String
-  orders     Order[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id           Int       @id @default(autoincrement())
+  fullname     String
+  email        String    @unique()
+  username     String?
+  password     String
+  role         String
+  orders       Order[]
+  ship_address Shipping?
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
 }
 
 model Order {
   id           Int           @id @default(autoincrement())
   user         user          @relation(fields: [userId], references: [id])
   userId       Int
-  address      String        @db.LongText
   quantity     String
   total_price  String
   order_date   String
@@ -65,4 +65,16 @@ model OrderDetail {
   quantity     String
   price        String
   subtotal     String
+}
+
+model Shipping {
+  id          Int     @id @default(autoincrement())
+  address_one String  @db.Text
+  address_two String? @db.Text
+  thana       String  @db.Text
+  zipecode    String
+  city        String
+  country     String
+  user        user    @relation(fields: [userId], references: [id])
+  userId      Int     @unique
 }
