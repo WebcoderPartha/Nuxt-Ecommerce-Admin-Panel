@@ -18,7 +18,8 @@
                     <div class="">
                         <div class="flex items-center justify-center relative">
                             <input v-model="form.password" type="password"  id="passAction" class=" bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full" placeholder="Enter password" autocomplete="on">
-                            <Icon class="text-2xl absolute right-2 cursor-pointer" @click="passwordHandler" name="entypo:eye" />
+                            <Icon class="text-2xl absolute right-2 cursor-pointer text-green-600" v-if="isShow" @click="passwordHandler" name="entypo:eye" />
+                            <Icon class="text-2xl absolute right-2 cursor-pointer" v-else @click="passwordHandler" name="entypo:eye-with-line" />
                         </div>
                         <span class="text-sm text-red-500">{{ requiredForm?.password }}</span>
                     </div>
@@ -75,17 +76,17 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
-const isShow = ref(false)
+const isShow = ref(true)
 
 const passwordHandler = () => {
-    if (isShow.value === true) {
+    if (isShow.value === false) {
         document.getElementById('passAction').type = 'password'
         
         
-        isShow.value = false
+        isShow.value = true
     } else {
         document.getElementById('passAction').type = 'text'
-        isShow.value = true
+        isShow.value = false
         
     }
    
