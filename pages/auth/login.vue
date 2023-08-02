@@ -16,7 +16,10 @@
                 <label class="">
                     <span>Password</span>
                     <div class="">
-                        <input v-model="form.password" type="password" class=" bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full" placeholder="Enter password" autocomplete="on">
+                        <div class="flex items-center justify-center relative">
+                            <input v-model="form.password" type="password"  id="passAction" class=" bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full" placeholder="Enter password" autocomplete="on">
+                            <Icon class="text-2xl absolute right-2 cursor-pointer" @click="passwordHandler" name="entypo:eye" />
+                        </div>
                         <span class="text-sm text-red-500">{{ requiredForm?.password }}</span>
                     </div>
                 </label>
@@ -72,8 +75,25 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
+const isShow = ref(false)
+
+const passwordHandler = () => {
+    if (isShow.value === true) {
+        document.getElementById('passAction').type = 'password'
+        
+        
+        isShow.value = false
+    } else {
+        document.getElementById('passAction').type = 'text'
+        isShow.value = true
+        
+    }
+   
+}
+
 const {signIn, status} = useAuth()
 // const isAuthenticated = computed(() =>  status.value == 'authenticated') 
+
 
 onBeforeMount(() => {
     if (status.value === 'authenticated') {
