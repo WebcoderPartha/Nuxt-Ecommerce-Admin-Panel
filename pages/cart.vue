@@ -2,7 +2,7 @@
    <div>
         <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6">
             <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" @cartQtyUpdate="cartQtyUpdateHandler" @cartQtyReduce="cartQtyReduceHandler" />
-            <CartTotalPrice />
+            <CartTotalPrice @checkOut="checkOutHandler" />
         </div>
    </div>
 </template>
@@ -98,6 +98,19 @@ const cartQtyReduceHandler = (id) => {
     allCart.value = JSON.parse(localStorage.getItem('cart'))
 }
 
+    // checkout Handler 
+    const {data:authData} = useAuth()
+   
+    const checkOutHandler = () => {
+      
+        
+        if (authData && authData?.value?.user?.role === 'customer') {
+            navigateTo('/checkout')
+        }else{
+          
+            navigateTo('/auth/login')
+        }
+    }
 
 </script>
 

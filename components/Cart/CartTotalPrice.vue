@@ -13,7 +13,7 @@
         <h2>Total</h2>
         <span>BDT {{addCart?.length>0 ? subTotal : '0'}}</span>
       </div>
-      <NuxtLink
+      <NuxtLink @click="$emit('checkOut')"
         to="/checkout"
         class="bg-black text-white px-3 py-3 text-center cursor-pointer"
         >Proccess To Checkout</NuxtLink
@@ -32,6 +32,8 @@
   }
   const subTotal = computed(() => cartPrice.value);
 
+  // Checkout Event
+  const emit = defineEmits(['checkOut'])
 
 </script>
 
