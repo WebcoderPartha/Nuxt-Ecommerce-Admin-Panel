@@ -17,6 +17,21 @@ definePageMeta({
     layout:'ecommerce'
 })
 
+// ===========Sweet Alert Use =============//
+const { $swal } = useNuxtApp();
+const Toast = $swal.mixin({
+  toast: true,
+  position: "top",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: false,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", $swal.stopTimer);
+    toast.addEventListener("mouseleave", $swal.resumeTimer);
+  },
+});
+// ===========Sweet Alert Use =============//
+
 const allCart = useCarts()
 if(process.client){
     allCart.value = JSON.parse(localStorage.getItem('cart')) || []
@@ -107,7 +122,10 @@ const cartQtyReduceHandler = (id) => {
         if (authData && authData?.value?.user?.role === 'customer') {
             navigateTo('/checkout')
         }else{
-          
+            Toast.fire({
+                icon: "error",
+                title: "Please login first!",
+            });
             navigateTo('/auth/login')
         }
     }
