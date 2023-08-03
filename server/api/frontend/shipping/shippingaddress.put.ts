@@ -9,7 +9,7 @@ export default defineEventHandler( async (event) => {
 
     const category = await prisma.shipping.update({
         where: {
-            userId: getBody.userId
+            userId: parseInt(getBody.userId)
         },
         data: {
             address_one: getBody.address_one,
@@ -22,7 +22,7 @@ export default defineEventHandler( async (event) => {
     })
 
     const data = {
-        success: 'Data inserted successfully!'
+        success: 'Data updated successfully!'
     }
 
     return data

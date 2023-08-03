@@ -235,7 +235,7 @@ const edidFormHandler = async () => {
   const {data:spAddress} = await useFetch('/api/frontend/shipping/'+authUser?.value?.user?.id, {
   method: "GET"
   })
-  console.log(spAddress.value)
+
   addressForm.value.address_one = spAddress.value.address_one
   addressForm.value.address_two = spAddress.value.address_two
   addressForm.value.thana = spAddress.value.thana
@@ -246,8 +246,38 @@ const edidFormHandler = async () => {
 
 };
 
-const updateShippingHandler = (e) => {
-  shipUpdateForm.value = false;
+const updateShippingHandler = async (e) => {
+  const formAddressData = {
+      address_one: addressForm.value.address_one,
+      address_two: addressForm.value.address_two,
+      thana: addressForm.value.thana,
+      zipecode: addressForm.value.zipe_code,
+      city: addressForm.value.city,
+      country: addressForm.value.country,
+      userId: authUser?.value?.user?.id,
+    };
+    
+    const {data:updateShip} = await useFetch('/api/frontend/shipping/shippingaddress',{
+      method: 'PUT',
+      body: formAddressData
+    })
+
+    refresh()
+    shipUpdateForm.value = false;
+    e.target.reset();
+    addressForm.value.address_one = "";
+    addressForm.value.address_two = "";
+    addressForm.value.thana = "";
+    addressForm.value.zipe_code = "";
+    addressForm.value.city = "";
+    addressForm.value.country = "";
+
+    validation.value.address_one = "";
+    validation.value.address_two = "";
+    validation.value.thana = "";
+    validation.value.zipe_code = "";
+    validation.value.city = "";
+    validation.value.country = "";
 
 };
 
@@ -299,7 +329,7 @@ const shippingHandler = async (e) => {
     validation.value.zipe_code = "";
     validation.value.city = "";
     validation.value.country = "";
-    console.log(shippData.value);
+    
   }
 };
 // ::::::::::::: Insert Shipping Address with Auth User:::::::::::::
