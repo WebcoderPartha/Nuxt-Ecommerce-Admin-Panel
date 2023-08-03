@@ -1,6 +1,17 @@
 <template>
   <div>
-    <div class="border rounded-md border-zinc-300 p-4 max-w-[400px]">
+    <div class="border rounded-md border-zinc-300 p-4 max-w-[400px]" v-if="getShipAddress?.shipping">
+      <h2 class="text-2xl font-semibold mb-3">Shipping Address</h2>
+      <div class="flex flex-col">
+        <h2 class="text-[18px] font-semibold"> {{ getShipAddress?.fullname }}</h2>
+        <p>{{ getShipAddress.shipping.address_one }}</p>
+        <p>{{ getShipAddress.shipping.address_two }}</p>
+        <p>{{ getShipAddress.shipping.area }} {{ getShipAddress.shipping.thana }}</p>
+        <p>{{ getShipAddress.shipping.city }}-{{ getShipAddress.shipping.zipecode }}</p>
+        <p>{{ getShipAddress.shipping.country }}</p>
+      </div>
+    </div>
+    <div class="border rounded-md border-zinc-300 p-4 max-w-[400px]" v-else>
       <h2 class="text-2xl font-semibold mb-3">Shipping Address</h2>
       <form @submit.prevent="shippingHandler" autocomplete="off">
         <div class="flex flex-col gap-3">
@@ -107,10 +118,10 @@ const validation = useState(() => ({
 
 const {data:authUser} = useAuth()
 
-const {data:shipaddress} = await useFetch('/api/frontend/order/'+authUser?.value?.user?.id, {
+const {data:getShipAddress, refresh} = await useFetch('/api/frontend/order/'+authUser?.value?.user?.id, {
   method: "GET"
 })
-console.log(shipaddress.value)
+
 
 const shippingHandler = async (e) => {
  if(addressForm.value.address_one.length === 0){
@@ -141,6 +152,8 @@ const shippingHandler = async (e) => {
       method: 'POST',
       body: formAddressData
     })
+    // User Address Refresh
+    refresh()
     e.target.reset()
     addressForm.value.address_one = ''
     addressForm.value.address_two = ''
