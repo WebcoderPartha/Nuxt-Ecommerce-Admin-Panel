@@ -1,10 +1,13 @@
 import {Prisma, PrismaClient} from '@prisma/client'
 
-export default defineEventHandler(async (event) => {
 
+export default defineEventHandler( async (event) => {
+
+
+    const getBody = await readBody(event);
     const prisma = new PrismaClient()
-    const getBody = await readBody(event)
-    const shipaddress = await prisma.shipping.create({
+
+    const category = await prisma.shipping.create({
         data: {
             address_one: getBody.address_one,
             address_two: getBody.address_two,
@@ -12,12 +15,14 @@ export default defineEventHandler(async (event) => {
             zipecode: getBody.zipecode,
             city: getBody.city,
             country: getBody.country,
-            userId: parseInt(getBody.userId)
+            userId: getBody.userId
         }
     })
 
-    return {
-        success: 'Shipping address is saved'
+    const data = {
+        success: 'Data inserted successfully!'
     }
+
+    return data
 
 })

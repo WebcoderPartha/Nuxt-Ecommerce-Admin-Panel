@@ -107,7 +107,12 @@ const validation = useState(() => ({
 
 const {data:authUser} = useAuth()
 
-const shippingHandler = (e) => {
+const {data:shipaddress} = await useFetch('/api/frontend/order/'+authUser?.value?.user?.id, {
+  method: "GET"
+})
+console.log(shipaddress.value)
+
+const shippingHandler = async (e) => {
  if(addressForm.value.address_one.length === 0){
     validation.value.address_one = 'Field is requried'
   }else if(addressForm.value.address_two.length === 0){
@@ -126,14 +131,36 @@ const shippingHandler = (e) => {
       address_one: addressForm.value.address_one,
       address_two: addressForm.value.address_two,
       thana: addressForm.value.thana,
-      zipe_code: addressForm.value.zipe_code,
+      zipecode: addressForm.value.zipe_code,
       city: addressForm.value.city,
       country: addressForm.value.country,
       userId: authUser?.value?.user?.id
     }
 
+    const {data:shippData} = await useFetch('/api/frontend/order/shippaddress', {
+      method: 'POST',
+      body: formAddressData
+    })
+    e.target.reset()
+    addressForm.value.address_one = ''
+    addressForm.value.address_two = ''
+    addressForm.value.thana = ''
+    addressForm.value.zipe_code = ''
+    addressForm.value.city = ''
+    addressForm.value.country = ''
+
+    validation.value.address_one = ''
+    validation.value.address_two = ''
+    validation.value.thana = ''
+    validation.value.zipe_code = ''
+    validation.value.city = ''
+    validation.value.country = ''
+    console.log(shippData.value)
+
   }
 }
+
+
 
 </script>
 
