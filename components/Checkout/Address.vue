@@ -13,7 +13,7 @@
           class="cursor-pointer text-xl"
         />
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-col text-gray-600">
         <h2 class="text-[18px] font-semibold">
           {{ getShipAddress?.fullname }}
         </h2>
@@ -41,7 +41,7 @@
               type="text"
               v-model="addressForm.address_one"
               placeholder="Address line one"
-              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
             />
             <span class="text-red-500 text-sm">{{
               validation?.address_one
@@ -52,7 +52,7 @@
               type="text"
               v-model="addressForm.address_two"
               placeholder="Address line two"
-              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
             />
             <span class="text-red-500 text-sm">{{
               validation?.address_two
@@ -64,7 +64,7 @@
                 type="text"
                 v-model="addressForm.thana"
                 placeholder="Area / Thana"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{ validation?.thana }}</span>
             </div>
@@ -73,7 +73,7 @@
                 type="text"
                 v-model="addressForm.zipe_code"
                 placeholder="Zip Code"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{
                 validation?.zipe_code
@@ -86,7 +86,7 @@
                 type="text"
                 v-model="addressForm.city"
                 placeholder="City"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{ validation?.city }}</span>
             </div>
@@ -95,7 +95,7 @@
                 type="text"
                 v-model="addressForm.country"
                 placeholder="Country"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{
                 validation?.country
@@ -124,7 +124,7 @@
               type="text"
               v-model="addressForm.address_one"
               placeholder="Address line one"
-              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
             />
             <span class="text-red-500 text-sm">{{
               validation?.address_one
@@ -135,7 +135,7 @@
               type="text"
               v-model="addressForm.address_two"
               placeholder="Address line two"
-              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+              class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
             />
             <span class="text-red-500 text-sm">{{
               validation?.address_two
@@ -147,7 +147,7 @@
                 type="text"
                 v-model="addressForm.thana"
                 placeholder="Area / Thana"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{ validation?.thana }}</span>
             </div>
@@ -156,7 +156,7 @@
                 type="text"
                 v-model="addressForm.zipe_code"
                 placeholder="Zip Code"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{
                 validation?.zipe_code
@@ -169,7 +169,7 @@
                 type="text"
                 v-model="addressForm.city"
                 placeholder="City"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{ validation?.city }}</span>
             </div>
@@ -178,7 +178,7 @@
                 type="text"
                 v-model="addressForm.country"
                 placeholder="Country"
-                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-400"
+                class="bg-gray-100 rounded-md focus:outline-none px-4 py-1 w-full text-gray-600"
               />
               <span class="text-red-500 text-sm">{{
                 validation?.country
@@ -219,6 +219,7 @@ const validation = useState(() => ({
 
 const { data: authUser } = useAuth();
 
+// Auth User Data with address
 const { data: getShipAddress, refresh } = await useFetch(
   "/api/frontend/order/" + authUser?.value?.user?.id,
   {
@@ -226,16 +227,28 @@ const { data: getShipAddress, refresh } = await useFetch(
   }
 );
 
+
+
 const shipUpdateForm = ref(false);
-const edidFormHandler = () => {
+const edidFormHandler = async () => {
+
+  const {data:spAddress} = await useFetch('/api/frontend/shipping/'+authUser?.value?.user?.id, {
+  method: "GET"
+  })
+  console.log(spAddress.value)
+  addressForm.value.address_one = spAddress.value.address_one
+  addressForm.value.address_two = spAddress.value.address_two
+  addressForm.value.thana = spAddress.value.thana
+  addressForm.value.zipe_code = spAddress.value.zipecode
+  addressForm.value.city = spAddress.value.city
+  addressForm.value.country = spAddress.value.country
   shipUpdateForm.value = true;
+
 };
 
 const updateShippingHandler = (e) => {
   shipUpdateForm.value = false;
-  const ok = document.getElementById("shipAddForm");
-  ok.classList;
-  console.log(ok.classList);
+
 };
 
 // ::::::::::::: Insert Shipping Address with Auth User:::::::::::::
