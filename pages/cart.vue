@@ -1,6 +1,6 @@
 <template>
    <div>
-        <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6">
+        <div class="max-w-[1200px] mx-auto grid gap-12 lg:grid-cols-12 justify-center items-center py-6 px-6 md:px-0">
             <CartLoopProduct :allCart="allCart" @clearCart="clearCartHandler" @removeCart="rmvCartHandler" @cartQtyUpdate="cartQtyUpdateHandler" @cartQtyReduce="cartQtyReduceHandler" />
             <CartTotalPrice @checkOut="checkOutHandler" />
         </div>
