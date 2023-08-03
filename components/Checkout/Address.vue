@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="border rounded-md border-zinc-300 p-4 max-w-[400px]" v-if="getShipAddress?.shipping">
-      <h2 class="text-2xl font-semibold mb-3">Shipping Address</h2>
+      <div class="flex justify-between">
+        <h2 class="text-2xl font-semibold mb-3">Shipping Address</h2>
+        <Icon name="fa6-solid:pen-to-square" class=" cursor-pointer text-xl" />
+      </div>
       <div class="flex flex-col">
         <h2 class="text-[18px] font-semibold"> {{ getShipAddress?.fullname }}</h2>
         <p>{{ getShipAddress.shipping.address_one }}</p>
