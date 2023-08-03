@@ -1,11 +1,11 @@
 <template>
-    <div class="max-w-[1200px] mx-auto py-6">
-        <div class=" grid lg:grid-cols-12 gap-4 items-center justify-center px-4 lg:px-0">
+    <div class="max-w-[1200px] mx-auto py-7">
+        <div class=" grid lg:grid-cols-12 justify-between px-4 lg:px-0">
             <div class=" lg:col-span-6">
                 <CheckoutAddress />
             </div>
-            <div class=" lg:col-span-6">
-                <CheckoutPrice />
+            <div class=" lg:col-span-5">
+               <CheckoutPaymentMethod />
             </div>
         </div>
     </div>
