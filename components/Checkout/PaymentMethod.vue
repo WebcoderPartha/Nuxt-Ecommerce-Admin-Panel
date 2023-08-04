@@ -123,7 +123,9 @@ const orderNowHandler = async (e) => {
       addCart.value = []
       localStorage.removeItem('cart')
       localStorage.removeItem('subtotal')
-      
+      const placedOrder = usePlacedOrderData()
+      placedOrder.value = orderNow.value.order
+      navigateTo('/order-success')
      
     } else {
       Toast.fire({

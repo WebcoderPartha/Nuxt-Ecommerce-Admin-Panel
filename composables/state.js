@@ -30,3 +30,7 @@ export const useCartPrice = () => {
     return useState(() =>  0)
 }
 
+export const usePlacedOrderData = () => {
+    return useState(() =>  '')
+}
+
