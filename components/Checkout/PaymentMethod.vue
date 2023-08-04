@@ -101,6 +101,7 @@ const { data: shipAdresGet, refresh } = await useFetch(
   }
 );
 
+
 // =========== Order Handler =============//
 const orderNowHandler = async (e) => {
   refresh();
@@ -116,8 +117,13 @@ const orderNowHandler = async (e) => {
         method: 'POST',
         body: formData
       })
-
-      console.log(orderNow.value)
+      const addCart = useCarts()
+      const cartPrice = useCartPrice()
+      cartPrice.value = 0
+      addCart.value = []
+      localStorage.removeItem('cart')
+      localStorage.removeItem('subtotal')
+      
      
     } else {
       Toast.fire({

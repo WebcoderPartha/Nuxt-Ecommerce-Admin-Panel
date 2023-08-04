@@ -13,10 +13,10 @@ CREATE TABLE `Category` (
 CREATE TABLE `Product` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `regular_price` VARCHAR(191) NOT NULL,
-    `discount` VARCHAR(191) NOT NULL,
-    `discount_price` VARCHAR(191) NOT NULL,
-    `quantity` VARCHAR(191) NOT NULL,
+    `regular_price` DOUBLE NOT NULL,
+    `discount` DOUBLE NOT NULL,
+    `discount_price` DOUBLE NOT NULL,
+    `quantity` DOUBLE NOT NULL,
     `slug` LONGTEXT NULL,
     `categoryId` INTEGER NOT NULL,
     `image` LONGTEXT NOT NULL,
@@ -46,12 +46,12 @@ CREATE TABLE `Order` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `tcn` VARCHAR(191) NOT NULL,
-    `quantity` VARCHAR(191) NOT NULL,
-    `total_price` VARCHAR(191) NOT NULL,
+    `quantity` DOUBLE NOT NULL,
+    `total_price` DOUBLE NOT NULL,
     `payment_method` VARCHAR(191) NULL,
     `order_date` VARCHAR(191) NOT NULL,
     `tran_id` VARCHAR(191) NOT NULL,
-    `order_status` VARCHAR(191) NULL,
+    `order_status` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -62,9 +62,9 @@ CREATE TABLE `OrderDetail` (
     `orderId` INTEGER NOT NULL,
     `product_name` VARCHAR(191) NOT NULL,
     `image` LONGTEXT NOT NULL,
-    `quantity` VARCHAR(191) NOT NULL,
-    `price` VARCHAR(191) NOT NULL,
-    `subtotal` VARCHAR(191) NOT NULL,
+    `quantity` DOUBLE NOT NULL,
+    `price` DOUBLE NOT NULL,
+    `subtotal` DOUBLE NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

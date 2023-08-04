@@ -59,8 +59,9 @@ export default defineEventHandler(async (event) => {
 
 
     return {
-        success: 'The order has been placed'
-        // success: details as any
+        success: 'The order has been placed',
+        order: oderDone
+      
     }
 
   
