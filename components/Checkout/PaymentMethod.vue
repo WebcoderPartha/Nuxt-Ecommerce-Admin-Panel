@@ -4,11 +4,15 @@
       <div class="flex flex-col gap-3 bg-gray-100 px-6 py-12">
         <div class="flex justify-between">
           <h2>Sub Total</h2>
-          <p class="font-semibold">BDT 345</p>
+          <ClientOnly>
+          <p class="font-semibold">BDT {{subtotal}}</p>
+        </ClientOnly>
         </div>
         <div class="flex justify-between mb-5">
           <h2>Sub Total</h2>
-          <p class="font-semibold">BDT 345</p>
+          <ClientOnly>
+          <p class="font-semibold">BDT {{subtotal}}</p>
+        </ClientOnly>
         </div>
         <div class="flex flex-col gap-3">
           <h2 class="text-xl font-semibold">Payment Method</h2>
@@ -31,6 +35,13 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+  const cartPrice = useCartPrice()
+  if(process.client){
+      cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
+  }
+  
+  const subtotal = computed(() => cartPrice.value);
+</script>
 
 <style lang="scss" scoped></style>
