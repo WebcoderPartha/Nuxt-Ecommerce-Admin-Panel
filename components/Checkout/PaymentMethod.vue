@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form action="">
+    <form @submit.prevent="orderNowHandler">
       <div class="flex flex-col gap-3 bg-gray-100 px-6 py-12">
         <div class="flex justify-between">
           <h2>Sub Total</h2>
@@ -17,31 +17,63 @@
         <div class="flex flex-col gap-3">
           <h2 class="text-xl font-semibold">Payment Method</h2>
           <div class="flex gap-2">
-            <input id="cash" class=" cursor-pointer" type="radio" name="payment_method" value="Cash On Delivery" />
+            <input @change="onClickPayMethod" id="cash" class=" cursor-pointer" type="radio" name="payment_method" value="Cash On Delivery" />
             <label for="cash" class=" cursor-pointer">Cash On Delivery</label>
           </div>
           <div class="flex gap-2">
-            <input id="cheque" class=" cursor-pointer" type="radio" name="payment_method" value="Cheque" />
+            <input @change="onClickPayMethod" id="cheque" class=" cursor-pointer" type="radio" name="payment_method" value="Cheque" />
             <label for="cheque" class=" cursor-pointer">Cheque</label>
           </div>
           <div class="flex gap-2">
-            <input id="bank" class=" cursor-pointer" type="radio" name="payment_method" value="Bank Transfer" />
+            <input @change="onClickPayMethod" id="bank" class=" cursor-pointer" type="radio" name="payment_method" value="Bank Transfer" />
             <label for="bank" class=" cursor-pointer">Bank Transfer</label>
           </div>
         </div>
-        <button class=" bg-slate-950 text-white px-3 py-1 mt-4 cursor-pointer">Order Now</button>
+        <button type="submit" class=" bg-slate-950 text-white px-3 py-1 mt-4 cursor-pointer">Order Now</button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
+// ===========Sweet Alert Use =============//
+const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+    toast: true,
+    position: "top",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+        toast.addEventListener("mouseenter", $swal.stopTimer);
+        toast.addEventListener("mouseleave", $swal.resumeTimer);
+    },
+    });
+// ===========Sweet Alert Use =============//
+
+// =========== Subtotal =============//
   const cartPrice = useCartPrice()
   if(process.client){
       cartPrice.value = JSON.parse(localStorage.getItem('subtotal'))
   }
-  
   const subtotal = computed(() => cartPrice.value);
+// =========== Subtotal =============//
+
+  const payMethod = ref("")
+  const onClickPayMethod = (e) => {
+    payMethod.value = e.target.value
+  }
+  const orderNowHandler = (e) => {
+    if (payMethod.value.length > 0) {
+      alert(payMethod.value)
+    }else{
+      Toast.fire({
+        icon: "warning",
+        title: "Select payment method!",
+      });
+    }
+  }
+
 </script>
 
 <style lang="scss" scoped></style>
