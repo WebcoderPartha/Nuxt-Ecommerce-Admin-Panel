@@ -50,6 +50,7 @@ model Order {
   userId       Int
   quantity     String
   total_price  String
+  payment_method String?
   order_date   String
   tran_id      String
   orderdetails OrderDetail[]
