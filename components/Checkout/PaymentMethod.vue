@@ -102,16 +102,23 @@ const { data: shipAdresGet, refresh } = await useFetch(
 );
 
 // =========== Order Handler =============//
-const orderNowHandler = (e) => {
+const orderNowHandler = async (e) => {
   refresh();
   if (shipAdresGet?.value) {
     if (payMethod.value.length > 0) {
       const formData = {
-        carts: 
+        carts: JSON.parse(localStorage.getItem('cart')),
+        payment_method: payMethod.value,
+        userId: authUser?.value?.user?.id
       }
 
+      const {data:orderNow, error} = await useFetch("/api/frontend/order/successorder", {
+        method: 'POST',
+        body: formData
+      })
 
-
+      console.log(orderNow.value)
+     
     } else {
       Toast.fire({
         icon: "warning",

@@ -32,29 +32,30 @@ model Product {
 }
 
 model user {
-  id           Int       @id @default(autoincrement())
-  fullname     String
-  email        String    @unique()
-  username     String?
-  password     String
-  role         String
-  orders       Order[]
-  shipping Shipping?
-  created_at   DateTime  @default(now())
-  updated_at   DateTime  @updatedAt
+  id         Int       @id @default(autoincrement())
+  fullname   String
+  email      String    @unique()
+  username   String?
+  password   String
+  role       String
+  orders     Order[]
+  shipping   Shipping?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 }
 
 model Order {
-  id           Int           @id @default(autoincrement())
-  user         user          @relation(fields: [userId], references: [id])
-  userId       Int
-  quantity     String
-  total_price  String
+  id             Int           @id @default(autoincrement())
+  user           user          @relation(fields: [userId], references: [id])
+  userId         Int
+  tcn            String
+  quantity       String
+  total_price    String
   payment_method String?
-  order_date   String
-  tran_id      String
-  orderdetails OrderDetail[]
-  order_status String?
+  order_date     String
+  tran_id        String
+  orderdetails   OrderDetail[]
+  order_status   String?
 }
 
 model OrderDetail {
@@ -76,6 +77,6 @@ model Shipping {
   zipecode    String
   city        String
   country     String
-  user user @relation(fields: [userId], references: [id])
-  userId Int @unique
+  user        user    @relation(fields: [userId], references: [id])
+  userId      Int     @unique
 }

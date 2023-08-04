@@ -45,8 +45,10 @@ CREATE TABLE `user` (
 CREATE TABLE `Order` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
+    `tcn` VARCHAR(191) NOT NULL,
     `quantity` VARCHAR(191) NOT NULL,
     `total_price` VARCHAR(191) NOT NULL,
+    `payment_method` VARCHAR(191) NULL,
     `order_date` VARCHAR(191) NOT NULL,
     `tran_id` VARCHAR(191) NOT NULL,
     `order_status` VARCHAR(191) NULL,

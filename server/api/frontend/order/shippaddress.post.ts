@@ -15,7 +15,7 @@ export default defineEventHandler( async (event) => {
             zipecode: getBody.zipecode,
             city: getBody.city,
             country: getBody.country,
-            userId: getBody.userId
+            userId: getBody.userId,
         }
     })
 
