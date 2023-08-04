@@ -17,10 +17,13 @@ definePageMeta({
 })
 
 const {data:authData} = useAuth()
+const addCart = useCarts()
 
 onBeforeMount(() => {
     if (authData && authData?.value?.user?.role !== 'customer') {
         navigateTo('/auth/login')
+    }else if(addCart.value.length === 0){
+        navigateTo('/')
     }
 });
 
