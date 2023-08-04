@@ -13,22 +13,33 @@ export default defineEventHandler(async (event) => {
     const trans_id = Math.random().toString(16).slice(2)
     let totalPrice = 0
     let totalQty = 0
+    const details:any[] = []
     allProduct.forEach((cart:any) =>{
         totalPrice += parseInt(cart.total)
         totalQty += parseInt(cart.quantity)
+        let pt = {
+            product_name: cart.name,
+            image: cart.image,
+            quantity: `${cart.quantity}`,
+            price: `${cart.price}`,
+            subtotal: `${cart.total}`,  
+        }
+        details.push(pt)
     })
     
 
-    // const OrderDetail = allProduct.map((item:any )=> {
-    //     return {
-    //         name: item.name,
-    //         image: item.image,
-    //         quantity: item.quantity,
-    //         price: item.price,
-    //         total: item.total,  
-    //     }
-    // })
+    const product = allProduct.map((item:any )=> {
+        return {
+            name: item.name,
+            image: item.image,
+            quantity: item.quantity,
+            price: item.price,
+            total: item.total,  
+        }
+    })
 
+   
+  
 
     const oderDone = await prisma.order.create({
         data: {
@@ -39,14 +50,21 @@ export default defineEventHandler(async (event) => {
             payment_method: payment_method,
             order_date: order_date,
             tran_id: trans_id,
-            order_status: '1'
+            order_status: '1',
+            orderdetails: {
+                create: details as any
+            }
         }
     })
 
 
     return {
-        success: oderDone
+        success: 'The order has been placed'
+        // success: details as any
     }
+
+  
+
 
     
  
