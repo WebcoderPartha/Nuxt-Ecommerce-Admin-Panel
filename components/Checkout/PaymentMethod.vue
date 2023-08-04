@@ -13,16 +13,16 @@
         <div class="flex flex-col gap-3">
           <h2 class="text-xl font-semibold">Payment Method</h2>
           <div class="flex gap-2">
-            <input type="radio" value="Cash On Delivery" />
-            <span>Cash On Delivery</span>
+            <input id="cash" class=" cursor-pointer" type="radio" name="payment_method" value="Cash On Delivery" />
+            <label for="cash" class=" cursor-pointer">Cash On Delivery</label>
           </div>
           <div class="flex gap-2">
-            <input type="radio" value="Cheque" />
-            <span>Cheque</span>
+            <input id="cheque" class=" cursor-pointer" type="radio" name="payment_method" value="Cheque" />
+            <label for="cheque" class=" cursor-pointer">Cheque</label>
           </div>
           <div class="flex gap-2">
-            <input type="radio" value="Bank Transfer" />
-            <span>Bank Transfer</span>
+            <input id="bank" class=" cursor-pointer" type="radio" name="payment_method" value="Bank Transfer" />
+            <label for="bank" class=" cursor-pointer">Bank Transfer</label>
           </div>
         </div>
         <button class=" bg-slate-950 text-white px-3 py-1 mt-4 cursor-pointer">Order Now</button>

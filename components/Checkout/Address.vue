@@ -199,23 +199,23 @@
 </template>
 
 <script setup>
-const addressForm = useState(() => ({
-  address_one: "",
-  address_two: "",
-  thana: "",
-  zipe_code: "",
-  city: "",
-  country: "",
-}));
+  const addressForm = useState(() => ({
+    address_one: "",
+    address_two: "",
+    thana: "",
+    zipe_code: "",
+    city: "",
+    country: "",
+  }));
 
-const validation = useState(() => ({
-  address_one: "",
-  address_two: "",
-  thana: "",
-  zipe_code: "",
-  city: "",
-  country: "",
-}));
+  const validation = useState(() => ({
+    address_one: "",
+    address_two: "",
+    thana: "",
+    zipe_code: "",
+    city: "",
+    country: "",
+  }));
 
 const { data: authUser } = useAuth();
 
