@@ -1,20 +1,36 @@
 import { Prisma, PrismaClient } from "@prisma/client"
+import {getServerSession} from '#auth'
 
 export default defineEventHandler(async (event) => {
 
-    const prisma = new PrismaClient()
-    const content =  event.context.params
-
-    const orders = await prisma.order.findMany({
-        where: {
-            userId: parseInt(content?.userid)
-        },
-        include: {
-            orderdetails: true
-        }
-    })
+    const session = await getServerSession(event)
     
-    return orders
+    if(session?.user?.role == 'customer') {
+        
+        const prisma = new PrismaClient()
+        const content =  event.context.params
+    
+        const orders = await prisma.order.findMany({
+            where: {
+                userId: parseInt(content?.userid)
+            },
+            include: {
+                orderdetails: true
+            }
+        })
+        
+        return orders
+
+    }else{
+
+        return {
+            status: 'Unauthenticated',
+            statusCode: 401
+        }
+
+    }
+
+    
 
 
 
