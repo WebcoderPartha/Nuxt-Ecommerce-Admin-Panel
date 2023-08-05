@@ -60,7 +60,7 @@ onBeforeMount(() => {
   }
 });
 
-setTimeout(() => {
+setInterval(() => {
     navigateTo('/')
     placeOrder.value = ''
 },6000)
