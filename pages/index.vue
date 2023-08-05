@@ -32,7 +32,7 @@
         </div>
         <!-- All Products -->
         <div class="allProduct">
-            <AllProducts @addToCart="addToCartHandler" />
+            <AllProducts @addToCart="addToCartHandler" @addWishlist="wishlistHandler" />
         </div>
       
         
@@ -113,6 +113,16 @@ const addToCartHandler =  async (id) => {
 }
 
 // =============== Add To cart ===============//
+
+// =============== Add Wishlist ============== //
+const wishlistHandler = async (product_id) => {
+    const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+      method: 'POST',
+      body: {
+        product_id: product_id
+      }
+    })
+}
 
 
 </script>
