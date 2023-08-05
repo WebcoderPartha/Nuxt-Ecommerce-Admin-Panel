@@ -69,10 +69,12 @@
   // Define Add to cart event
   const emit = defineEmits(['addToCart', 'addWishlist'])
 
+  // Add to wishlist Handler
   const wishlistHandler = async (product_id) => {
     emit('addWishlist', product_id)
     
   }
+  // Add to wishlist Handler
 
  
 </script>

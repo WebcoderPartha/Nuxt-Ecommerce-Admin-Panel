@@ -37,7 +37,6 @@
       <!-- Product Item -->
       <swiper-slide v-if="sliderProduct?.length > 0" v-for="(product, idx) in sliderProduct" :key="idx">
         <div class="border rounded-md p-1 group">
-          <NuxtLink :to="`/product/${product.slug}`">
             <div class="relative overflow-hidden">
               <nuxt-img
                 class="hover:scale-125 duration-300"
@@ -45,21 +44,21 @@
                 <span
             class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
             >New</span>
-            <Icon name="material-symbols:favorite-outline-rounded"
-            class=" group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16"
+            <Icon @click="wishlistHandler(product.id)" name="heroicons-solid:heart"
+            class=" cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16"
             />
             </div>
             <div class="text-center flex flex-col gap-4">
-              <h2 class="text-sm">{{ product.name.substring(0, 30)+'..' }}</h2>
-              <p class="text-base font-extrabold" v-if="product.discount !== '0'">
-                <span class="line-through text-red-600 text-sm">BDT {{ product.regular_price }}</span> BDT {{ product.discount_price }} 
-              </p>
-              <p class="text-base font-extrabold" v-else>
-                BDT {{ product.regular_price }} 
-              </p>
-        
+              <NuxtLink :to="`/product/${product.slug}`">
+                <h2 class="text-sm">{{ product.name.substring(0, 30)+'..' }}</h2>
+                <p class="text-base font-extrabold" v-if="product.discount !== '0'">
+                  <span class="line-through text-red-600 text-sm">BDT {{ product.regular_price }}</span> BDT {{ product.discount_price }} 
+                </p>
+                <p class="text-base font-extrabold" v-else>
+                  BDT {{ product.regular_price }} 
+                </p>
+              </NuxtLink>
             </div>
-          </NuxtLink>
           <div
             class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col"
           >
@@ -91,10 +90,14 @@
 
 
   // custom Event
-  const emit = defineEmits()
+  const emit = defineEmits(['addToCart', 'addWishlist'])
   const addToCart = (id) => {
     emit('addToCart', id)
-  
+  }
+
+  // Wishlist Handler 
+  const wishlistHandler = (product_id) => {
+    emit('addWishlist', product_id)
   }
   
 

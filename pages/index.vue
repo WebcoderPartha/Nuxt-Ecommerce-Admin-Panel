@@ -28,7 +28,7 @@
         </div>
 
         <div class=" my-6">
-            <ProductSlider @addToCart="addToCartHandler" />
+            <ProductSlider @addToCart="addToCartHandler" @addWishlist="wishlistHandler" />
         </div>
         <!-- All Products -->
         <div class="allProduct">
