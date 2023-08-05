@@ -1,29 +1,29 @@
 <template>
     <div class="max-w-[1200px] mx-auto py-8">
- 
+        <h2>{{orderId}}</h2>
      
     </div>
   </template>
   
   <script setup>
-      definePageMeta({
-          layout: 'ecommerce'
-      })
-      
-      // Dynamic Tabs
-      const tabState = ref('orderlist')
-      const tabActionHandler = (e) => {
-          tabState.value = e.target.getAttribute('data-tabs')
-      }
-      // Dynamic Tabs
-  
-      const {data:authUser} = useAuth()
-  
-      const getOrders = useState(() => [])
-      const {data:allOrders} = await useFetch('/api/frontend/myaccount/orders/'+authUser?.value?.user?.id,{
-          method: 'GET'
-      })
-      getOrders.value = allOrders
+
+    definePageMeta({
+        layout: 'ecommerce'
+    })
+    
+    // Dynamic route params
+    const orderId = useRoute().params.orderid
+
+
+    const {data:authUser} = useAuth()
+
+    // Authenticate before load
+    onBeforeMount(() => {
+        if (authUser && authUser?.value?.user?.role !== 'customer') {
+            navigateTo('/auth/login')
+        }
+    });
+    // Authenticate
   
   
   </script>

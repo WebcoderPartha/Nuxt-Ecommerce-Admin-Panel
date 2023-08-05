@@ -33,7 +33,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(order,i) in getOrders" :key="i">
-                                <td class="text-center border border-slate-200">{{order.tcn}}</td>
+                                <td class="text-center border border-slate-200"><NuxtLink class="text-blue-500" :to="`/customer/order/view/${order.tcn}`">{{order.tcn}}</NuxtLink></td>
                                 <td class="text-center border border-slate-200">BDT {{order.total_price}}</td>
                                 <td class="text-center border border-slate-200">{{order.payment_method}}</td>
                                 <td class="text-center border border-slate-200">{{order.tran_id}}</td>
@@ -44,8 +44,10 @@
                                     <span class=" bg-green-400 text-sm px-2 py-1 rounded-md" v-else-if="order.order_status === '3'">Delivered</span>
                                     <span class=" bg-red-400 text-sm px-2 py-1 rounded-md text-white" v-else>Cancelled</span>
                                 </td>
-                                <td class="text-center border border-slate-200 text-red-400">
-                                    <Icon name="entypo:eye" class=" cursor-pointer text-2xl" />
+                                <td class="text-center border border-slate-200">
+                                    <NuxtLink class="text-blue-500" :to="`/customer/order/view/${order.tcn}`">
+                                        <Icon name="entypo:eye" class=" cursor-pointer text-2xl" />
+                                    </NuxtLink>
                                 </td>
                             </tr>
                         </tbody>
