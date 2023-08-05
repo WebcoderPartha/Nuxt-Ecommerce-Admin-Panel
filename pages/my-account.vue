@@ -64,11 +64,22 @@
     definePageMeta({
         layout: 'ecommerce'
     })
+    
+    // Dynamic Tabs
     const tabState = ref('orderlist')
-
     const tabActionHandler = (e) => {
         tabState.value = e.target.getAttribute('data-tabs')
     }
+    // Dynamic Tabs
+
+    const {data:authUser} = useAuth()
+
+    const {data:allOrders} = await useFetch('/api/frontend/myaccount/orders/'+authUser?.value?.user?.id,{
+        method: 'GET'
+    })
+    console.log(allOrders.value)
+
+
 </script>
 
 <style lang="scss" scoped></style>

@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
 
     const orders = await prisma.order.findMany({
         where: {
-            userId: parseInt(content?.userId)
+            userId: parseInt(content?.userid)
         },
         include: {
             orderdetails: true
         }
     })
-
+    
     return orders
 
 
