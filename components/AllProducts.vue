@@ -9,7 +9,7 @@
       class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0"
     >
       <!-- Product Item -->
-      <div class="border rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
+      <div class="border group rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
         <NuxtLink :to="`/product/${hProduct.slug}`">
         <div class="relative overflow-hidden">
           <!-- <img
@@ -19,7 +19,7 @@
           /> -->
           <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
           <span
-            class="bg-blue-400 text-white absolute px-3 py-1 rounded-md top-0 right-0"
+            class="bg-blue-400 group-hover:top-2 text-white absolute px-3 py-1 rounded-md -top-10 duration-300 right-2"
             >New</span
           >
         </div>
