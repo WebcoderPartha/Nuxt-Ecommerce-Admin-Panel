@@ -17,9 +17,9 @@
             :src="hProduct.image"
             alt=""
           /> -->
-          <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
+          <nuxt-img :src="hProduct.image" class="group-hover:scale-125 duration-300" loading="lazy" />
           <span
-            class="bg-blue-400 group-hover:top-2 text-white absolute px-3 py-1 rounded-md -top-10 duration-300 right-2"
+            class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-300 -right-16"
             >New</span
           >
         </div>
