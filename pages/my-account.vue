@@ -18,7 +18,8 @@
             <div v-if="tabState === 'orderlist'" >
                 <div class="flex flex-col gap-3">
                     <h2 class="text-center text-xl bg-gray-100 py-2">Order List</h2>
-                    <table class="w-full border-collapse border border-slate-200" v-if="getOrders?.length > 0">
+                    <div class=" overflow-x-auto" v-if="getOrders?.length > 0">
+                        <table class="border-collapse w-full border table-auto border-slate-200" >
                         <thead>
                             <tr>
                                 <th class="border border-slate-300">Order ID</th>
@@ -49,6 +50,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                     <h2 class="text-center" v-else>You have no order yet!</h2>
                 </div>
             </div>
