@@ -19,9 +19,11 @@
           /> -->
           <nuxt-img :src="hProduct.image" class="group-hover:scale-125 duration-300" loading="lazy" />
           <span
-            class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-300 -right-16"
-            >New</span
-          >
+            class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
+            >New</span>
+            <Icon name="heroicons-solid:heart"
+            class=" group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16"
+            />
         </div>
         <div class="text-center flex flex-col gap-4">
           <h2 class="text-sm">{{ hProduct.name.substring(0,30)+'...' }}</h2>
