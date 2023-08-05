@@ -16,6 +16,9 @@ export default defineEventHandler(async (event) => {
             },
             include: {
                 orderdetails: true
+            },
+            orderBy: {
+                order_date: "desc"
             }
         })
         

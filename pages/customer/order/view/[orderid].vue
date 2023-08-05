@@ -13,8 +13,7 @@
     
     // Dynamic route params
     const orderId = useRoute().params.orderid
-
-
+    
     const {data:authUser} = useAuth()
 
     // Authenticate before load
@@ -24,7 +23,13 @@
         }
     });
     // Authenticate
-  
+
+    const {data:orderDetail} = await useFetch(`/api/frontend/myaccount/orders/view/${orderId}`, {
+        method: 'GET'
+    })
+    console.log(orderDetail.value)
+
+    
   
   </script>
   
