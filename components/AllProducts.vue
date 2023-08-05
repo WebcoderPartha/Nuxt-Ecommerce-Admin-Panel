@@ -21,7 +21,7 @@
           <span
             class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
             >New</span>
-            <Icon  name="heroicons-solid:heart"
+            <Icon @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
             class=" group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16"
             />
         </div>
@@ -66,6 +66,16 @@
 
   // Define Add to cart event
   const emit = defineEmits(['addToCart'])
+
+  const wishlistHandler = async (id) => {
+    const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+      method: 'POST',
+      body: {
+        product_id: id
+      }
+    })
+    console.log(wishdata.value)
+  }
 
  
 </script>
