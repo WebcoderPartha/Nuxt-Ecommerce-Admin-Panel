@@ -7,9 +7,9 @@
         <div class=" md:col-span-1 bg-gray-100 text-center">
             <nav>
                 <ul>
-                    <li :class="`${tabState === 'orderlist' && 'bg-gray-300'} py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="orderlist">Orders</li>
-                    <li :class="`${tabState === 'profile' && 'bg-gray-300'} py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="profile">Profile</li>
-                    <li :class="`${tabState === 'password' && 'bg-gray-300'} py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="password">Change Password</li>
+                    <li :class="`${tabState === 'orderlist' && 'bg-gray-300'} py-2 px-4 border-b cursor-pointer hover:bg-gray-300`" @click="tabActionHandler" data-tabs="orderlist">Orders</li>
+                    <li :class="`${tabState === 'profile' && 'bg-gray-300'} hover:bg-gray-300 py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="profile">Profile</li>
+                    <li :class="`${tabState === 'password' && 'bg-gray-300'} hover:bg-gray-300 py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="password">Change Password</li>
                 </ul>
             </nav>
         </div>
@@ -70,6 +70,15 @@
     definePageMeta({
         layout: 'ecommerce'
     })
+    const {data:authUser} = useAuth()
+
+    // Authenticate before load
+    onBeforeMount(() => {
+        if (authUser && authUser?.value?.user?.role !== 'customer') {
+            navigateTo('/auth/login')
+        }
+    });
+    // Authenticate
     
     // Dynamic Tabs
     const tabState = ref('orderlist')
@@ -77,8 +86,8 @@
         tabState.value = e.target.getAttribute('data-tabs')
     }
     // Dynamic Tabs
+    
 
-    const {data:authUser} = useAuth()
 
     const getOrders = useState(() => [])
     const {data:allOrders} = await useFetch('/api/frontend/myaccount/orders/'+authUser?.value?.user?.id,{
