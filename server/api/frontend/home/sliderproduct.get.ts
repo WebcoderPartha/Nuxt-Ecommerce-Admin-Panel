@@ -9,9 +9,10 @@ export default defineEventHandler(async (event) => {
             id: 'desc'
         },
         include: {
-            category: true
+            category: true,
+            wishlist: true
         },
-        take: 8
+        take: 8,
     })
 
     return product;

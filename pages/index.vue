@@ -65,9 +65,15 @@ definePageMeta({
 
 const {data:authUser, status} = useAuth()
 
+  // Slider Product
+  const sliderProduct = useHomeSliderProduct()
+  const {data:sliderPt, refresh:sliderPtRefresh} = await useFetch('/api/frontend/home/sliderproduct', {method: 'GET'})
+  sliderProduct.value = sliderPt 
+  // Slider Product
+
 // Fetch Category
 const homeCategories = useHomeCategories()
-const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
+const {data:hmCategories} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 homeCategories.value = hmCategories
 // Fetch Category
 
@@ -162,6 +168,7 @@ const wishlistHandler = async (product_id) => {
                 icon: "success",
                 title: rmvWishlist.value.success
             });
+            sliderPtRefresh()
 
         } else {
             // Added to wishlist
@@ -176,6 +183,7 @@ const wishlistHandler = async (product_id) => {
                 icon: "success",
                 title: "Added to wishlist",
             });
+            sliderPtRefresh()
 
         }
 
