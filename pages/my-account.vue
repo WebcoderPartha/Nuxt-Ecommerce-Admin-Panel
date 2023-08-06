@@ -132,30 +132,29 @@
             class="max-w-[400px] mx-auto my-16 bg-white rounded-lg border border-slate-300"
           >
             <div class="py-10 px-10">
-              <form @submit.prevent="loginHandler">
+              <form @submit.prevent="changePasswordHandler" autocomplete="off">
                 <div class="mb-6">
-                  <h2 class="text-2xl text-center">Login your Account</h2>
+                  <h2 class="text-2xl text-center">Change Password</h2>
                 </div>
                 <div class="flex flex-col gap-2">
                   <label class="">
                     <span>Old Password</span>
                     <div class="">
-                      <input 
+                      <input v-model="old_password" 
                         type="password"
                         class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
                         placeholder="*******"
                       />
-                      <!-- <span class="text-sm text-red-500">{{
-                        requiredForm?.emailOrUsername
-                      }}</span> -->
+                      <span class="text-sm text-red-500">{{
+                        err_old_password
+                      }}</span>
                     </div>
                   </label>
                   <label class="">
                     <span>New Password</span>
                     <div class="">
                       <div class="flex items-center justify-center relative">
-                        <input
-                         
+                        <input v-model="new_password" 
                           type="password"
                           id="passAction"
                           class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
@@ -175,22 +174,22 @@
                           name="entypo:eye-with-line"
                         />
                       </div>
-                      <!-- <span class="text-sm text-red-500">{{
-                        requiredForm?.password
-                      }}</span> -->
+                      <span class="text-sm text-red-500">{{
+                        err_new_password
+                      }}</span>
                     </div>
                   </label>
                   <label class="">
                     <span>Confirm Password</span>
                     <div class="">
-                      <input 
+                      <input v-model="password_confirm" 
                         type="password"
                         class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
                         placeholder="*******"
                       />
-                      <!-- <span class="text-sm text-red-500">{{
-                        requiredForm?.emailOrUsername
-                      }}</span> -->
+                      <span class="text-sm text-red-500">{{
+                        err_password_confirm
+                      }}</span>
                     </div>
                   </label>
                   <button
@@ -279,6 +278,40 @@ const passwordHandler = () => {
     }
 }
 // Password Show / Hide
+
+// Change Password Equipment
+  const old_password = ref('')
+  const new_password = ref('')
+  const password_confirm = ref('')
+  const err_old_password = ref('')
+  const err_new_password = ref('')
+  const err_password_confirm = ref('')
+
+  const changePasswordHandler = (e) => {
+    if(old_password.value.length === 0){
+      err_old_password.value = 'Old password is required!'
+    }else if(new_password.value.length === 0){
+      err_new_password.value = 'New password is required!'
+    }else if(password_confirm.value.length === 0){
+      err_password_confirm.value = 'Confirm password is required!'
+    }else{
+
+      if(new_password.value === password_confirm.value){
+          Toast.fire({
+          icon: "success",
+          title: "Success!",
+          });
+      }else{
+          Toast.fire({
+            icon: "error",
+            title: "Confirm password not matched!",
+          });
+      }
+
+    }
+  }
+
+// Change Password Equipment
 
 
 // Logout Handler
