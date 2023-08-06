@@ -10,19 +10,16 @@ export default defineEventHandler( async (event) => {
         const getBody = await readBody(event);
         const prisma = new PrismaClient()
     
-        const existProduct = await prisma.wishlist.findFirst({
+        const existProduct = await prisma.wishlist.delete({
             where: {
                 productId: parseInt(getBody?.product_id),
                 userId: parseInt(session?.user?.id)
-            },
-            include: {
-                product: true
             }
         })
     
-
-    
-        return existProduct
+        return {
+            success: 'Removed from wishlist'
+        }
         
     }else{
 

@@ -140,16 +140,23 @@ const addToCartHandler =  async (id) => {
 const wishlistHandler = async (product_id) => {
 
     if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated"){
-        const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+        const {data:existWishList} = await useFetch('/api/frontend/wishlist/getwishlistbyid',{
             method: 'POST',
             body: {
                 product_id: product_id
             }
         })
-        Toast.fire({
-            icon: "success",
-            title: "Added to wishlist",
-        });
+        console.log(existWishList.value)
+        // const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+        //     method: 'POST',
+        //     body: {
+        //         product_id: product_id
+        //     }
+        // })
+        // Toast.fire({
+        //     icon: "success",
+        //     title: "Added to wishlist",
+        // });
     }else{
         Toast.fire({
             icon: "warning",
