@@ -3,15 +3,16 @@
     <div
       class="text-center py-2 my-2 shadow-md shadow-purple-300 bg-purple-400 mb-4"
     >
-      <h2 class="text-2xl">All Products</h2>
+      <h2 class="text-2xl">All Wishlist Product</h2>
     </div>
-    <div
+    <div v-if="getWishlistProduct?.length > 0"
       class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0"
     >
       <!-- Product Item -->
         <WishlistProduct :wishlist="getWishlistProduct" @rmvWishlist="rmvWishListHandler" />
       <!-- End Product Item -->
     </div>
+    <h3 class="text-center my-4">You don't have wishlist product.</h3>
   </div>
 </template>
 
