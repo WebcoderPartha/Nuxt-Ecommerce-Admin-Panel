@@ -34,7 +34,7 @@
     <div
       class="flex md:items-center md:flex-row md:justify-center mt-4 mb-4 px-3 flex-col"
     >
-      <Icon name="ic:baseline-delete" @click="$emit('removeWishlistHandler', hProduct.product.id)" class="text-red-500 text-2xl cursor-pointer"/>
+      <Icon name="ic:baseline-delete" @click="$emit('rmvWishlist', hProduct.product.id)" class="text-red-500 text-2xl cursor-pointer"/>
     </div>
   </div>
 
@@ -42,7 +42,8 @@
 
 <script setup>
     const {wishlist} = defineProps(['wishlist'])
-
+    const emit = defineEmits(['rmvWishlist'])
+    
 </script>
 
 <style lang="scss" scoped></style>

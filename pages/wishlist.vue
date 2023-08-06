@@ -9,7 +9,7 @@
       class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0"
     >
       <!-- Product Item -->
-        <WishlistProduct :wishlist="getWishlistProduct" />
+        <WishlistProduct :wishlist="getWishlistProduct" @rmvWishlist="rmvWishListHandler" />
       <!-- End Product Item -->
     </div>
   </div>
@@ -31,9 +31,15 @@
     });
     // Authenticate
 
+    // Wishlist data fetching
     const getWishlistProduct = useWishlistProduct()
     const {data:wishlistPt} = await useFetch('/api/frontend/wishlist/getallwishlist')
     getWishlistProduct.value = wishlistPt.value
+    // Wishlist data fetching
+
+    const rmvWishListHandler = (product_id) => {
+      alert(product_id)
+    }
    
 
 
