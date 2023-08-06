@@ -11,7 +11,7 @@
                     <div class="md:w-[500px] w-[200px] mx-auto mt-3 md:mt-0">
                         <input  type="text" class="bg-gray-100 text-gray-400 px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                     </div>
-                    <div class="flex gap-2 justify-center">
+                    <div class="flex gap-2 justify-center item-center">
                         <NuxtLink to="/wishlist" class="h-full mt-2">
                             <Icon :class="`${router.name === 'wishlist' && 'text-red-500'} text-2xl text-gray-600`" name="material-symbols:favorite-outline-rounded" />
                         </NuxtLink>
@@ -26,10 +26,11 @@
                             <Icon name="fa6-regular:user" />
                             <span class="ml-2">Sign In</span>
                         </NuxtLink>
-                        <a v-else @click="logoutHander" href="#" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
+                        <NuxtLink v-else to="/my-account" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
-                            <span class="ml-2">Logout</span>
-                        </a>
+                            <span class="ml-2">My Account</span>
+                        </NuxtLink>
+                        <Icon @click="logoutHander" v-if="isAuthenticated" name="ph:sign-out-fill" class="text-xl mt-3 cursor-pointer" />
                     </div>
                 </div>
                 
