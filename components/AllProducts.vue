@@ -24,7 +24,7 @@
             <!-- <Icon @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
             :class="`${hProduct.wishlist?.productId === hProduct.id  && 'text-red-700'} cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16`"
             /> -->
-            <Icon v-if="hProduct.wishlist?.productId === hProduct.id" @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
+            <Icon v-if="hProduct.wishlist?.productId === hProduct.id && authUser?.user?.role === 'customer'" @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
             :class="` text-red-700 cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 absolute top-10 duration-300 -right-16`"
             />
             <Icon v-else @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
@@ -66,6 +66,7 @@
 
 <script setup>
 
+  const {data:authUser} = useAuth()
   // Get All Product
   const allProduct = useHomeAllProduct()
   // end Get All Product
