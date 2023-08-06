@@ -44,8 +44,11 @@
                 <span
             class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
             >New</span>
-            <Icon @click="wishlistHandler(product.id)" name="heroicons-solid:heart"
-            :class="`${product?.wishlist && 'text-red-700'} cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16`"
+            <Icon v-if="product?.wishlist?.productId === product.id" @click="wishlistHandler(product.id)"  name="heroicons-solid:heart"
+            :class="` text-red-700 cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 absolute top-10 duration-300 -right-16`"
+            />
+            <Icon v-else @click="wishlistHandler(product.id)"  name="heroicons-solid:heart"
+            :class="` text-white cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 absolute top-10 duration-300 -right-16`"
             />
             </div>
             <div class="text-center flex flex-col gap-4">
