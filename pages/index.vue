@@ -140,23 +140,45 @@ const addToCartHandler =  async (id) => {
 const wishlistHandler = async (product_id) => {
 
     if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated"){
+
+        // Find exist wishlist product
         const {data:existWishList} = await useFetch('/api/frontend/wishlist/getwishlistbyid',{
             method: 'POST',
             body: {
                 product_id: product_id
             }
         })
-        console.log(existWishList.value)
-        // const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
-        //     method: 'POST',
-        //     body: {
-        //         product_id: product_id
-        //     }
-        // })
-        // Toast.fire({
-        //     icon: "success",
-        //     title: "Added to wishlist",
-        // });
+
+        // Check exist wishlist
+        if (existWishList.value) {
+            const {data:rmvWishlist} = await useFetch('/api/frontend/wishlist/removewishlist', {
+                method: "DELETE", 
+                body: {
+                    product_id: product_id
+                }
+            })
+              // Sweet toast alert 
+            Toast.fire({
+                icon: "success",
+                title: rmvWishlist.value.success
+            });
+
+        } else {
+            // Added to wishlist
+            const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+                method: 'POST',
+                body: {
+                    product_id: product_id
+                }
+            })
+            // Sweet toast alert
+            Toast.fire({
+                icon: "success",
+                title: "Added to wishlist",
+            });
+
+        }
+
     }else{
         Toast.fire({
             icon: "warning",
