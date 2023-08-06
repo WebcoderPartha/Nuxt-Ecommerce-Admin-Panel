@@ -76,21 +76,19 @@ const requiredForm = useState(() => ({
     password: ''
 }))
 
+// Password Show / Hide
 const isShow = ref(true)
 
 const passwordHandler = () => {
     if (isShow.value === false) {
         document.getElementById('passAction').type = 'password'
-        
-        
         isShow.value = true
     } else {
         document.getElementById('passAction').type = 'text'
         isShow.value = false
-        
     }
-   
 }
+// Password Show / Hide
 
 const {signIn, status} = useAuth()
 // const isAuthenticated = computed(() =>  status.value == 'authenticated') 
