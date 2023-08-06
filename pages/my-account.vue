@@ -10,6 +10,7 @@
                     <li :class="`${tabState === 'orderlist' && 'bg-gray-300'} py-2 px-4 border-b cursor-pointer hover:bg-gray-300`" @click="tabActionHandler" data-tabs="orderlist">Orders</li>
                     <li :class="`${tabState === 'profile' && 'bg-gray-300'} hover:bg-gray-300 py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="profile">Profile</li>
                     <li :class="`${tabState === 'password' && 'bg-gray-300'} hover:bg-gray-300 py-2 px-4 border-b cursor-pointer`" @click="tabActionHandler" data-tabs="password">Change Password</li>
+                    <li :class="`hover:bg-gray-300 py-2 px-4 border-b cursor-pointer`" @click="logoutHander" >Logout</li>
                 </ul>
             </nav>
         </div>
@@ -72,7 +73,23 @@
     definePageMeta({
         layout: 'ecommerce'
     })
-    const {data:authUser} = useAuth()
+
+    // ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", $swal.stopTimer);
+            toast.addEventListener("mouseleave", $swal.resumeTimer);
+        },
+    });
+    // ===========Sweet Alert Use =============//
+    
+    const {data:authUser, signOut} = useAuth()
 
     // Authenticate before load
     onBeforeMount(() => {
@@ -88,14 +105,24 @@
         tabState.value = e.target.getAttribute('data-tabs')
     }
     // Dynamic Tabs
-    
-
 
     const getOrders = useState(() => [])
     const {data:allOrders} = await useFetch('/api/frontend/myaccount/orders/'+authUser?.value?.user?.id,{
         method: 'GET'
     })
     getOrders.value = allOrders
+
+    // Logout Handler
+    const logoutHander = async() => {
+        await signOut({redirect:false})
+        navigateTo('/')
+        Toast.fire({
+            icon: "success",
+            title: "Logout successfully!"
+        });
+    }
+      // Logout Handler
+
 
 
 </script>

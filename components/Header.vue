@@ -28,8 +28,8 @@
                         </NuxtLink>
                         <NuxtLink v-else to="/my-account" class="text-stone-950 px px-2 py-2 hover:rounded-md cursor-pointer">
                             <Icon name="fa6-regular:user" />
-                            <span class="ml-2">My Account</span>
-                        </NuxtLink>
+                            <span class="ml-1 text-sm">My Account</span>
+                        </NuxtLink> 
                         <Icon @click="logoutHander" v-if="isAuthenticated" name="ph:sign-out-fill" class="text-xl mt-3 cursor-pointer" />
                     </div>
                 </div>
@@ -49,7 +49,10 @@
 </template>
 
 <script setup>
+
+    // Current Route for Checking dynamic route path
     const router = useRouter().currentRoute
+
     // ===========Sweet Alert Use =============//
     const { $swal } = useNuxtApp();
     const Toast = $swal.mixin({
