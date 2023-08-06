@@ -30,6 +30,7 @@ export default defineEventHandler( async (event) => {
             status: 'Unauthenticated',
             statusCode: 401
         }
+        
     }
 
  

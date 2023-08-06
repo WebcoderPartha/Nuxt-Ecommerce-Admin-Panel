@@ -41,8 +41,10 @@
 </template>
 
 <script setup>
-    const {wishlist} = defineProps(['wishlist'])
-    const emit = defineEmits(['rmvWishlist'])
+  
+  
+  const {wishlist} = defineProps(['wishlist'])
+  const emit = defineEmits(['rmvWishlist'])
     
 </script>
 

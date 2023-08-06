@@ -10,7 +10,7 @@
     >
       <!-- Product Item -->
       <div class="border group rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
-  
+      
         <div class="relative overflow-hidden">
           <!-- <img
             class="hover:scale-125 duration-300"
@@ -21,8 +21,14 @@
           <span
             class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
             >New</span>
-            <Icon @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
-            :class="`${hProduct?.wishlist && 'text-red-700'} cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16`"
+            <!-- <Icon @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
+            :class="`${hProduct.wishlist?.productId === hProduct.id  && 'text-red-700'} cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 text-white absolute top-10 duration-300 -right-16`"
+            /> -->
+            <Icon v-if="hProduct.wishlist?.productId === hProduct.id" @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
+            :class="` text-red-700 cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 absolute top-10 duration-300 -right-16`"
+            />
+            <Icon v-else @click="wishlistHandler(hProduct.id)"  name="heroicons-solid:heart"
+            :class="` text-white cursor-pointer group-hover:right-4 text-2xl hover:text-red-600 hover:duration-0 absolute top-10 duration-300 -right-16`"
             />
         </div>
         <div class="text-center flex flex-col gap-4">

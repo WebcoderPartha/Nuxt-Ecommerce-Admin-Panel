@@ -37,6 +37,8 @@
     getWishlistProduct.value = wishlistPt.value
     // Wishlist data fetching
 
+
+    // Remove Item
     const rmvWishListHandler = async (product_id) => {
       const {data:rmvSuccess} = await useFetch('/api/frontend/wishlist/removewishlist', {
         method: "DELETE",
@@ -47,7 +49,8 @@
       const {data:wishlistPt} = await useFetch('/api/frontend/wishlist/getallwishlist')
      getWishlistProduct.value = wishlistPt.value
     }
-   
+    // Remove Item
+    
 
 
 </script>
