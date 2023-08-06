@@ -136,15 +136,14 @@
                 <div class="mb-6">
                   <h2 class="text-2xl text-center">Login your Account</h2>
                 </div>
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
                   <label class="">
-                    <span>Email or Username</span>
+                    <span>Old Password</span>
                     <div class="">
-                      <input
-           
-                        type="text"
+                      <input 
+                        type="password"
                         class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
-                        placeholder="Enter email or username"
+                        placeholder="*******"
                       />
                       <!-- <span class="text-sm text-red-500">{{
                         requiredForm?.emailOrUsername
@@ -152,7 +151,7 @@
                     </div>
                   </label>
                   <label class="">
-                    <span>Password</span>
+                    <span>New Password</span>
                     <div class="">
                       <div class="flex items-center justify-center relative">
                         <input
@@ -160,7 +159,7 @@
                           type="password"
                           id="passAction"
                           class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
-                          placeholder="Enter password"
+                          placeholder="*******"
                           autocomplete="on"
                         />
                         <Icon
@@ -181,9 +180,22 @@
                       }}</span> -->
                     </div>
                   </label>
+                  <label class="">
+                    <span>Confirm Password</span>
+                    <div class="">
+                      <input 
+                        type="password"
+                        class="bg-gray-100 rounded-md focus:outline-none px-2 py-2 w-full"
+                        placeholder="*******"
+                      />
+                      <!-- <span class="text-sm text-red-500">{{
+                        requiredForm?.emailOrUsername
+                      }}</span> -->
+                    </div>
+                  </label>
                   <button
                     type="submit"
-                    class="bg-black text-white py-2 rounded-md"
+                    class="bg-gray-400 hover:bg-gray-500 text-white py-2 mt-4 rounded-md"
                   >
                     Change Password
                   </button>
