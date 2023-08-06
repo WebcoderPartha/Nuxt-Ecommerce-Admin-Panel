@@ -33,12 +33,19 @@
 
     // Wishlist data fetching
     const getWishlistProduct = useWishlistProduct()
-    const {data:wishlistPt} = await useFetch('/api/frontend/wishlist/getallwishlist')
+    const {data:wishlistPt, refresh:wishRefresh} = await useFetch('/api/frontend/wishlist/getallwishlist')
     getWishlistProduct.value = wishlistPt.value
     // Wishlist data fetching
 
-    const rmvWishListHandler = (product_id) => {
-      alert(product_id)
+    const rmvWishListHandler = async (product_id) => {
+      const {data:rmvSuccess} = await useFetch('/api/frontend/wishlist/removewishlist', {
+        method: "DELETE",
+        body: {
+          product_id: product_id
+        }
+      })
+      const {data:wishlistPt} = await useFetch('/api/frontend/wishlist/getallwishlist')
+     getWishlistProduct.value = wishlistPt.value
     }
    
 
