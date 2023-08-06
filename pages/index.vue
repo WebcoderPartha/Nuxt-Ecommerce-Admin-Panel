@@ -46,15 +46,37 @@ definePageMeta({
     layout:'ecommerce'
 })
 
+
+// ===========Sweet Alert Use =============//
+    const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", $swal.stopTimer);
+            toast.addEventListener("mouseleave", $swal.resumeTimer);
+        },
+    });
+// ===========Sweet Alert Use =============//
+
+
+const {data:authUser, status} = useAuth()
+
+// Fetch Category
 const homeCategories = useHomeCategories()
 const {data:hmCategories, refresh} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 homeCategories.value = hmCategories
+// Fetch Category
 
-
+// Get Cart data from Local storage with client side
 const addcart = useCarts()
 if(process.client){
     addcart.value = JSON.parse(localStorage.getItem('cart')) || []
 }
+// Get Cart data from Local storage with client side
 
 
 // =============== Add To cart ===============//
@@ -116,12 +138,26 @@ const addToCartHandler =  async (id) => {
 
 // =============== Add Wishlist ============== //
 const wishlistHandler = async (product_id) => {
-    const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
-      method: 'POST',
-      body: {
-        product_id: product_id
-      }
-    })
+
+    if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated"){
+        const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+            method: 'POST',
+            body: {
+                product_id: product_id
+            }
+        })
+        Toast.fire({
+            icon: "success",
+            title: "Added to wishlist",
+        });
+    }else{
+        Toast.fire({
+            icon: "warning",
+            title: "Please login!",
+        });
+        navigateTo('/auth/login')
+    }
+   
 }
 
 
