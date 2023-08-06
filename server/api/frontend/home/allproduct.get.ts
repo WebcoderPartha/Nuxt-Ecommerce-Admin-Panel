@@ -9,7 +9,8 @@ export default defineEventHandler(async (event) => {
             id: 'desc'
         },
         include: {
-            category: true
+            category: true,
+            wishlist: true
         }
     })
 

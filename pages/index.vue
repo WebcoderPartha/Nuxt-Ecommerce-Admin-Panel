@@ -71,6 +71,12 @@ const {data:authUser, status} = useAuth()
   sliderProduct.value = sliderPt 
   // Slider Product
 
+  // Get All Product
+  const allProduct = useHomeAllProduct()
+  const {data:allpt, refresh:allProductRefresh} = await useFetch('/api/frontend/home/allproduct', {method: "GET"})
+  allProduct.value = allpt
+  // end Get All Product
+
 // Fetch Category
 const homeCategories = useHomeCategories()
 const {data:hmCategories} = await useFetch('/api/frontend/category/category', {method: 'GET'})
@@ -169,6 +175,7 @@ const wishlistHandler = async (product_id) => {
                 title: rmvWishlist.value.success
             });
             sliderPtRefresh()
+            allProductRefresh()
 
         } else {
             // Added to wishlist
@@ -184,6 +191,7 @@ const wishlistHandler = async (product_id) => {
                 title: "Added to wishlist",
             });
             sliderPtRefresh()
+            allProductRefresh()
 
         }
 
