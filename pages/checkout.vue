@@ -20,12 +20,16 @@ definePageMeta({
 })
 const {data:authData} = useAuth()
 const addCart = useCarts()
-
+if(process.client){
+    addCart.value = JSON.parse(localStorage.getItem('cart')) || []
+}
 onBeforeMount(() => {
     if (authData && authData?.value?.user?.role !== 'customer') {
         navigateTo('/auth/login')
-    }else if(addCart.value.length === 0){
-        navigateTo('/')
+    }else {
+        if(addCart.value.length === 0){
+            navigateTo('/')
+        }
     }
 });
 

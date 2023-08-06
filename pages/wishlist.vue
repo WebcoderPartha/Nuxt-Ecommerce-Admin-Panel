@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="max-w-[1200px] mx-auto">
         <h1>Wishlist</h1>
     </div>
 </template>
