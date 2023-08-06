@@ -34,3 +34,6 @@ export const usePlacedOrderData = () => {
     return useState(() =>  '')
 }
 
+export const useWishlistProduct = () => {
+    return useState(()=> [])
+}

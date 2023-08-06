@@ -6,14 +6,13 @@ export default defineEventHandler( async (event) => {
 
     const session = await getServerSession(event);
 
-    if(session?.user?.role === 'customer'){
-        
-        const getBody = await readBody(event);
+    if ( session?.user?.role === 'customer' ) {
+
         const prisma = new PrismaClient()
     
         const allWishlist = await prisma.wishlist.findMany({
             where: {
-                userId: parseInt(session?.user?.id)
+                userId: 1
             },
             include: {
                 product: true
@@ -21,14 +20,18 @@ export default defineEventHandler( async (event) => {
         })
     
         return allWishlist
-        
-    }else{
 
-        return {
+    } else {
+        const data = {
             status: 'Unauthenticated',
             statusCode: 401
         }
+
+        return data
     }
+
+
+   
 
  
 
