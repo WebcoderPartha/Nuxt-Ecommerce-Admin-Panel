@@ -279,6 +279,8 @@ const passwordHandler = () => {
 }
 // Password Show / Hide
 
+
+
 // Change Password Equipment
   const old_password = ref('')
   const new_password = ref('')
@@ -287,7 +289,7 @@ const passwordHandler = () => {
   const err_new_password = ref('')
   const err_password_confirm = ref('')
 
-  const changePasswordHandler = (e) => {
+  const changePasswordHandler = async (e) => {
     if(old_password.value.length === 0){
       err_old_password.value = 'Old password is required!'
     }else if(new_password.value.length === 0){
@@ -297,6 +299,13 @@ const passwordHandler = () => {
     }else{
 
       if(new_password.value === password_confirm.value){
+        const {data:getuser} = await useFetch("/api/frontend/myaccount/cpassword/matchpassword", {
+          method: "POST",
+          body: {
+            old_password: old_password.value
+          }
+        })
+      
           Toast.fire({
           icon: "success",
           title: "Success!",
