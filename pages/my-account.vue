@@ -322,6 +322,20 @@ const passwordHandler = () => {
               title: "Old & new password should not be same!",
             });
           } else {
+            const {data:cpsuccess} = await useFetch('/api/frontend/myaccount/cpassword/passwordupdate', {
+              method: "PUT",
+              body: {
+                password: new_password.value
+              }
+            })
+            console.log(cpsuccess.value)
+            e.target.reset()
+            old_password.value = ''
+            new_password.value = ''
+            password_confirm.value = ''
+            err_new_password.value = ''
+            err_old_password.value = ''
+            err_password_confirm.value = ''
             Toast.fire({
               icon: "success",
               title: "Password is changed!",

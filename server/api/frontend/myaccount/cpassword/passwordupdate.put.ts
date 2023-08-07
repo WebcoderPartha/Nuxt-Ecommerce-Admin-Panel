@@ -6,19 +6,24 @@ export default defineEventHandler(async (event) => {
 
     const session = await getServerSession(event)
     
-    if(session?.user?.role == 'customer') {
+    if(session?.user?.role === 'customer') {
         
         const prisma = new PrismaClient()
         const getBody = await readBody(event)
-        const user = await prisma.user.findFirst({
+        const hashPassword =  await bcrypt.hashSync(getBody.password, 10)
+        const user = await prisma.user.update({
             where: {
-                id: parseInt(session?.user?.id)
+                id: parseInt(session?.user?.id),
+            },
+            data: {
+                password: hashPassword
             }
         })
         
-        const matchPassword = await bcrypt.compareSync(getBody?.old_password, user?.password)
         
-        return matchPassword
+        return {
+            success: 'Password has been update'
+        }
 
     }else{
 
