@@ -194,7 +194,7 @@
                   </label>
                   <button
                     type="submit"
-                    class="bg-gray-400 hover:bg-gray-500 text-white py-2 mt-4 rounded-md"
+                    class="bg-gray-500 hover:bg-gray-600 text-white py-2 mt-4 rounded-md"
                   >
                     Change Password
                   </button>
@@ -299,17 +299,42 @@ const passwordHandler = () => {
     }else{
 
       if(new_password.value === password_confirm.value){
-        const {data:getuser} = await useFetch("/api/frontend/myaccount/cpassword/matchpassword", {
+
+        // Match Old Password
+        const {data:matchOldPass} = await useFetch("/api/frontend/myaccount/cpassword/matchpassword", {
           method: "POST",
           body: {
             old_password: old_password.value
           }
         })
-      
+        // Match New Password
+        const {data:matchNewPass} = await useFetch("/api/frontend/myaccount/cpassword/matchpassword", {
+          method: "POST",
+          body: {
+            old_password: new_password.value
+          }
+        })
+
+        if(matchOldPass.value === true){
+          if (matchOldPass.value === true && matchNewPass.value === true) {
+            Toast.fire({
+              icon: "warning",
+              title: "Old & new password should not be same!",
+            });
+          } else {
+            Toast.fire({
+              icon: "success",
+              title: "Password is changed!",
+            });
+          }
+        }else{
+         
           Toast.fire({
-          icon: "success",
-          title: "Success!",
+          icon: "warning",
+          title: "Old password incorrect!",
           });
+        }
+       
       }else{
           Toast.fire({
             icon: "error",
