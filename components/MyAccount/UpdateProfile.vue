@@ -4,13 +4,13 @@
         <form action="">
             <div class="flex flex-col gap-4">
                 <div class="relative w-28 mx-auto group">
-                    <nuxt-img class="rounded-full group-hover:opacity-50"
-                        src="https://media.e-valy.com/cms/products/images/c9cc7d04-ae44-4b2f-b7a1-a25f88c5cb00" />
+                    <nuxt-img class="rounded-full h-28 group-hover:opacity-50"
+                        :src="getResponse.image" />
                     <Icon @click="uploadImage" class="text-3xl absolute top-10 -right-4 cursor-pointer"
                         name="ep:camera-filled" />
                 </div>
-                <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Your name">
-                <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Email Address">
+                <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" v-model="fullname" placeholder="Your name">
+                <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" v-model="email" placeholder="Email Address">
                 <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" value="Username" disabled>
                 <button type="submit" class="mt-4 bg-gray-300 hover:bg-gray-400 py-2">Save Change</button>
             </div>
@@ -33,7 +33,19 @@ const Toast = $swal.mixin({
     },
 });
 // ===========Sweet Alert Use =============//
-
+    
+    // Get Auth User
+    const {data:getResponse, refresh} = await useFetch("/api/frontend/myaccount/profile/getuser", {
+        method: "GET"
+    })
+    // Get Auth User
+    const image = ref('') 
+    const fullname = ref('') 
+    const email = ref('') 
+  
+    // image.value = getResponse.value.image
+    // fullname.value = getResponse.value.fullname
+    // email.value = getResponse.value.email
 
 // upload Image
 const uploadImage = async () => {
@@ -50,7 +62,7 @@ const uploadImage = async () => {
         } else {
             const reader = new FileReader()
             reader.onload = async (event) => {
-                const { data: uiresponse, error } = await useFetch('/api/frontend/myaccount/profile/uploadimg', {
+                const { data: uiresponse} = await useFetch('/api/frontend/myaccount/profile/uploadimg', {
                     method: 'PUT',
                     body: {
                         image: event.target.result
@@ -60,15 +72,20 @@ const uploadImage = async () => {
                     icon: "success",
                     title: uiresponse.value.success,
                 });
-
+                refresh()
             }
             reader.readAsDataURL(file)
+         
         }
     }
 
     input.click()
+   
 }
 // upload Image
+
+
+
 
 </script>
 
