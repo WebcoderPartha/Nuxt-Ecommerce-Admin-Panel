@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
                 userId: parseInt(content?.userid)
             },
             include: {
-                orderdetails: true
+                orderdetail: true
             },
             orderBy: {
                 order_date: "desc"

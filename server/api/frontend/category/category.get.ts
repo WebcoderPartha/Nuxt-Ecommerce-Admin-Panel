@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
             id: 'desc'
         },
         include: {
-            products:true
+            product:true
         }
     })
 

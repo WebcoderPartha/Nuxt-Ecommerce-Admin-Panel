@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
             slug: getBody.slug 
         },
         include: {
-            products:true
+            product:true
         }
     })
 
