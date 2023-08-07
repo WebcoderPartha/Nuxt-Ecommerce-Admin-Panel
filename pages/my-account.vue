@@ -214,7 +214,7 @@
                 <div class="flex flex-col gap-4">
                   <div class="relative w-28 mx-auto group">
                     <nuxt-img class="rounded-full group-hover:opacity-50" src="https://media.e-valy.com/cms/products/images/c9cc7d04-ae44-4b2f-b7a1-a25f88c5cb00" />
-                    <Icon class="text-3xl absolute top-10 -right-4 cursor-pointer" name="ep:camera-filled" />
+                    <Icon @click="uploadImage" class="text-3xl absolute top-10 -right-4 cursor-pointer" name="ep:camera-filled" />
                   </div>
                   <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Your name">
                   <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Email Address">
@@ -232,6 +232,7 @@
 </template>
 
 <script setup>
+
 definePageMeta({
   layout: "ecommerce",
 });
@@ -260,6 +261,30 @@ onBeforeMount(() => {
   }
 });
 // Authenticate
+
+// upload Image
+const uploadImage = async () => {
+  const input = document.createElement('input')
+  input.type = 'file'
+  input.onchange = (e) => {
+    console.log(e.target.files[0])
+    const file = e.target.files[0]
+    if(file.size > 1048570){
+          Toast.fire({
+          icon: "warning",
+          title: "File must not be less then 1 MB",
+          });
+    }else{
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        console.log(event.target.result)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  input.click()
+}
 
 // Dynamic Tabs
 const tabState = ref("orderlist");
