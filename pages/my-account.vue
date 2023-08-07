@@ -208,7 +208,22 @@
         <!-- Profile -->
         <!-- Change Password -->
         <div class="duration-300" v-if="tabState === 'profile'">
-          <h2>Profile</h2>
+            <div class="w-[500px] mx-auto px-8 py-4 border border-slate-200">
+              <h2 class="text-2xl mb-3 text-center">Your Profile</h2>
+              <form action="">
+                <div class="flex flex-col gap-4">
+                  <div class="relative w-28 mx-auto group">
+                    <nuxt-img class="rounded-full group-hover:opacity-50" src="https://media.e-valy.com/cms/products/images/c9cc7d04-ae44-4b2f-b7a1-a25f88c5cb00" />
+                    <Icon class="text-3xl absolute top-10 -right-4 cursor-pointer" name="ep:camera-filled" />
+                  </div>
+                  <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Your name">
+                  <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" placeholder="Email Address">
+                  <input type="text" class="bg-gray-100 focus:outline-none rounded-sm px-4 py-1" value="Username" disabled>
+                  <button type="submit" class="mt-4 bg-gray-300 hover:bg-gray-400 py-2">Save Change</button>
+                </div>
+             
+              </form>
+            </div>
         </div>
         <!-- Change Password -->
       </div>
@@ -328,7 +343,6 @@ const passwordHandler = () => {
                 password: new_password.value
               }
             })
-            console.log(cpsuccess.value)
             e.target.reset()
             old_password.value = ''
             new_password.value = ''
