@@ -1,7 +1,7 @@
 <template>
   <div class="mb-10">
     <div
-      class="text-center py-2 my-2 shadow-md shadow-purple-300 bg-purple-400 mb-4"
+      class="text-center py-2 my-2 border border-slate-300 mb-4"
     >
       <h2 class="text-2xl">All Products</h2>
     </div>

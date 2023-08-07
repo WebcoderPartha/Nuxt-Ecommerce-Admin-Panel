@@ -39,7 +39,6 @@
                         <li class="py-2 px-2"><NuxtLink to="/">Home</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/my-account">Account</NuxtLink></li>
-                        <li class="py-2 px-2"><NuxtLink to="#">Category</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/cart">Cart</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/checkout">Checkout</NuxtLink></li>
                     </ul>
