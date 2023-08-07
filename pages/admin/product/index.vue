@@ -30,7 +30,7 @@
           <tbody>
             <tr v-for="(product, idx) in getProductState" :key="product.id">
               <td class="border">{{ idx + 1 }}</td>
-              <td class="border">{{ product.name.substring(0, 50) + '...' }}</td>
+              <td class="border">{{ product?.name?.substring(0, 50) + '...' }}</td>
               <td class="border">{{ product.category?.name }}</td>
               <td class="border">{{ product.quantity }}</td>
               <td class="border">{{ product.regular_price }}</td>
@@ -76,13 +76,13 @@ const {status, data:userData} = useAuth()
     // Admin 
     onBeforeMount(() => {
     
-        if(status.value === "unauthenticated"){
-            navigateTo("/admin/login")
-        }else if(userData.value.user.role !== 'admin'){
-            navigateTo("/admin/login")
-        }
-       
-    })
+    if(status.value === "unauthenticated"){
+        navigateTo("/admin/login")
+    }else if(userData.value.user.role !== 'admin'){
+        navigateTo("/admin/login")
+    }
+   
+})
 
 // ===========Sweet Alert Use =============//
 const { $swal } = useNuxtApp();

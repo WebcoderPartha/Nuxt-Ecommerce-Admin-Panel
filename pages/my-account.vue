@@ -263,12 +263,11 @@ onBeforeMount(() => {
 // Authenticate
 
 // upload Image
-const formImage = ref('')
 const uploadImage = async () => {
   const input = document.createElement('input')
   input.type = 'file'
   input.onchange = (e) => {
-    console.log(e.target.files[0])
+    // console.log(e.target.files[0])
     const file = e.target.files[0]
     if(file.size > 1048570){
           Toast.fire({
@@ -278,7 +277,6 @@ const uploadImage = async () => {
     }else{
       const reader = new FileReader()
       reader.onload = async (event) => {
-        formImage.value = event.target.result
         const {data:uiresponse, error} = await useFetch('/api/frontend/myaccount/profile/uploadimg', {
           method: 'PUT',
           body: {
@@ -297,6 +295,7 @@ const uploadImage = async () => {
 
   input.click()
 }
+// upload Image
 
 // Dynamic Tabs
 const tabState = ref("orderlist");
