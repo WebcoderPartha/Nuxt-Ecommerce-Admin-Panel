@@ -53,7 +53,7 @@
             </div>
             <!-- End Product Item -->
         </div>
-        <button class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button>
+        <button @click="loadMoreProduct" class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button>
     </div>
 </template>
 
@@ -74,15 +74,15 @@ const { data: getData } = await useFetch('/api/frontend/shop/getdefaultproduct',
     }
 })
 allProduct.value = getData
-const limit = async () => {
+const loadMoreProduct = async () => {
     take.value += 1
-    const { data: okdata } = await useFetch('/api/frontend/shop/getdefaultproduct', {
+    const { data: loadProduct } = await useFetch('/api/frontend/shop/getdefaultproduct', {
         method: "POST",
         body: {
             limit: take.value
         }
     })
-    product.value = okdata
+    allProduct.value = loadProduct
 }
 
 
