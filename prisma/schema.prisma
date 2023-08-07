@@ -39,6 +39,7 @@ model user {
   username   String?
   password   String
   role       String
+  image      String?    @db.LongText
   orders     Order[]
   shipping   Shipping?
   wishlist   Wishlist[]
