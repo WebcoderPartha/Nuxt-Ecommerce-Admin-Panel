@@ -37,7 +37,7 @@
                 <div class="MenuContainer pt-4 pb-3">
                     <ul class="flex gap-3 text-stone-950 font-semibold justify-center md:justify-normal">
                         <li class="py-2 px-2"><NuxtLink to="/">Home</NuxtLink></li>
-                        <li class="py-2 px-2"><NuxtLink to="#">Shop</NuxtLink></li>
+                        <li class="py-2 px-2"><NuxtLink to="/shop">Shop</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/my-account">Account</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/cart">Cart</NuxtLink></li>
                         <li class="py-2 px-2"><NuxtLink to="/checkout">Checkout</NuxtLink></li>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-
+    
     // Current Route for Checking dynamic route path
     const router = useRouter().currentRoute
 

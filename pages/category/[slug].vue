@@ -1,6 +1,6 @@
 <template>
   <div class="mb-10 max-w-[1200px] mx-auto">
-    <div class="text-center py-2 my-2 shadow-md shadow-purple-300 bg-purple-400 mb-4">
+    <div class="text-center py-2 my-2 border border-slate-300 mb-4">
       <h2 class="text-2xl">{{ catgoryProduct.name }}</h2>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
@@ -9,11 +9,7 @@
         v-for="(hProduct, hinx) in catgoryProduct?.product" :key="hinx">
         <NuxtLink :to="`/product/${hProduct.slug}`">
           <div class="relative overflow-hidden">
-            <!-- <img
-                class="hover:scale-125 duration-300"
-                :src="hProduct.image"
-                alt=""
-              /> -->
+       
             <nuxt-img :src="hProduct.image" class="hover:scale-125 duration-300" loading="lazy" />
             <span class="bg-blue-400 text-white absolute px-3 py-1 rounded-md top-0 right-0">New</span>
           </div>
