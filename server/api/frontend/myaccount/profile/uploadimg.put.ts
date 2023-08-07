@@ -12,10 +12,9 @@ export default defineEventHandler(async (event) => {
 
         const updateImage = await prisma.user.update({
             where: {
-                userId: parseInt(session?.user?.id)
+                id: parseInt(session?.user?.id)
             },
             data: {
-                fullname: 'sdf',
                 image: getBody?.image
             }
         })

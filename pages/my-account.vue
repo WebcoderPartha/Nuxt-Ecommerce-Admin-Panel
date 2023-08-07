@@ -263,6 +263,7 @@ onBeforeMount(() => {
 // Authenticate
 
 // upload Image
+const formImage = ref('')
 const uploadImage = async () => {
   const input = document.createElement('input')
   input.type = 'file'
@@ -276,8 +277,19 @@ const uploadImage = async () => {
           });
     }else{
       const reader = new FileReader()
-      reader.onload = (event) => {
-        console.log(event.target.result)
+      reader.onload = async (event) => {
+        formImage.value = event.target.result
+        const {data:uiresponse, error} = await useFetch('/api/frontend/myaccount/profile/uploadimg', {
+          method: 'PUT',
+          body: {
+            image: event.target.result
+          }
+        })
+        Toast.fire({
+          icon: "success",
+          title:uiresponse.value.success,
+          });
+    
       }
       reader.readAsDataURL(file)
     }
