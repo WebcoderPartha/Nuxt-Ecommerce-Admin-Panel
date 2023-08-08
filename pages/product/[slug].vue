@@ -6,8 +6,8 @@
                <div class="w-[300px]">
                 <inner-image-zoom :src="productDetail.image" zoomType="hover" :zoomSrc="productDetail.image" />
                </div>
-               <div class="flex gap-2 items-center justify-center my-3">
-                <img :src="productDetail.image" class=" w-16" alt="">
+               <div class="flex gap-2 items-center my-2">
+                <img :src="img.image" v-for="(img, idx) in productDetail.gallery" :key="idx" class="w-16" alt="">
              
                </div>
             </div>
@@ -54,9 +54,9 @@
             </div>
         </div>
         <!-- Releted Product -->
-        <div class="my-10">
+        <!-- <div class="my-10">
             <ProductSlider />
-        </div>
+        </div> -->
     </div>
 </template>
 

@@ -9,7 +9,8 @@ export default defineEventHandler(async (event) => {
             slug: getBody.slug 
         },
         include: {
-            category:true
+            category:true,
+            gallery:true
         }
     })
 
