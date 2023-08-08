@@ -8,7 +8,7 @@
       <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="allProduct?.length > 0"
         v-for="(hProduct, hinx) in allProduct" :key="hinx">
         <div class="relative overflow-hidden">
-          <nuxt-img :src="hProduct.gallery[0].image" class="group-hover:scale-110 duration-300" loading="lazy" />
+          <nuxt-img :src="hProduct.gallery[0].image" class="group-hover:scale-110 duration-300 w-full" loading="lazy" />
           <span v-if="hProduct.discount !== '0'"
             class="bg-[#79bc62] text-xs w-16 text-center text-white font-semibold absolute px-3 py-1 rounded-sm top-6 left-4">-{{
               hProduct.discount }}%</span>
