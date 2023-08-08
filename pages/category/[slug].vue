@@ -73,11 +73,13 @@ definePageMeta({
 const categorySlug = useRoute().params.slug
 
 // Fetching Category Product
-const catgoryProduct = useHomeCatProduct()
+// const catgoryProduct = useHomeCatProduct()
+const catgoryProduct = useState(() => [])
 const { data: catpt, refresh } = await useFetch('/api/frontend/category/categoryproduct', {
   method: 'POST',
   body: {
-    slug: JSON.stringify(categorySlug.toString)
+    // slug: JSON.stringify(categorySlug.toString)
+    slug: categorySlug
   }
 })
 catgoryProduct.value = catpt
