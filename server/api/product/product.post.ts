@@ -35,6 +35,7 @@ export default defineEventHandler( async (event) => {
         quantity : getBody.quantity,
         slug:getBody.slug,
         categoryId: getBody.category_id,
+        image: getBody.images[0].image,
         gallery: {
             create: images as any
         }

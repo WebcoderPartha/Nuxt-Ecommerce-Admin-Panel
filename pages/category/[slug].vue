@@ -8,7 +8,7 @@
       <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="catgoryProduct?.product?.length > 0"
         v-for="(hProduct, hinx) in catgoryProduct?.product" :key="hinx">
         <div class="relative overflow-hidden">
-          <nuxt-img :src="hProduct.image" class="group-hover:scale-110 duration-300" loading="lazy" />
+          <nuxt-img :src="hProduct?.image" class="group-hover:scale-110 duration-300" loading="lazy" />
           <span v-if="hProduct.discount !== '0'"
             class="bg-[#79bc62] text-xs w-16 text-center text-white font-semibold absolute px-3 py-1 rounded-sm top-6 left-4">-{{
               hProduct.discount }}%</span>
@@ -56,16 +56,6 @@
             <Icon name="tabler:star-filled" />
           </span>
         </div>
-        <!-- 
-        <div class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col">
-          <button @click="$emit('addToCart', hProduct.id)"
-            class="bg-red-500 text-white md:px-2 py-1 rounded-md mb-3 md:mb-0">
-            Add to Cart
-          </button>
-          <button class="bg-yellow-500 text-white md:px-2 py-1 rounded-md">
-            Buy Now
-          </button>
-        </div> -->
       </div>
       <!-- End Product Item -->
 

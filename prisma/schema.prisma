@@ -69,6 +69,7 @@ model product {
   discount_price String
   quantity       String
   slug           String?   @db.LongText
+  image          String?   @db.LongText
   categoryId     Int
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt

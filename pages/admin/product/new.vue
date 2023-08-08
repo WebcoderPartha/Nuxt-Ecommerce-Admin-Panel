@@ -42,25 +42,27 @@
         <div class="mb-2">
           <input type="file" @change="imageHadler" multiple class="w-80 bg-gray-900 rounded-md px-3 py-2" />
         </div>
-       
+
         <div class="mb-2">
           <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
             value="Submit" />
         </div>
-        
+
       </form>
     </div>
     <div v-if="images?.length > 0" class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-7">
       <h3 class="text-2xl font-semibold text-white py-2">Product Gallery</h3>
-    <div class="flex gap-1"  >
+      <div class="flex gap-1">
         <div v-for="(image, idx) in images">
           <div class=" relative">
-            <nuxt-img :src="image.image" class="w-32 rounded mx-2" alt="" />   
-            <Icon @click="removeImage(idx)" class=" cursor-pointer bg-red-500 absolute -top-1 rounded-full w-5 h-5 text-white -right-0" name="material-symbols:close-rounded" />
+            <nuxt-img :src="image.image" class="w-32 rounded mx-2" alt="" />
+            <Icon @click="removeImage(idx)"
+              class=" cursor-pointer bg-red-500 absolute -top-1 rounded-full w-5 h-5 text-white -right-0"
+              name="material-symbols:close-rounded" />
           </div>
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
   
@@ -139,23 +141,23 @@ const discountChange = (e) => {
 //============ Upload Image Data ===========
 const imageHadler = (e) => {
   const files = e.target.files
-    for (let i = 0; i < files.length; i++){
-          let reader = new FileReader()
-          reader.onload = (event) => {
-              let data = {
-                  image: event.target.result
-              }
-              images.value.push(data)
-          }
-          reader.readAsDataURL(files[i])
+  for (let i = 0; i < files.length; i++) {
+    let reader = new FileReader()
+    reader.onload = (event) => {
+      let data = {
+        image: event.target.result
       }
+      images.value.push(data)
+    }
+    reader.readAsDataURL(files[i])
+  }
 };
 //============ Upload Image Data ===========
 
 // ========== Remove image with index ==========
 const removeImage = (index) => {
   images.value.splice(index, 1)
-} 
+}
 // ========== Remove image with index ==========
 
 

@@ -17,25 +17,49 @@ export default defineEventHandler( async (event) => {
     
     const prisma = new PrismaClient()
 
-    const productupdate = await prisma.product.update({
+    // Delete exist product gallery
+    const deleteExistGalary = await prisma.gallery.deleteMany({
         where: {
-            id: parseInt(getBody.id)
-        },
-        data: {
-            name : getBody.name,
-            regular_price : getBody.regular_price,
-            discount : getBody.discount,
-            discount_price : getBody.discount_price,
-            quantity : getBody.quantity,
-            image : getBody?.image,
-            categoryId: parseInt(getBody.categoryId)
+            productId: parseInt(getBody?.id)
         }
     })
 
-    const data = {
-        success: 'Data updated successfully!'
+    if (deleteExistGalary) {
+
+        
+        const images:any[] = []
+        const getimages = getBody.images
+        // Making array push 
+        getimages.forEach((item:any) => {
+            images.push({
+                image: item.image
+            })
+        })
+    
+        const productupdate = await prisma.product.update({
+            where: {
+                id: parseInt(getBody.id)
+            },
+            data: {
+                name : getBody.name,
+                regular_price : getBody.regular_price,
+                discount : getBody.discount,
+                discount_price : getBody.discount_price,
+                quantity : getBody.quantity,
+                image : getBody?.images[0].image,
+                categoryId: parseInt(getBody.categoryId),
+                gallery: {
+                    create: images as any
+                }
+            }
+        })
+    
+        const data = {
+            success: 'Data updated successfully!'
+        }
+    
+        return data
     }
 
-    return data
 
 })

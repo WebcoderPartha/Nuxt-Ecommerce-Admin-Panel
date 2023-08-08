@@ -22,7 +22,8 @@ export default defineEventHandler( async (event) => {
             id: parseInt(getBody.id)
         },
         include: {
-            category: true
+            category: true,
+            gallery: true
         }
     })
 
