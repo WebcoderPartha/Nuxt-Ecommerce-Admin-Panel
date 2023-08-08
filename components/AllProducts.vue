@@ -5,7 +5,7 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
       <!-- Product Item -->
-      <div class="shadow-md shadow-gray-300 group rounded-md" v-if="allProduct?.length > 0"
+      <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="allProduct?.length > 0"
         v-for="(hProduct, hinx) in allProduct" :key="hinx">
 
         <div class="relative overflow-hidden">
@@ -28,9 +28,7 @@
             :class="` text-white duration-500 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-20 -right-16`" />
             <NuxtLink :to="`/product/${hProduct.slug}`" class="group-hover:bottom-0 absolute -bottom-10 duration-300 bg-[#79bc62] w-full text-center py-2 text-white font-semibold">Product Detail</NuxtLink>
         </div>
-        <div class="text-center flex flex-col gap-4 py-2">
-          <NuxtLink :to="`/product/${hProduct.slug}`">
-
+        <div class="text-center flex flex-col gap-1">
             <h2 class="text-sm h-14">{{ hProduct.name.substring(0, 50) + '...' }}</h2>
             <div class="flex flex-col gap-2" v-if="hProduct.discount !== '0'">
               <!-- <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} -->
@@ -41,12 +39,27 @@
               </div>
             </div>
 
-            <p class="text-base font-extrabold text-neutral-600" v-else>
+            <p class="text-base font-extrabold text-neutral-600 mt-8" v-else>
               BDT {{ hProduct.regular_price }}
             </p>
-          </NuxtLink>
         </div>
-
+        <div class="flex gap-1 w-24 mx-auto">
+          <span class="text-yellow-400">
+            <Icon name="tabler:star-filled" />
+          </span>
+          <span class="text-yellow-400">
+            <Icon name="tabler:star-filled" />
+          </span>
+          <span class="text-yellow-400">
+            <Icon name="tabler:star-filled" />
+          </span>
+          <span class="text-yellow-400">
+            <Icon name="tabler:star-filled" />
+          </span>
+          <span class="text-yellow-400">
+            <Icon name="tabler:star-filled" />
+          </span>
+        </div>
 <!-- 
         <div class="flex md:items-center md:flex-row md:justify-between mt-4 mb-4 px-3 flex-col">
           <button @click="$emit('addToCart', hProduct.id)"
