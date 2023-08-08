@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
         },
         include: {
             category: true,
-            wishlist: true
+            wishlist: true,
+            gallery: true
         }
     })
 
