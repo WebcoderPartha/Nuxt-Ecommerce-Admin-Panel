@@ -22,7 +22,7 @@
                             <td class="border">{{ idx + 1 }}</td>
                             <td class="border">{{ category?.name }}</td>
                             <td class="border">{{ category?.slug }}</td>
-                            <td class="border"><nuxt-img v-if="category?.image" :src="category?.image" class="w-32" /></td>
+                            <td class="border"><nuxt-img v-if="category?.image" :src="category?.image" class="w-10" /></td>
                             <td class="border">
                                 <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white">
                                     <Icon name="fa6-regular:pen-to-square" @click="getIdData(category.id)" />

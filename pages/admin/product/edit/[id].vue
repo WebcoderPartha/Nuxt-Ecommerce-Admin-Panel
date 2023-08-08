@@ -16,7 +16,7 @@
         <div class="mb-2">
           <select
             class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300"
-            v-model="form.category_id">
+            v-model="form.categoryId">
             <option value="">Choose product category</option>
             <option v-for="(category, idx) in getCategory" :key="idx" :value="category.id">
               {{ category.name }}
