@@ -4,10 +4,10 @@
             <div>
                <!-- <img :src="productDetail.image" class=" w-[300px]" alt=""> -->
                <div class="w-[300px]">
-                <inner-image-zoom :src="productDetail.image" zoomType="hover" :zoomSrc="productDetail.image" />
+                <inner-image-zoom :src="useImageZoom.imageSrc" zoomType="hover" :zoomSrc="useImageZoom.zoomSrc" />
                </div>
                <div class="flex gap-2 items-center my-2">
-                <img :src="img.image" v-for="(img, idx) in productDetail.gallery" :key="idx" class="w-16" alt="">
+                <img @click="onChangeImageEvent" :src="img.image" v-for="(img, idx) in productDetail.gallery" :key="idx" class="w-16 cursor-pointer" alt="">
              
                </div>
             </div>
@@ -86,6 +86,21 @@
     useHead({
         title: productDetail.value?.name
     })
+
+    // ========== Image Zoom ================
+    const useImageZoom = useState(() => ({
+        imageSrc: '',
+        zoomSrc: ''
+    }))
+
+    useImageZoom.value.imageSrc = ptdetail.value.image
+    useImageZoom.value.zoomSrc = ptdetail.value.image
+    
+    const onChangeImageEvent = (e) => {
+        useImageZoom.value.imageSrc = e.target.src
+        useImageZoom.value.zoomSrc = e.target.src
+    }
+    // ========== Image Zoom ================
 
     const quantity = ref(1)
     // Qty Increment 
