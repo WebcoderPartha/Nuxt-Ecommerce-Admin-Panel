@@ -124,6 +124,7 @@ const discountChange = (e) => {
   }
 };
 
+// Upload Image Data
 const imageHadler = (e) => {
   const file = e.target.files[0];
   if (file.size > 1048570) {
@@ -140,6 +141,7 @@ const imageHadler = (e) => {
     reader.readAsDataURL(file);
   }
 };
+// Upload Image Data
 
 const storeProduct = async (e) => {
 

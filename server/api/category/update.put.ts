@@ -24,7 +24,8 @@ export default defineEventHandler( async (event) => {
         },
         data: {
             name: getBody.name,
-            slug: getBody.slug
+            slug: getBody.slug,
+            image: getBody.image
         }
     })
 

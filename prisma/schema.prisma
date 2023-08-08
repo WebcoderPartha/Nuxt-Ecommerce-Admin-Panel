@@ -27,7 +27,8 @@ model category {
   name       String
   slug       String?   @db.LongText
   created_at DateTime  @default(now())
-  updated_at DateTime
+  updated_at DateTime  @updatedAt
+  image      String?   @db.LongText
   product    product[]
 }
 
@@ -71,7 +72,7 @@ model product {
   categoryId     Int
   image          String    @db.LongText
   created_at     DateTime  @default(now())
-  updated_at     DateTime
+  updated_at     DateTime  @updatedAt
   category       category  @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
   wishlist       wishlist?
 
