@@ -36,7 +36,7 @@
               <td class="border">{{ product.regular_price }}</td>
               <td class="border">{{ product.discount }}%</td>
               <td class="border">{{ product.discount_price }}</td>
-              <td class="border"><img :src="product.image" width="40" alt=""></td>
+              <td class="border"><img :src="product.gallery[0].image" class="w-16 mx-auto" alt=""></td>
               <td class="border">
                 <NuxtLink
                   class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
