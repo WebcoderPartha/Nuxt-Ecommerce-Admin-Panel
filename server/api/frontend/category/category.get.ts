@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
         },
         include: {
             product:true
-        }
+        },
+        take: 6
     })
 
     return category;

@@ -5,9 +5,11 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-6 mx-4 md:mx-0 gap-4 md:gap-8">
             <NuxtLink v-for="category in categories" :key="category.id" :to="`/category/${category.slug}`" class="group">
-                <div class="flex flex-col items-center justify-center py-6 rounded-lg shadow-xl shadow-slate-200">
-                    <NuxtImg :src="category?.image" v-if="category?.image" />
-                    <h3 class="text-base group-hover:text-[#79bc62] py-2">{{ category?.name }}</h3>
+                <div class="flex flex-col items-center justify-center h-44 py-6 rounded-lg shadow-xl shadow-slate-200">
+                    <NuxtImg class="w-16" :src="category?.image" v-if="category?.image" />
+                    <div>
+                        <h3 class="text-base group-hover:text-[#79bc62] py-2 px-2 text-center">{{ category?.name }}</h3>
+                    </div>
                 </div>
             </NuxtLink>
         </div>

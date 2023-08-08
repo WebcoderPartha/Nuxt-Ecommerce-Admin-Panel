@@ -3,9 +3,9 @@
     <div class="text-center py-2 my-2 border border-slate-300 mb-4">
       <h2 class="text-2xl">{{ catgoryProduct.name }}</h2>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
+    <div v-if="catgoryProduct?.product?.length > 0" class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
       <!-- Product Item -->
-      <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="catgoryProduct?.product?.length > 0"
+      <div class="shadow-md shadow-gray-300 group rounded-md pb-4"
         v-for="(hProduct, hinx) in catgoryProduct?.product" :key="hinx">
         <div class="relative overflow-hidden">
           <nuxt-img :src="hProduct?.image" class="group-hover:scale-110 duration-300" loading="lazy" />
@@ -58,8 +58,10 @@
         </div>
       </div>
       <!-- End Product Item -->
-
     </div>
+    <div class="py-6" v-else>
+        <h2 class="text-2xl text-center">No product found!</h2>
+      </div>
   </div>
 </template>
   
