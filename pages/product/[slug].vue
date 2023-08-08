@@ -15,10 +15,10 @@
             <div>
                 <h3 class=" font-semibold text-2xl">{{ productDetail.name }}</h3>
                 <p class=" my-3">Category: <span class=" font-semibold">{{ productDetail.category.name }}</span></p>
-                <span class="my-3 rounded-md bg-red-600 px-2 py-1 text-white" v-if="productDetail.quantity === '0'">
+                <span class="my-3 rounded-sm bg-red-600 px-2 py-1 text-white" v-if="productDetail.quantity === '0'">
                     Stock Out
                 </span>
-                <span class=" my-3 rounded-md bg-[#79bc62] px-2 py-1 text-white" v-else>
+                <span class=" my-3 rounded-sm bg-[#79bc62] px-2 py-1 text-white" v-else>
                     Available
                 </span>
                 <div class="flex gap-3 justify-between items-center mt-6">
@@ -51,7 +51,7 @@
 
                 <div class="flex gap-6 mt-5 border-t border-b py-4">
                     <button @click="addToCart(productDetail.id)"
-                        class="bg-[#00a88a] text-white md:px-8 md:py-3 font-semibold py-1 rounded-sm mb-3 md:mb-0"> ADD TO CART </button>
+                        class="bg-[#00a88a] text-white px-4 md:px-8 md:py-3 font-semibold py-2 rounded-sm mb-3 md:mb-0"> ADD TO CART </button>
                     <div class="mt-2">Stock: {{ productDetail.quantity }}</div>
                 </div>
 
