@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-1 items-center gap-6 text-center my-8 mx-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center my-8 mx-3 ">
 
     <Head>
       <Title>Add Product</Title>
@@ -42,16 +42,25 @@
         <div class="mb-2">
           <input type="file" @change="imageHadler" multiple class="w-80 bg-gray-900 rounded-md px-3 py-2" />
         </div>
-        <div class="mb-2 w-[200px] mx-auto" v-if="form.image">
-          <img :src="form.image" class="rounded" alt="" />
-        </div>
+       
         <div class="mb-2">
           <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
             value="Submit" />
-
         </div>
+        
       </form>
     </div>
+    <div v-if="images?.length > 0" class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-7">
+      <h3 class="text-2xl font-semibold text-white py-2">Product Gallery</h3>
+    <div class="flex gap-1"  >
+        <div v-for="(image, idx) in images">
+          <div class=" relative">
+            <nuxt-img :src="image.image" class="w-32 rounded mx-2" alt="" />   
+            <Icon class=" cursor-pointer bg-red-500 absolute -top-1 rounded-full w-5 h-5 text-white -right-0" name="material-symbols:close-rounded" />
+          </div>
+        </div>
+    </div>
+  </div>
   </div>
 </template>
   
@@ -105,9 +114,9 @@ const form = useState(() => ({
   discount: '',
   discount_price: '',
   quantity: '',
-  image: '',
+  // image: '',
 }))
-
+const images = useState(() => [])
 
 const discountChange = (e) => {
   if (form.value.regular_price !== '') {
@@ -126,20 +135,17 @@ const discountChange = (e) => {
 
 // Upload Image Data
 const imageHadler = (e) => {
-  const file = e.target.files[0];
-  if (file.size > 1048570) {
-    Toast.fire({
-      icon: "warning",
-      title: "File must not be less then 1 MB",
-    });
-  } else {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      form.value.image = event.target.result;
-    };
-
-    reader.readAsDataURL(file);
-  }
+  const files = e.target.files
+    for (let i = 0; i < files.length; i++){
+          let reader = new FileReader()
+          reader.onload = (event) => {
+              let data = {
+                  image: event.target.result
+              }
+              images.value.push(data)
+          }
+          reader.readAsDataURL(files[i])
+      }
 };
 // Upload Image Data
 
