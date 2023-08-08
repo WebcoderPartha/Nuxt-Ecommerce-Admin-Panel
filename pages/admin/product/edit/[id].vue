@@ -6,7 +6,7 @@
     </Head>
 
     <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7">
-      <h3 class="text-xl font-semibold pt-4 mb-3">Add Product</h3>
+      <h3 class="text-xl font-semibold pt-4 mb-3">Edit Product</h3>
       <form @submit.prevent="update" autocomplete="off">
         <div class="mb-2">
           <input type="text" class="w-80 bg-gray-900 rounded-md px-3 py-2" v-model="form.name"
@@ -119,17 +119,17 @@
 // Get ID By Product
 
     const route = useRoute().params
-    const {data:idProduct} = await useFetch('/api/product/getidbyproduct', {
+    const {data:idProduct, refresh:productReresh} = await useFetch('/api/product/getidbyproduct', {
         method: 'POST',
         body: {
             id: parseInt(route.id)
         }
   })
-  form.value = idProduct
+  form.value = idProduct.value
 
-  const getImages = idProduct.value.gallery
+  // const getImages = idProduct.value.gallery
   
-  getImages.forEach(gallery => {
+  form.value.gallery.forEach(gallery => {
     images.value.push({
       image: gallery.image
     })
@@ -201,7 +201,8 @@ const removeImage = (index) => {
           form.value.discount = ''
           form.value.discount_price = ''
           form.value.quantity = ''
-          images.value = ''
+          images.value = []
+          productReresh()
           navigateTo('/admin/product')
          
   

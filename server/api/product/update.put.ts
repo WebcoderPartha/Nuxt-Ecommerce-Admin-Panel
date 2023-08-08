@@ -31,9 +31,10 @@ export default defineEventHandler( async (event) => {
         const getimages = getBody.images
         // Making array push 
         getimages.forEach((item:any) => {
-            images.push({
+            const img = {
                 image: item.image
-            })
+            }
+            images.push(img)
         })
     
         const productupdate = await prisma.product.update({

@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -106,7 +107,7 @@ model gallery {
   id        Int     @id @default(autoincrement())
   image     String  @db.LongText
   productId Int
-  product   product @relation(fields: [productId], references: [id], map: "Gallery_productId_fkey")
+  product   product @relation(fields: [productId], references: [id],onDelete: Cascade, map: "Gallery_productId_fkey")
 
   @@index([productId], map: "Gallery_productId_fkey")
 }

@@ -16,13 +16,14 @@ export default defineEventHandler( async (event) => {
     const getBody = await readBody(event);
     const prisma = new PrismaClient()
 
-    const images:any[] = []
+    const imagearry:any[] = []
     const getimages = getBody.images
     // Making array push 
     getimages.forEach((item:any) => {
-        images.push({
+        const img = {
             image: item.image
-        })
+        }
+        imagearry.push(img)
     })
 
 
@@ -37,7 +38,7 @@ export default defineEventHandler( async (event) => {
         categoryId: getBody.category_id,
         image: getBody.images[0].image,
         gallery: {
-            create: images as any
+            create: imagearry as any
         }
        }
     })

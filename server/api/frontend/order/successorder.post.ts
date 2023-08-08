@@ -41,8 +41,6 @@ export default defineEventHandler(async (event) => {
         }
     })
 
-   
-  
 
     const oderDone = await prisma.order.create({
         data: {
