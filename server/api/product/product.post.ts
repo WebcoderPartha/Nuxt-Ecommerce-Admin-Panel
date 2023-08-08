@@ -16,6 +16,16 @@ export default defineEventHandler( async (event) => {
     const getBody = await readBody(event);
     const prisma = new PrismaClient()
 
+    const images:any[] = []
+    const getimages = getBody.images
+    // Making array push 
+    getimages.forEach((item:any) => {
+        images.push({
+            image: item.image
+        })
+    })
+
+
     const product = await prisma.product.create({
        data: {
         name : getBody.name,
@@ -24,8 +34,10 @@ export default defineEventHandler( async (event) => {
         discount_price : getBody.discount_price,
         quantity : getBody.quantity,
         slug:getBody.slug,
-        image : getBody.image,
-        categoryId: getBody.category_id
+        categoryId: getBody.category_id,
+        gallery: {
+            create: images as any
+        }
        }
     })
 

@@ -13,6 +13,9 @@ export default defineEventHandler(async (event) => {
     const trans_id = Math.random().toString(16).slice(2)
     let totalPrice = 0
     let totalQty = 0
+    
+
+    // Typescript array  like - product:any[] = []
     const details:any[] = []
     allProduct.forEach((cart:any) =>{
         totalPrice += parseInt(cart.total)
@@ -51,7 +54,7 @@ export default defineEventHandler(async (event) => {
             order_date: order_date,
             tran_id: trans_id,
             order_status: '1',
-            orderdetails: {
+            orderdetail: {
                 create: details as any
             }
         }

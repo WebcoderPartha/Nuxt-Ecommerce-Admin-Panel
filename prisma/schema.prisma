@@ -70,7 +70,6 @@ model product {
   quantity       String
   slug           String?   @db.LongText
   categoryId     Int
-  image          String    @db.LongText
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt
   gallery        gallery[]

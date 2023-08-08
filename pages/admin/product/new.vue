@@ -56,7 +56,7 @@
         <div v-for="(image, idx) in images">
           <div class=" relative">
             <nuxt-img :src="image.image" class="w-32 rounded mx-2" alt="" />   
-            <Icon class=" cursor-pointer bg-red-500 absolute -top-1 rounded-full w-5 h-5 text-white -right-0" name="material-symbols:close-rounded" />
+            <Icon @click="removeImage(idx)" class=" cursor-pointer bg-red-500 absolute -top-1 rounded-full w-5 h-5 text-white -right-0" name="material-symbols:close-rounded" />
           </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
 // });
 
 const { status, data: userData } = useAuth()
-// Admin 
+// ====== Admin  authenticate ========== //
 onBeforeMount(() => {
 
   if (status.value === "unauthenticated") {
@@ -84,6 +84,7 @@ onBeforeMount(() => {
   }
 
 })
+// ====== Admin  authenticate ========== //
 
 // ===========Sweet Alert Use =============//
 const { $swal } = useNuxtApp();
@@ -118,6 +119,7 @@ const form = useState(() => ({
 }))
 const images = useState(() => [])
 
+// ============= Discount Calculate =============
 const discountChange = (e) => {
   if (form.value.regular_price !== '') {
     const disVal = e.target.value
@@ -132,8 +134,9 @@ const discountChange = (e) => {
     form.value.discount = ''
   }
 };
+// ============= Discount Calculate =============
 
-// Upload Image Data
+//============ Upload Image Data ===========
 const imageHadler = (e) => {
   const files = e.target.files
     for (let i = 0; i < files.length; i++){
@@ -147,8 +150,16 @@ const imageHadler = (e) => {
           reader.readAsDataURL(files[i])
       }
 };
-// Upload Image Data
+//============ Upload Image Data ===========
 
+// ========== Remove image with index ==========
+const removeImage = (index) => {
+  images.value.splice(index, 1)
+} 
+// ========== Remove image with index ==========
+
+
+// ============ Insert Product ====================
 const storeProduct = async (e) => {
 
   if (form.value.name.length > 0 && form.value.category_id !== '' && form.value.regular_price !== '' && form.value.discount !== '' && form.value.discount_price !== '' && form.value.quantity !== '') {
@@ -161,7 +172,7 @@ const storeProduct = async (e) => {
       discount_price: form.value.discount_price,
       quantity: form.value.quantity,
       slug: form.value.name.replaceAll(' ', '-') + "-" + uniqueNumber,
-      image: form.value.image,
+      images: images.value,
     }
 
     const { data: postData } = await useFetch('/api/product/product', {
@@ -179,7 +190,7 @@ const storeProduct = async (e) => {
     form.value.discount = ''
     form.value.discount_price = ''
     form.value.quantity = ''
-    form.value.image = ''
+    images.value = []
     navigateTo('/admin/product')
 
   } else {
@@ -189,7 +200,7 @@ const storeProduct = async (e) => {
     });
   }
 }
-
+// ============ Insert Product ====================
 </script>
   
 <style lang="scss" scoped></style>
