@@ -65,7 +65,11 @@ useHead({
     title: 'Shop'
 })
 
-const take = ref(1)
+
+
+// Define Default Value for Take product
+const take = ref(10)
+// Product State
 const allProduct = useState(() => [])
 const { data: getData } = await useFetch('/api/frontend/shop/getdefaultproduct', {
     method: "POST",
@@ -74,8 +78,15 @@ const { data: getData } = await useFetch('/api/frontend/shop/getdefaultproduct',
     }
 })
 allProduct.value = getData
+// Define Default Value for Take product
+
+
+// Load More Product
 const loadMoreProduct = async () => {
-    take.value += 1
+
+    // Load more product increment value assign
+    take.value += 10
+    // Fetching Load more product after click the Load more Button
     const { data: loadProduct } = await useFetch('/api/frontend/shop/getdefaultproduct', {
         method: "POST",
         body: {
@@ -84,7 +95,7 @@ const loadMoreProduct = async () => {
     })
     allProduct.value = loadProduct
 }
-
+// Load More Product
 
 </script>
 

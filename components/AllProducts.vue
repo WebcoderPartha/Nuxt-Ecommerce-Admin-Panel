@@ -9,7 +9,7 @@
       class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0"
     >
       <!-- Product Item -->
-      <div class="border group rounded-md p-1" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
+      <div class="shadow-md shadow-gray-300 group rounded-md" v-if="allProduct?.length > 0" v-for="(hProduct, hinx) in allProduct" :key="hinx">
       
         <div class="relative overflow-hidden">
           <!-- <img
@@ -17,7 +17,7 @@
             :src="hProduct.image"
             alt=""
           /> -->
-          <nuxt-img :src="hProduct.image" class="group-hover:scale-125 duration-300" loading="lazy" />
+          <nuxt-img :src="hProduct.image" class="group-hover:scale-110 duration-300" loading="lazy" />
           <span
             class="bg-blue-400 group-hover:right-2 text-xs text-white absolute px-3 py-1 rounded-md top-2 duration-200 -right-16"
             >New</span>
@@ -33,10 +33,16 @@
         </div>
         <div class="text-center flex flex-col gap-4">
           <NuxtLink :to="`/product/${hProduct.slug}`">
-          <h2 class="text-sm">{{ hProduct.name.substring(0,30)+'...' }}</h2>
-          <p class="text-base font-extrabold" v-if="hProduct.discount !== '0'">
-            <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} 
-          </p>
+            
+          <h2 class="text-sm h-14">{{ hProduct.name.substring(0,50)+'...' }}</h2>
+          <div class="flex flex-col gap-2" v-if="hProduct.discount !== '0'">
+            <!-- <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} -->
+            <span class="font-extrabold text-neutral-600">BDT {{ hProduct.regular_price }}</span>
+            <div class="flex w-36 gap-3 px-1 justify-center mx-auto text-[#00a88a] bg-[#e5fffa]">
+              <Icon class="text-[16px] font-semibold mt-[5px]" name="ph:credit-card-duotone" />
+              <span class=" font-extrabold">BDT {{ hProduct.discount_price }}</span>
+            </div>
+          </div>
     
           <p class="text-base font-extrabold" v-else>
             BDT {{ hProduct.regular_price }} 
