@@ -40,7 +40,7 @@
             placeholder="Quantity" />
         </div>
         <div class="mb-2">
-          <input type="file" @change="imageHadler" class="w-80 bg-gray-900 rounded-md px-3 py-2" />
+          <input type="file" @change="imageHadler" multiple class="w-80 bg-gray-900 rounded-md px-3 py-2" />
         </div>
         <div class="mb-2 w-[200px] mx-auto" v-if="form.image">
           <img :src="form.image" class="rounded" alt="" />

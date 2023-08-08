@@ -73,6 +73,7 @@ model product {
   image          String    @db.LongText
   created_at     DateTime  @default(now())
   updated_at     DateTime  @updatedAt
+  gallery        gallery[]
   category       category  @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
   wishlist       wishlist?
 
@@ -99,4 +100,13 @@ model wishlist {
   user      user    @relation(fields: [userId], references: [id], map: "Wishlist_userId_fkey")
 
   @@index([userId], map: "Wishlist_userId_fkey")
+}
+
+model gallery {
+  id        Int     @id @default(autoincrement())
+  image     String  @db.LongText
+  productId Int
+  product   product @relation(fields: [productId], references: [id], map: "Gallery_productId_fkey")
+
+  @@index([productId], map: "Gallery_productId_fkey")
 }
