@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
                 tcn: context?.orderid
             },
             include:{
-                orderdetails: true
+                orderdetail: true
             }
         })   
         

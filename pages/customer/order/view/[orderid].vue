@@ -33,7 +33,7 @@
 
         <div class="flex gap-4 py-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-2 w-[800px]">
-                <div class="border border-slate-200 flex flex-col gap-1 pb-2" v-for="(product,i) in orderDetail.orderdetails" :key="i">
+                <div class="border border-slate-200 flex flex-col gap-1 pb-2" v-for="(product,i) in orderDetail.orderdetail" :key="i">
                     <NuxtImg :src="product.image" />
                     <h2 class="text-center">{{ product.product_name }}</h2>
                     <p class="text-center text-sm">BDT {{ product.price }}</p>
