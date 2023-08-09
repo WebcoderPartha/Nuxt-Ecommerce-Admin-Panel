@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="items-center gap-6 text-center my-8 mx-8"
-  >
-    <div
-      class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-5 text-white"
-    >
+  <div class="items-center gap-6 text-center my-8 mx-8">
+    <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-5 text-white">
+
       <Head>
         <Title>Product List</Title>
       </Head>
@@ -38,26 +35,21 @@
               <td class="border">{{ product.discount_price }}</td>
               <td class="border"><img :src="product.image" class="w-16 mx-auto" alt=""></td>
               <td class="border">
-                <NuxtLink
-                  class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
-                  :to="`/admin/product/edit/${product.id}`"
-                >
-                  <Icon
-                    name="fa6-regular:pen-to-square"
-                  
-                  /></NuxtLink>&nbsp;
+                <NuxtLink class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
+                  :to="`/admin/product/edit/${product.id}`">
+                  <Icon name="fa6-regular:pen-to-square" />
+                </NuxtLink>&nbsp;
                 <button @click="deleteProduct(product.id)"
-                 
-                  class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white"
-                >
+                  class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white">
                   <Icon name="fa6-regular:trash-can" />
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
+        <button @click="loadMoreHandler" class=" bg-neutral-900 text-white px-4 rounded-md py-2 my-3">Load More</button>
       </div>
-  
+
     </div>
   </div>
 </template>
@@ -65,23 +57,23 @@
 <script setup>
 
 // definePageMeta({
-  // middleware: "auth",
-  // auth: {
-  //     unauthenticatedOnly: true,
-  //     navigateAuthenticatedTo: '/',
-  // },
+// middleware: "auth",
+// auth: {
+//     unauthenticatedOnly: true,
+//     navigateAuthenticatedTo: '/',
+// },
 // });
 
-const {status, data:userData} = useAuth() 
-    // Admin 
-    onBeforeMount(() => {
-    
-    if(status.value === "unauthenticated"){
-        navigateTo("/admin/login")
-    }else if(userData.value.user.role !== 'admin'){
-        navigateTo("/admin/login")
-    }
-   
+const { status, data: userData } = useAuth()
+// Admin 
+onBeforeMount(() => {
+
+  if (status.value === "unauthenticated") {
+    navigateTo("/admin/login")
+  } else if (userData.value.user.role !== 'admin') {
+    navigateTo("/admin/login")
+  }
+
 })
 
 // ===========Sweet Alert Use =============//
@@ -98,13 +90,32 @@ const Toast = $swal.mixin({
   },
 });
 // ===========Sweet Alert Use =============//
-
+const perPage = ref(7)
 const getProductState = useState(() => []);
-const { data: ptData, refresh } = await useFetch("/api/product/product", {
-  method: "GET",
+const { data: ptData, refresh } = await useFetch("/api/product/getallproduct", {
+  method: "POST",
+  body: {
+    perPage: perPage.value
+  }
 });
-
 getProductState.value = ptData
+
+
+// =============== Load More Product ==============
+const loadMoreHandler = async () => {
+  perPage.value += 5
+  const { data: loadPt, refresh } = await useFetch("/api/product/getallproduct", {
+    method: "POST",
+    body: {
+      perPage: perPage.value
+    }
+  });
+  getProductState.value = loadPt
+
+}
+// =============== Load More Product ==============
+
+
 
 
 const discountChange = (e) => {
@@ -124,7 +135,7 @@ const discountChange = (e) => {
 };
 
 const deleteProduct = async (productId) => {
-  const {data:delptdata} = await useFetch('/api/product/product', {
+  const { data: delptdata } = await useFetch('/api/product/product', {
     method: 'DELETE',
     body: {
       id: productId
@@ -132,13 +143,13 @@ const deleteProduct = async (productId) => {
   })
 
   Toast.fire({
-      icon: "success",
-      title: delptdata.value.success
-    });
+    icon: "success",
+    title: delptdata.value.success
+  });
 
-    refresh()
+  refresh()
 
- }
+}
 
 </script>
 
