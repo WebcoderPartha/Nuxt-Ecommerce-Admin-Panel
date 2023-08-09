@@ -68,27 +68,32 @@
         </div> -->
       </div>
       <!-- End Product Item -->
-
     </div>
+    <div class="flex justify-center my-5" v-if="loader"><Icon class="text-4xl font-extrabold text-[#00a88a]" name="eos-icons:bubble-loading" /></div>
+        <button v-else @click="$emit('loadMore')" class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button>
   </div>
 </template>
 
 <script setup>
 
 const { data: authUser } = useAuth()
+
+//Loader Composables 
+const loader = useHomeLoader()
+
 // Get All Product
 const allProduct = useHomeAllProduct()
 // end Get All Product
 
 // Define Add to cart event
-const emit = defineEmits(['addToCart', 'addWishlist'])
+const emit = defineEmits(['addToCart', 'addWishlist', 'loadMore'])
 
 // Add to wishlist Handler
 const wishlistHandler = async (product_id) => {
   emit('addWishlist', product_id)
 
 }
-  // Add to wishlist Handler
+// Add to wishlist Handler
 
 
 </script>

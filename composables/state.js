@@ -38,3 +38,7 @@ export const useWishlistProduct = () => {
     return useState(()=> [])
 }
 
+export const useHomeLoader = () => {
+    return useState(()=>  false)
+}
+

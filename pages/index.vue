@@ -34,7 +34,7 @@
         </div>
         <!-- All Products -->
         <div class="allProduct">
-            <AllProducts @addToCart="addToCartHandler" @addWishlist="wishlistHandler" />
+            <AllProducts @addToCart="addToCartHandler" @addWishlist="wishlistHandler" @loadMore="loadMoreProduct" />
         </div>
       
         
@@ -73,11 +73,34 @@ const {data:authUser, status} = useAuth()
   sliderProduct.value = sliderPt 
   // Slider Product
 
+  const lazyLoader = useHomeLoader()
+  const takeLimit = ref(20)
   // Get All Product
   const allProduct = useHomeAllProduct()
-  const {data:allpt, refresh:allProductRefresh} = await useFetch('/api/frontend/home/allproduct', {method: "GET"})
+  const {data:allpt, refresh:allProductRefresh} = await useFetch('/api/frontend/home/allproduct', {
+    method: "POST",
+    body: {
+        limit: takeLimit.value
+    }
+    })
   allProduct.value = allpt
   // end Get All Product
+
+  const loadMoreProduct = async () => {
+    lazyLoader.value = true
+    takeLimit.value += 20
+    const {data:loadproduct, status} = await useFetch('/api/frontend/home/allproduct', {
+        method: "POST",
+        body: {
+            limit: takeLimit.value
+        }
+    })
+    allProduct.value = loadproduct
+    if (status.value === 'success') {
+        lazyLoader.value = false
+    }
+
+  }
 
 // Fetch Category
 const homeCategories = useHomeCategories()
