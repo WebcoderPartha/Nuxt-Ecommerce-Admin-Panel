@@ -3,7 +3,7 @@
     <div class="text-center py-2 my-2 border border-slate-300 mb-4">
       <h2 class="text-2xl">All Products</h2>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0 m-2">
+    <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-5 lg:grid-cols-5 p-4 md:p-0 m-2">
       <!-- Product Item -->
       <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="allProduct?.length > 0"
         v-for="(hProduct, hinx) in allProduct" :key="hinx">
@@ -15,7 +15,7 @@
 
           <Icon v-if="hProduct.wishlist?.productId === hProduct.id && authUser?.user?.role === 'customer'"
             @click="wishlistHandler(hProduct.id)" name="heroicons-solid:heart"
-            :class="` text-red-700 duration-300 cursor-pointer group-hover:right-4 text-3xl p-1 rounded-full bg-[#79bc62] hover:text-red-600 absolute top-8 -right-16`" />
+            :class="` text-red-700 duration-300 cursor-pointer group-hover:right-4 text-2xl p-1 rounded-full bg-[#79bc62] hover:text-red-600 absolute top-8 -right-16`" />
           <Icon v-else @click="wishlistHandler(hProduct.id)" name="heroicons-solid:heart"
             :class="` text-white duration-300 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-8 -right-16`" />
           <Icon @click="$emit('addToCart', hProduct.id)" name="ri:shopping-basket-fill"
@@ -24,8 +24,8 @@
             class="group-hover:bottom-0 absolute -bottom-10 duration-300 bg-[#79bc62] w-full text-center py-2 text-white font-semibold">
             Product Detail</NuxtLink>
         </div>
-        <div class="text-center flex flex-col gap-1">
-          <h2 class="text-sm h-14">{{ hProduct.name.substring(0, 50) + '...' }}</h2>
+        <div class="text-center flex flex-col gap-1 mt-2">
+          <h2 class="text-sm font-semibold h-14 text-neutral-500 px-2">{{ hProduct.name.substring(0, 50) + '...' }}</h2>
           <div class="flex flex-col gap-2" v-if="hProduct.discount !== '0'">
             <!-- <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} -->
             <span class="font-extrabold text-neutral-600">BDT {{ hProduct.regular_price }}</span>

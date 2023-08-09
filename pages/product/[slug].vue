@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-5 md:mx-0 item-center">
             <div>
                 <!-- <img :src="productDetail.image" class=" w-[300px]" alt=""> -->
-                <div class=" max-w-xl">
+                <div class=" max-w-md">
                     <inner-image-zoom :src="useImageZoom.imageSrc" zoomType="hover" :zoomSrc="useImageZoom.zoomSrc" />
                 </div>
                 <div class="flex gap-2 items-center my-2">
