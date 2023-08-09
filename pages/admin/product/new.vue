@@ -103,11 +103,14 @@ const Toast = $swal.mixin({
 });
 // ===========Sweet Alert Use =============//
 
+// ========= Get Category ====================//
 const getCategory = useState(() => []);
 const { data: getCtData } = await useFetch("/api/category/category", {
   method: "GET",
 });
 getCategory.value = getCtData;
+
+// ========= Get Category ====================//
 
 
 const form = useState(() => ({
