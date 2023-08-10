@@ -5,8 +5,8 @@
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
             <!-- Product Item -->
-            <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="allProduct?.length > 0"
-        v-for="(hProduct, hinx) in allProduct" :key="hinx">
+            <div class="shadow-md shadow-gray-300 group rounded-md pb-4" v-if="allProduct?.products.length > 0"
+        v-for="(hProduct, hinx) in allProduct?.products" :key="hinx">
         <div class="relative overflow-hidden">
           <nuxt-img :src="hProduct.image" class="group-hover:scale-110 duration-300" loading="lazy" />
           <span v-if="hProduct.discount !== '0'"
@@ -61,17 +61,14 @@
         </div>
 
         <!-- Pagination -->
-        <div class=" block">
-          <FrontendPagination />
+        <div>
+          <FrontendPagination :total="total" />
         </div>
-         <!-- Pagination -->
-        <!-- <div v-if="loading" class="flex justify-center my-5"><Icon class="text-4xl font-extrabold text-[#00a88a]" name="eos-icons:bubble-loading" /></div>
-        <button v-else @click="loadMoreProduct" class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button> -->
-        
     </div>
 </template>
 
 <script setup>
+
 definePageMeta({
     layout: 'ecommerce'
 })
@@ -79,42 +76,23 @@ useHead({
     title: 'Shop'
 })
 
-
-// Define Default Value for Take product
+// Default Value for Take product
 const take = ref(20)
+const skip = ref(0)
+const total = ref(0)
 // Product State
+
 const allProduct = useState(() => [])
-const { data: getData } = await useFetch('/api/frontend/shop/getdefaultproduct', {
+const { data: getData } = await useFetch("/api/frontend/shop/getproductpaginate", {
     method: "POST",
     body: {
-        limit: take.value
+      take: take.value,
+      skip: skip.value
     }
 })
 allProduct.value = getData
+total.value = allProduct.value.total
 // Define Default Value for Take product
-
-
-// Loading button
-const loading = ref(false)
-
-// Load More Product
-// const loadMoreProduct = async () => {
-//     loading.value = true
-//     // Load more product increment value assign
-//     take.value += 10
-//     // Fetching Load more product after click the Load more Button
-//     const { data: loadProduct, status } = await useFetch('/api/frontend/shop/getdefaultproduct', {
-//         method: "POST",
-//         body: {
-//             limit: take.value
-//         }
-//     })
-//     allProduct.value = loadProduct
-//     if(status.value === 'success'){
-//       loading.value = false
-//     }
-// }
-// Load More Product
 
 </script>
 

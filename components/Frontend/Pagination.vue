@@ -33,21 +33,16 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: 'ecommerce'
-})
 
-
-const { data: res } = await useFetch('/api/frontend/paginate/allproduct', {
-    method: 'GET'
-})
+// Total Price
+const {total} = defineProps(['total'])
 
 // Current Page
 const currentPage = ref(1)
 // Per page Item
 const perPage = ref(20)
 // Total Item Count
-const total = res.value._count.name
+
 
 // Total Page Number
 const TotalPage = Math.ceil(total / perPage.value)
