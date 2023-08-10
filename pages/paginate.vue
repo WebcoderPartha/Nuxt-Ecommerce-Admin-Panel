@@ -22,13 +22,13 @@
                     :data-skip="number.skip" :data-page="number.page">{{ number.page }}</span>
             </li>
             <!-- Page Number -->
-            
+
             <!-- Next Button -->
-            <li v-if="nextPage === lastPageNumber">
+            <li v-if="currentPage === lastPageNumber">
                 <span class=" cursor-not-allowed bg-gray-700 text-white px-2 py-1">Next</span>
             </li>
             <li v-else>
-                <span @click="prevPageHandler" :data-prevPage="prevPage" :data-prevSkip="prevSkip" class=" cursor-pointer bg-green-700 text-white px-2 py-1">Next</span>
+                <span @click="nextPageHandler" :data-nextPage="nextPage" :data-nextSkip="nextSkip" class=" cursor-pointer bg-green-700 text-white px-2 py-1">Next</span>
             </li>
             <!-- Next Button -->
         </ul>
@@ -74,7 +74,9 @@ const prevSkip = ref(20)
 const prevPage = ref(1)
 const nextSkip = ref(40)
 const nextPage = ref(2)
-// const prev = 
+
+
+// Pagination Button Handler
 const paginateHandler = (e) => {
 
     // Current Page
@@ -89,13 +91,23 @@ const paginateHandler = (e) => {
     // Previous Skip
     prevSkip.value = currentSkip - perPage.value
 
-    //const sendData
-    const data = {
+    // Previous Button Data
+
+    //Current Button Data
+    const prevData = {
+        prevPage: prevPage.value,
+        skip: prevSkip.value,
+    }
+
+    //Current Button Data
+    const currentData = {
         currentPage: currentPage.value,
         skip: prevSkip.value,
     }
-    console.log(data)
+    console.log(prevData)
 }
+
+// Previous Page Button Handler
 const prevPageHandler = (e) => {
     // Current Page
     currentPage.value = parseInt(e.target.getAttribute('data-prevPage'))
@@ -109,17 +121,28 @@ const prevPageHandler = (e) => {
     // Previous Skip
     prevSkip.value = currentSkip
 
+    // Previous Button Data
     const prevData = {
         prevPage: prevPage.value,
         skip: prevSkip.value,
     }
+    
+    // Current Button Data
     const currentData = {
         currentPage: currentPage.value,
         skip: currentSkip
     }
-    console.log(currentData)
-
+    console.log(prevData)
 }
+
+// Next Page Button Handdler 
+const nextPageHandler = (e) => {
+    // Current Page
+    currentPage.value = parseInt(e.target.getAttribute('data-nextPage'))
+    // next Page
+    nextPage.value = currentPage.value + 1
+}
+
 </script>
 
 <style lang="scss" scoped></style>
