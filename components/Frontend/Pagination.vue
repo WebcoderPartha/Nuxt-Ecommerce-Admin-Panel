@@ -35,14 +35,16 @@
 <script setup>
 
 // Total Price
-const {total} = defineProps(['total'])
-
+const {total, per_page} = defineProps(['total','per_page'])
 // Current Page
 const currentPage = ref(1)
 // Per page Item
-const perPage = ref(20)
+const perPage = ref(0)
+perPage.value = per_page
 // Total Item Count
 
+// custom Event 
+const emit = defineEmits()
 
 // Total Page Number
 const TotalPage = Math.ceil(total / perPage.value)
@@ -68,7 +70,7 @@ lastPageNumber.value = lastPage
 const paginateHandler = (e) => {
     
     const getButton = e.target.getAttribute('data-button')
-    console.log(getButton)
+    
     if (getButton === 'prev') {
 
         // Get Previous Page
@@ -86,9 +88,13 @@ const paginateHandler = (e) => {
             skip: skip,
             take: take
         }
-        console.log(data)
+
+        // Define Emit
+        emit('paginate', skip)
+        // console.log(data)
 
     } else if(getButton === 'next') {
+
         // Get Next Page
         const nextPage = currentPage.value + 1
         // Get Current Page
@@ -104,8 +110,13 @@ const paginateHandler = (e) => {
             skip: skip,
             take: take
         }
-        console.log(data)  
+
+        // define Emit
+        emit('paginate', skip)
+        // console.log(data)  
+
     }else{
+
         // Get Carrent Page
         currentPage.value = parseInt(e.target.getAttribute('data-pageNumber'))
         // Total Page Item
@@ -119,55 +130,15 @@ const paginateHandler = (e) => {
             skip: skip,
             take: take
         }
-        console.log(data) 
+        
+        // define Emit
+        emit('paginate', skip)
+        // console.log(data) 
+        
     }
 
 }
-//================== Pagination Button Handler ===============================//
 
-// Previous Page Button Handler
-// const prevPageHandler = (e) => {
-    
-//     // Get Previous Page
-//     const previousPage = currentPage.value - 1
-//     // Get Carrent Page
-//     currentPage.value = previousPage
-//     // Total Page Item
-//     const totalPageItem  = parseInt(previousPage * perPage.value).toFixed(0)
-//     // Skip Item
-//     const skip = totalPageItem - perPage.value
-//     // Take Item
-//     const take = perPage.value
-
-//     const data = {
-//         skip: skip,
-//         take: take
-//     }
-//     console.log(data)
-
-// }
-
-
-// Next Page Button Handdler 
-// const nextPageHandler = (e) => {
-
-//    // Get Next Page
-//     const nextPage = currentPage.value + 1
-//     // Get Current Page
-//     currentPage.value = nextPage
-//     // Total Page Item
-//     const totalPageItem  = parseInt(nextPage * perPage.value).toFixed(0)
-//     // Skip Item
-//     const skip = totalPageItem - perPage.value
-//     // Take Item
-//     const take = perPage.value
-
-//     const data = {
-//         skip: skip,
-//         take: take
-//     }
-//     console.log(data)   
-// }
 
 </script>
 

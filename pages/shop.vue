@@ -62,7 +62,7 @@
 
         <!-- Pagination -->
         <div>
-          <FrontendPagination :total="total" />
+          <FrontendPagination :total="total" :per_page="perPage" @paginate="paginateHandler" />
         </div>
     </div>
 </template>
@@ -76,23 +76,37 @@ useHead({
     title: 'Shop'
 })
 
-// Default Value for Take product
-const take = ref(20)
+//=============== Default Value for Take product ==============
+const perPage = ref(20)
 const skip = ref(0)
 const total = ref(0)
-// Product State
+//=============== Default Value for Take product =============
 
+//================== Default  Page 1 Data ===================== //
 const allProduct = useState(() => [])
 const { data: getData } = await useFetch("/api/frontend/shop/getproductpaginate", {
     method: "POST",
     body: {
-      take: take.value,
+      take: perPage.value,
       skip: skip.value
     }
 })
 allProduct.value = getData
 total.value = allProduct.value.total
-// Define Default Value for Take product
+//================== Default  Page 1 Data ===================== //
+
+//============== Pagination Handler ================
+const paginateHandler = async (skip) => {
+  const { data: pagiData } = await useFetch("/api/frontend/shop/getproductpaginate", {
+    method: "POST",
+    body: {
+      take: perPage.value,
+      skip: skip
+    }
+  })
+  allProduct.value = pagiData
+}
+//============== Pagination Handler ================
 
 </script>
 
