@@ -1,31 +1,31 @@
 <template>
-    <div>
-        <ul class="flex justify-center gap-4">
+    <div class="pt-12 pb-4">
+        <ul class="flex justify-center gap-2">
             <!-- Previous Button -->
             <li v-if="currentPage === 1">
-                <span class=" cursor-not-allowed bg-gray-700 text-white px-2 py-1">Prev</span>
+                <span class=" rounded-md cursor-not-allowed bg-gray-700 text-white px-2 py-1">❮</span>
             </li>
             <li v-else>
-                <span @click="paginateHandler" data-button="prev" class=" cursor-pointer bg-green-700 text-white px-2 py-1">Prev</span>
+                <span @click="paginateHandler" data-button="prev" class="rounded-md cursor-pointer bg-green-700 text-white px-2 py-1">❮</span>
             </li>
              <!-- Previous Button -->
             
              <!-- Page Number -->
             <li v-for="(number, idx) in pageNumber">
-                <span v-if="currentPage === number.page" class="bg-red-700 text-white px-2 py-1 cursor-not-allowed">
+                <span v-if="currentPage === number.page" class="rounded-md bg-red-700 text-white px-2 py-1 cursor-not-allowed">
                     {{ number.page }}
                 </span>
-                <span v-else :class="` cursor-pointer bg-green-700 text-white px-2 py-1`" @click="paginateHandler"
+                <span v-else :class="`rounded-md  cursor-pointer bg-green-700 text-white px-2 py-1`" @click="paginateHandler"
                     :data-pageNumber="number.page" data-button="number">{{ number.page }}</span>
             </li>
             <!-- Page Number -->
 
             <!-- Next Button -->
             <li v-if="currentPage === lastPageNumber">
-                <span class=" cursor-not-allowed bg-gray-700 text-white px-2 py-1">Next</span>
+                <span class="rounded-md cursor-not-allowed bg-gray-700 text-white px-2 py-1">❯</span>
             </li>
             <li v-else>
-                <span @click="paginateHandler" data-button="next" class=" cursor-pointer bg-green-700 text-white px-2 py-1">Next</span>
+                <span @click="paginateHandler" data-button="next" class="rounded-md cursor-pointer bg-green-700 text-white px-2 py-1">❯</span>
             </li>
             <!-- Next Button -->
         </ul>

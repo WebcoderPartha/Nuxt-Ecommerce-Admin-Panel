@@ -59,8 +59,14 @@
       </div>
             <!-- End Product Item -->
         </div>
-        <div v-if="loading" class="flex justify-center my-5"><Icon class="text-4xl font-extrabold text-[#00a88a]" name="eos-icons:bubble-loading" /></div>
-        <button v-else @click="loadMoreProduct" class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button>
+
+        <!-- Pagination -->
+        <div class=" block">
+          <FrontendPagination />
+        </div>
+         <!-- Pagination -->
+        <!-- <div v-if="loading" class="flex justify-center my-5"><Icon class="text-4xl font-extrabold text-[#00a88a]" name="eos-icons:bubble-loading" /></div>
+        <button v-else @click="loadMoreProduct" class="text-xl bg-[#00a88a] w-48 mx-auto my-6 text-white px-4 py-2 font-semibold block">Load More</button> -->
         
     </div>
 </template>
