@@ -51,6 +51,9 @@
       </div>
 
     </div>
+    <div class="pt-3">
+      <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
+    </div>
   </div>
 </template>
 
@@ -93,7 +96,7 @@ const Toast = $swal.mixin({
 
 
 const total = ref(0)
-const perPage = ref(7)
+const perPage = ref(20)
 const skip  = ref(0)
 
 //=========== Fetch All Product =============//
@@ -106,8 +109,22 @@ const { data: ptData, refresh, pending } = await useFetch("/api/product/getallpr
     } 
 })
 getProductState.value = ptData
+total.value = getProductState.value.total
 //=========== Fetch All Product =============//
 
+//=============== Pagination Handler ================//
+const paginateHandler = async (skip) => {
+  const { data: pagiPt, refresh, pending } = await useFetch("/api/product/getallproduct", { 
+    method: "POST",
+    body: {
+        skip:skip,
+        take: perPage.value
+    } 
+})
+getProductState.value = pagiPt
+
+}
+//=============== Pagination Handler ================//
 
 // // =============== Load More Product ==============
 // const loadMoreHandler = async () => {
