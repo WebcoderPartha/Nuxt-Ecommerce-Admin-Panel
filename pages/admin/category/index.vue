@@ -1,5 +1,6 @@
 <template>
-    <div class=" grid grid-cols-1 md:grid-cols-2 items-center gap-6 text-center my-8 mx-8">
+    <div class="py-4">
+       <div class=" grid grid-cols-1 md:grid-cols-2 gap-6 text-center my-2 mx-8">
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-5 text-white">
 
             <Head>
@@ -38,7 +39,7 @@
             </div>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7" v-if="!getStateIdData">
+        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7 h-96" v-if="!getStateIdData">
             <h3 class="text-xl font-semibold pt-4 mb-3">Add Category</h3>
             <form @submit.prevent="storeData">
                 <div class=" flex flex-col gap-3 items-center">
@@ -52,7 +53,7 @@
             </form>
         </div>
 
-        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7" v-else>
+        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7 h-96" v-else>
             <h3 class="text-xl font-semibold pt-4 mb-3">Edit Category</h3>
             <form @submit.prevent="updateData">
                 <div class=" flex flex-col gap-3 items-center">
@@ -65,8 +66,11 @@
                 </div>
             </form>
         </div>
+    </div>
 
-
+        <div class="pt-3">
+            <BankendPagination per_page="20" total="70" />
+        </div>
     </div>
 </template>
 
@@ -110,9 +114,22 @@ const Toast = $swal.mixin({
 });
 // ===========Sweet Alert Use =============//
 
+// Paginate 
+const total = ref(0)
+const perPage = ref(7)
+const skip  = ref(0)
+
+//=================== Get Category ================== //
 const getCategory = useCategory()
-const { data: categories, refresh, pending } = await useFetch('/api/category/category', { method: 'GET' })
+const { data: categories, refresh, pending } = await useFetch("/api/category/getallcategory", { 
+    method: "POST",
+    body: {
+        skip:skip.value,
+        take: perPage.value
+    } 
+})
 getCategory.value = categories
+//=================== Get Category ================== //
 
 const name = ref('');
 const image = ref('')

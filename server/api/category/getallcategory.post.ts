@@ -4,6 +4,7 @@ import {getServerSession} from '#auth'
 export default defineEventHandler(async (event) => {
 
     const session = await getServerSession(event)
+    const getBody = await readBody(event)
 
     if(session?.user?.role != 'admin'){
         return {
@@ -16,6 +17,8 @@ export default defineEventHandler(async (event) => {
     const prisma = new PrismaClient()
 
     const category = await prisma.category.findMany({
+        skip: getBody?.skip,
+        take: getBody?.take,
         orderBy: {
             id: 'asc'
         }
