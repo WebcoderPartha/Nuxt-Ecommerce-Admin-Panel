@@ -17,7 +17,7 @@ export default defineEventHandler( async (event) => {
 
     const category = await prisma.category.findMany({
         orderBy:{
-            id: 'desc'
+            id: "asc"
         }
     })
 

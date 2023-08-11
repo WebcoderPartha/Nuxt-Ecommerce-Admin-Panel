@@ -114,6 +114,10 @@ const updateHomeCategoryHandler = async () => {
         }
     })
 
+    Toast.fire({
+        icon: 'success',
+        text: updateCat.value.success
+    })
     categoryIds.value = []
     refresh()
 }

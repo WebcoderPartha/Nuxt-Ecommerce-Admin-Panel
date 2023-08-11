@@ -4,14 +4,15 @@ export default defineEventHandler(async (event) => {
 
     const prisma = new PrismaClient()
 
-    const product = await prisma.product.findMany({
+    const product = await prisma.category.findMany({
+        where:{
+            homecategory: 1
+        },
         orderBy: {
             id: 'desc'
         },
         include: {
-            category: true,
-            wishlist: true,
-            gallery: true
+            product: true
         },
         take: 8,
     })
