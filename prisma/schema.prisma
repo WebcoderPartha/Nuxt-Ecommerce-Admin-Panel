@@ -30,7 +30,7 @@ model category {
   updated_at   DateTime      @updatedAt
   image        String?       @db.LongText
   product      product[]
-  homecategory homecategory?
+  homecategory Int? @default(0)
 }
 
 model order {
@@ -111,8 +111,3 @@ model gallery {
   @@index([productId], map: "Gallery_productId_fkey")
 }
 
-model homecategory {
-  id         Int       @id @default(autoincrement())
-  category   category  @relation(fields: [categoryId], references: [id])
-  categoryId Int       @unique
-}

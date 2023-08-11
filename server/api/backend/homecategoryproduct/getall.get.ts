@@ -15,13 +15,21 @@ export default defineEventHandler( async (event) => {
 
     const prisma = new PrismaClient()
 
-    const category = await prisma.homecategory.findMany({
+    const category = await prisma.category.findMany({
         orderBy:{
             id: 'desc'
         }
     })
 
+    const count = await prisma.category.aggregate({
+        _count:{
+            name: true
+        }
+    })
 
-    return category
+    return {
+        categories:category,
+        total: count._count.name
+    }
 
 })

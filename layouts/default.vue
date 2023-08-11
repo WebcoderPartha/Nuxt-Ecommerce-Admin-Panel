@@ -15,9 +15,9 @@
                         </NuxtLink>
                     </li>
                     <li :class="``">
-                        <NuxtLink to="/admin/home/product/categories" class="cursor-pointer px-6 py-3 hover:bg-[#262930] text-white flex">
+                        <NuxtLink to="/admin/home/product/category/assign" class="cursor-pointer px-6 py-3 hover:bg-[#262930] text-white flex">
                             <Icon name="mdi:monitor" class="text-2xl mr-3 text-white" />
-                            <span :class="``">Home Category Product</span>
+                            <span :class="``">Home Category Assign</span>
                         </NuxtLink>
                     </li>
                     <li v-for="(menu,i) in allMenu" @click="OpenSubmenu(menu.title, i)" :key="i" :class="`${menu.space ? 'mt-6 mb-2' : ''}`">
