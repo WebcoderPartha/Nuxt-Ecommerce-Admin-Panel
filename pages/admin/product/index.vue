@@ -25,7 +25,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(product, idx) in getProductState" :key="product.id">
+            <tr v-for="(product, idx) in getProductState.products" :key="product.id">
               <td class="border">{{ idx + 1 }}</td>
               <td class="border">{{ product?.name?.substring(0, 50) + '...' }}</td>
               <td class="border">{{ product.category?.name }}</td>
@@ -47,7 +47,7 @@
             </tr>
           </tbody>
         </table>
-        <button @click="loadMoreHandler" class=" bg-neutral-900 text-white px-4 rounded-md py-2 my-3">Load More</button>
+       
       </div>
 
     </div>
@@ -90,30 +90,38 @@ const Toast = $swal.mixin({
   },
 });
 // ===========Sweet Alert Use =============//
+
+
+const total = ref(0)
 const perPage = ref(7)
+const skip  = ref(0)
+
+//=========== Fetch All Product =============//
 const getProductState = useState(() => []);
-const { data: ptData, refresh } = await useFetch("/api/product/getallproduct", {
-  method: "POST",
-  body: {
-    perPage: perPage.value
-  }
-});
-getProductState.value = ptData
-
-
-// =============== Load More Product ==============
-const loadMoreHandler = async () => {
-  perPage.value += 5
-  const { data: loadPt, refresh } = await useFetch("/api/product/getallproduct", {
+const { data: ptData, refresh, pending } = await useFetch("/api/product/getallproduct", { 
     method: "POST",
     body: {
-      perPage: perPage.value
-    }
-  });
-  getProductState.value = loadPt
+        skip:skip.value,
+        take: perPage.value
+    } 
+})
+getProductState.value = ptData
+//=========== Fetch All Product =============//
 
-}
-// =============== Load More Product ==============
+
+// // =============== Load More Product ==============
+// const loadMoreHandler = async () => {
+//   perPage.value += 5
+//   const { data: loadPt, refresh } = await useFetch("/api/product/getallproduct", {
+//     method: "POST",
+//     body: {
+//       perPage: perPage.value
+//     }
+//   });
+//   getProductState.value = loadPt
+
+// }
+// // =============== Load More Product ==============
 
 
 

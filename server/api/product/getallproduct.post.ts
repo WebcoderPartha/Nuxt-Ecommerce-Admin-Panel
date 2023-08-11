@@ -17,7 +17,7 @@ export default defineEventHandler( async (event) => {
    
     const prisma = new PrismaClient()
 
-    const data = await prisma.product.findMany({
+    const products = await prisma.product.findMany({
         orderBy: {
             id: 'desc'
         },
@@ -25,11 +25,20 @@ export default defineEventHandler( async (event) => {
             category: true,
             gallery: true
         },
-        take: getBody?.perPage
+        take: getBody?.take,
+        skip: getBody?.skip
        
     })
 
+    const count = await prisma.product.aggregate({
+        _count:{
+            name: true
+        }
+    })
 
-    return data
+    return {
+        products: products,
+        total: count._count.name
+    }
 
 })
