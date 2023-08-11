@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  
 }
 
 datasource db {
@@ -24,13 +23,14 @@ model user {
 }
 
 model category {
-  id         Int       @id @default(autoincrement())
-  name       String
-  slug       String?   @db.LongText
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  image      String?   @db.LongText
-  product    product[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  slug         String?       @db.LongText
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+  image        String?       @db.LongText
+  product      product[]
+  homecategory homecategory?
 }
 
 model order {
@@ -63,21 +63,20 @@ model orderdetail {
 }
 
 model product {
-  id             Int       @id @default(autoincrement())
+  id             Int          @id @default(autoincrement())
   name           String
   regular_price  String
   discount       String
   discount_price String
   quantity       String
-  slug           String?   @db.LongText
-  image          String?   @db.LongText
+  slug           String?      @db.LongText
+  image          String?      @db.LongText
   categoryId     Int
-  created_at     DateTime  @default(now())
-  updated_at     DateTime  @updatedAt
+  created_at     DateTime     @default(now())
+  updated_at     DateTime     @updatedAt
   gallery        gallery[]
-  category       category  @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
+  category       category     @relation(fields: [categoryId], references: [id], map: "Product_categoryId_fkey")
   wishlist       wishlist?
-
   @@index([categoryId], map: "Product_categoryId_fkey")
 }
 
@@ -107,7 +106,13 @@ model gallery {
   id        Int     @id @default(autoincrement())
   image     String  @db.LongText
   productId Int
-  product   product @relation(fields: [productId], references: [id],onDelete: Cascade, map: "Gallery_productId_fkey")
+  product   product @relation(fields: [productId], references: [id], onDelete: Cascade, map: "Gallery_productId_fkey")
 
   @@index([productId], map: "Gallery_productId_fkey")
+}
+
+model homecategory {
+  id         Int       @id @default(autoincrement())
+  category   category  @relation(fields: [categoryId], references: [id])
+  categoryId Int       @unique
 }
