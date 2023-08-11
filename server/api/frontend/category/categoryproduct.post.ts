@@ -5,33 +5,36 @@ export default defineEventHandler(async (event) => {
     const prisma = new PrismaClient()
     const getBody = await readBody(event)
 
-    const products = await prisma.category.findFirst({
+    // Get By Single Category
+    const category = await prisma.category.findFirst({
         where: {
-            slug: getBody.slug 
-        },
-        skip: getBody?.skip,
-        take: getBody?.take,
-        include: {
-            product:true
+            slug: getBody?.slug 
         }
     })
 
     // Total Count 
     const totalCount = await prisma.product.aggregate({
         where: {
-            categoryId: products?.id
+            categoryId: category?.id
         },
         _count: {
             categoryId: true
         }
     })
-
     const total = totalCount._count.categoryId 
+
+    const products = await prisma.product.findMany({
+        where: {
+            categoryId:category?.id
+        },
+        skip: getBody?.skip,
+        take: getBody?.take
+    })
 
 
     return {
         products: products,
-        total: total
+        total: total,
     };
 
 })

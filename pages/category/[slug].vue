@@ -3,10 +3,10 @@
     <div class="text-center py-2 my-2 border border-slate-300 mb-4">
       <h2 class="text-2xl">{{ catgoryProduct.name }}</h2>
     </div>
-    <div v-if="catgoryProduct?.product?.length > 0" class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
+    <div v-if="catgoryProduct?.length > 0" class="grid grid-cols-2 md:grid-cols-4 items-center justify-center gap-3 lg:grid-cols-5 p-4 md:p-0">
       <!-- Product Item -->
       <div class="shadow-md shadow-gray-300 group rounded-md pb-4"
-        v-for="(hProduct, hinx) in catgoryProduct?.product" :key="hinx">
+        v-for="(hProduct, hinx) in catgoryProduct" :key="hinx">
         <div class="relative overflow-hidden">
           <nuxt-img :src="hProduct?.image" class="group-hover:scale-110 duration-300" loading="lazy" />
           <span v-if="hProduct.discount !== '0'"
@@ -62,7 +62,7 @@
     <div class="py-6" v-else>
         <h2 class="text-2xl text-center">No product found!</h2>
     </div>
-    <FrontendPagination :per_page="perPage" :total="total" />
+    <FrontendPagination :per_page="perPage" :total="total" @paginate="paginationHandler" />
   </div>
 </template>
   
@@ -84,7 +84,7 @@ const total = ref(0)
 // Fetching Category Product
 // const catgoryProduct = useHomeCatProduct()
 const catgoryProduct = useState(() => [])
-const { data: catpt, refresh } = await useFetch('/api/frontend/category/categoryproduct', {
+const { data: catpt } = await useFetch('/api/frontend/category/categoryproduct', {
   method: 'POST',
   body: {
     // slug: JSON.stringify(categorySlug.toString)
@@ -96,12 +96,26 @@ const { data: catpt, refresh } = await useFetch('/api/frontend/category/category
 catgoryProduct.value = catpt.value.products
 // Fetching Category Product
 total.value = catpt.value.total
-console.log(catpt.value)
 
 // Page title
 useHead({
   title: catgoryProduct.value.name
 })
+
+//============ Pagination Handler ================//
+const paginationHandler = async (skip) => {
+  const { data: paginatePt } = await useFetch('/api/frontend/category/categoryproduct', {
+  method: 'POST',
+  body: {
+    // slug: JSON.stringify(categorySlug.toString)
+    slug: categorySlug,
+    skip: skip,
+    take:perPage.value
+  }
+})
+catgoryProduct.value = paginatePt.value.products
+}
+//============ Pagination Handler ================//
 
 
 // Getting Cart from local storage
