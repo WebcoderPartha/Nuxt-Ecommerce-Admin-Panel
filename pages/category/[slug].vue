@@ -61,7 +61,8 @@
     </div>
     <div class="py-6" v-else>
         <h2 class="text-2xl text-center">No product found!</h2>
-      </div>
+    </div>
+    <FrontendPagination :per_page="perPage" :total="total" />
   </div>
 </template>
   
@@ -74,6 +75,12 @@ definePageMeta({
 // Category Slug
 const categorySlug = useRoute().params.slug
 
+//=============== Default Value for Take product ==============
+const perPage = ref(20)
+const skip = ref(0)
+const total = ref(0)
+//=============== Default Value for Take product =============
+
 // Fetching Category Product
 // const catgoryProduct = useHomeCatProduct()
 const catgoryProduct = useState(() => [])
@@ -81,11 +88,15 @@ const { data: catpt, refresh } = await useFetch('/api/frontend/category/category
   method: 'POST',
   body: {
     // slug: JSON.stringify(categorySlug.toString)
-    slug: categorySlug
+    slug: categorySlug,
+    skip: skip.value,
+    take:perPage.value
   }
 })
-catgoryProduct.value = catpt
+catgoryProduct.value = catpt.value.products
 // Fetching Category Product
+total.value = catpt.value.total
+console.log(catpt.value)
 
 // Page title
 useHead({

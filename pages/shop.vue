@@ -93,6 +93,7 @@ const { data: getData } = await useFetch("/api/frontend/shop/getproductpaginate"
 })
 allProduct.value = getData
 total.value = allProduct.value.total
+
 //================== Default  Page 1 Data ===================== //
 
 //============== Pagination Handler ================
