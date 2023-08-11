@@ -23,7 +23,16 @@ export default defineEventHandler(async (event) => {
             id: 'asc'
         }
     })
+    
+    const count = await prisma.category.aggregate({
+        _count: {
+            name: true
+        }
+    })
 
-    return category;
+    return {
+        category: category,
+        total: count._count.name
+    };
 
 })

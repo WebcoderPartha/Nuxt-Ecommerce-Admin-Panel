@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(category, idx) in getCategory" :key="category.id">
+                        <tr v-for="(category, idx) in getCategory.category" :key="category.id">
                             <td class="border">{{ idx + 1 }}</td>
                             <td class="border">{{ category?.name }}</td>
                             <td class="border">{{ category?.slug }}</td>
@@ -69,7 +69,7 @@
     </div>
 
         <div class="pt-3">
-            <BankendPagination per_page="20" total="70" />
+            <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
         </div>
     </div>
 </template>
@@ -129,8 +129,21 @@ const { data: categories, refresh, pending } = await useFetch("/api/category/get
     } 
 })
 getCategory.value = categories
+total.value = getCategory.value.total
 //=================== Get Category ================== //
 
+//================= Pagination Handler ===============//
+const paginateHandler = async (skip) => {
+    const { data: categories, refresh, pending } = await useFetch("/api/category/getallcategory", { 
+        method: "POST",
+        body: {
+            skip: skip,
+            take: perPage.value
+        } 
+    })
+    getCategory.value = categories
+}
+//================= Pagination Handler ===============//
 const name = ref('');
 const image = ref('')
 // =============== Upload Image Data ===========
