@@ -11,7 +11,8 @@
                 <div v-for="(skip, idx) in skipLoop" >
                     <div v-for="category in getCategory.categories.slice(skip.skip, skip.take)" :key="category.id">
                         <div class="flex gap-3" >
-                            <input @click="homeCategoryHandler(category.id)" :id="`category-${category.id}`" type="checkbox" :value="category.id">
+                            <input v-if="category.homecategory === 1" checked @click="homeCategoryHandler(category.id)" :id="`category-${category.id}`" type="checkbox" :value="category.id">
+                            <input v-else  @click="homeCategoryHandler(category.id)" :id="`category-${category.id}`" type="checkbox" :value="category.id">
                             <label :for="`category-${category.id}`">{{ category.name }}</label>
                         </div>
                     </div>
@@ -102,7 +103,7 @@ const homeCategoryHandler = (category_id) => {
     }
     categoryIds.value.push(data)
     categoryIds.value = [...new Map(categoryIds.value.map(item=> [item['categoryId'], item])).values()]
-    console.log(categoryIds.value)
+
 }
 
 const updateHomeCategoryHandler = async () => {
