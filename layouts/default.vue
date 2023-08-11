@@ -8,7 +8,13 @@
             </div>
             <nav>
                 <ul>
-                    <li v-for="(menu,i) in allMenu" @click="OpenSubmenu(menu.title, i)" :key="i" :class="`${menu.space ? 'mt-6 mb-6' : ''}`">
+                    <li :class="`mt-6 mb-2`">
+                        <NuxtLink to="/admin" class="cursor-pointer px-6 py-3 hover:bg-[#262930] text-white flex">
+                            <Icon name="mdi:monitor" class="text-2xl mr-3 text-white" />
+                            <span :class="``">Dashboard</span>
+                        </NuxtLink>
+                    </li>
+                    <li v-for="(menu,i) in allMenu" @click="OpenSubmenu(menu.title, i)" :key="i" :class="`${menu.space ? 'mt-6 mb-2' : ''}`">
                         <div class="cursor-pointer px-6 py-3 hover:bg-[#262930]">
                             <Icon :name="menu.icon" class="text-2xl mr-3 text-white" />
                             <span :class="`text-white ${menuOpen ? ' visible' : 'hidden'} duration-300`">{{ menu.title }}</span>
@@ -19,11 +25,16 @@
                                 <Icon v-if="menu.submenu" :name="menu.minusIcon" :class="` duration-500 text-2xl float-right text-white`" />
                             </span>
                         </div>
-                        <ul class="bg-[#282c33]" v-if="menu.submenu && submenuIndex  === i && menuOpen">
-                            <li class="cursor-pointer px-16 py-3 hover:bg-[#262930] text-white" v-for="(sbmenu, id) in menu.submenuItems" :key="id">
+                        <!-- <ul class="bg-[#282c33]" v-if="menu.submenu && submenuIndex  === i && menuOpen">
+                            <li class="cursor-pointer bg-red-700 hover:bg-[#262930] text-white" v-for="(sbmenu, id) in menu.submenuItems" :key="id">
                                 <NuxtLink :to="sbmenu.link">{{ sbmenu.title }}</NuxtLink>
                             </li>
-                        </ul>
+                        </ul> -->
+                        <div class="bg-[#282c33] flex flex-col" v-if="menu.submenu && submenuIndex  === i && menuOpen">
+                          
+                            <NuxtLink  class="cursor-pointer  hover:bg-[#262930] text-white pl-14 py-3" v-for="(sbmenu, id) in menu.submenuItems" :key="id" :to="sbmenu.link">{{ sbmenu.title }}</NuxtLink>
+                            
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -42,13 +53,7 @@
    })
 
    const allMenu = [
-    {
-        title: 'Dashboard',
-        link: '/',
-        icon: 'mdi:monitor',
-        space: true,
-        submenu: false
-    },
+
     {
         title: 'Category',
         link: '/',
