@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-for="category in sliderProduct" :key="category.id">
+    <div v-for="category in sliderProduct" :key="category.id" class="my-10">
 
 
       <div class="text-center py-2 my-2 border border-slate-300 mb-4">
         <h2 class="text-2xl">{{ category.name }}</h2>
       </div>
-      <swiper :slidesPerView="4" :autoplay="{
+      <swiper :slidesPerView="4"   :navigation="true" :autoplay="{
         delay: 2500,
         disableOnInteraction: false,
       }" :breakpoints="{
@@ -23,10 +23,10 @@
     spaceBetween: 10,
   },
   '1024': {
-    slidesPerView: 5,
+    slidesPerView: 4,
     spaceBetween: 10,
   },
-}" :spaceBetween="4" :grabCursor="true" :modules="[SwiperAutoplay]" class="mySwiper">
+}" :spaceBetween="4" :grabCursor="true" :modules="[SwiperAutoplay,SwiperNavigation]" class="homeSwiper">
         <!-- Product Item -->
         <swiper-slide v-if="category?.product?.length > 0" v-for="(hProduct, idx) in category?.product.slice(0,8)" :key="idx" class="m-2">
           <div class="shadow-md shadow-gray-300 group rounded-md pb-4">
@@ -109,3 +109,15 @@ const wishlistHandler = (product_id) => {
 
 
 </script>
+<style>
+.homeSwiper .swiper-button-prev, .homeSwiper .swiper-button-next {
+    background: #79bc62 !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 50% !important;
+    color:#fff
+}
+.homeSwiper .swiper-button-prev:after, .homeSwiper .swiper-button-next:after {
+    font-size: small;
+}
+</style>
