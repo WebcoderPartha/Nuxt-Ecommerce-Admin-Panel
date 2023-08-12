@@ -12,14 +12,46 @@
         <table class="table-auto border-collapse w-full">
           <thead>
             <tr>
-              <th class="border">Order ID</th>
+              <th class="border">ID</th>
+              <th class="border">Name</th>
+              <th class="border">Total</th>
+              <th class="border">Method</th>
+              <th class="border">Txn ID</th>
+              <th class="border">Order Date</th>
+              <th class="border">Status</th>
               <th class="border">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(order, idx) in getAllOrder.todayOrders" :key="order.id">
+            <tr v-for="(order, idx) in getAllOrder?.todayOrders" :key="order.id">
               <td class="border">{{ order.tcn }}</td>
-
+              <td class="border">{{ order.user.fullname }}</td>
+              <td class="border">BDT {{ order.total_price }}</td>
+              <td class="border">{{ order.payment_method }}</td>
+              <td class="border">{{ order.tran_id }}</td>
+              <td class="border">{{ order.order_date }}</td>
+              <td class="text-center border border-slate-200">
+              <span
+                class="bg-yellow-400 text-sm px-2 py-1 rounded-md"
+                v-if="order.order_status === '1'"
+                >Pending</span
+              >
+              <span
+                class="bg-blue-400 text-sm px-2 py-1 rounded-md"
+                v-else-if="order.order_status === '2'"
+                >Processing</span
+              >
+              <span
+                class="bg-green-400 text-sm px-2 py-1 rounded-md"
+                v-else-if="order.order_status === '3'"
+                >Delivered</span
+              >
+              <span
+                class="bg-red-400 text-sm px-2 py-1 rounded-md text-white"
+                v-else
+                >Cancelled</span
+              >
+            </td>
               <td class="border">
                 <NuxtLink class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
                   :to="`/admin/`">
@@ -53,7 +85,7 @@
     
         if(status.value === "unauthenticated"){
             navigateTo("/admin/login")
-        }else if(userData.value.user.role !== 'admin'){
+        }else if(userData?.value?.user?.role !== 'admin'){
             navigateTo("/admin/login")
         }
        
@@ -75,7 +107,7 @@ const { data: orderData, refresh, pending } = await useFetch("/api/backend/order
     } 
 })
 getAllOrder.value = orderData
-total.value = getAllOrder.value.total
+total.value = getAllOrder?.value?.total
 //=========== Fetch All Product =============//
 
 //=============== Pagination Handler ================//
