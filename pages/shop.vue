@@ -18,7 +18,7 @@
             :class="` text-red-700 duration-300 cursor-pointer group-hover:right-4 text-2xl p-1 rounded-full bg-[#79bc62] hover:text-red-600 absolute top-8 -right-16`" />
           <Icon v-else @click="wishlistHandler(hProduct.id)" name="heroicons-solid:heart"
             :class="` text-white duration-300 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-8 -right-16`" />
-          <Icon @click="$emit('addToCart', hProduct.id)" name="ri:shopping-basket-fill"
+          <Icon @click="addToCartHandler(hProduct.id)" name="ri:shopping-basket-fill"
             :class="` text-white duration-500 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-20 -right-16`" />
           <NuxtLink :to="`/product/${hProduct.slug}`"
             class="group-hover:bottom-0 absolute -bottom-10 duration-300 bg-[#79bc62] w-full text-center py-2 text-white font-semibold">
@@ -108,6 +108,73 @@ const paginateHandler = async (skip) => {
   allProduct.value = pagiData
 }
 //============== Pagination Handler ================
+
+
+// Get Cart data from Local storage with client side
+const addcart = useCarts()
+if(process.client){
+    addcart.value = JSON.parse(localStorage.getItem('cart')) || []
+}
+// Get Cart data from Local storage with client side
+
+// =============== Add To cart ===============//
+const addToCartHandler =  async (id) => {
+    const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
+        method: 'GET'
+    })
+
+ 
+    const addData = {
+        id: cartProduct.value.id,
+        name: cartProduct.value.name,
+        price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
+        quantity: 1,
+        image: cartProduct.value.image,
+        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
+    }
+
+    const getCartData = JSON.parse(localStorage.getItem('cart')) || []
+    const foundCartItem = getCartData.find(item => item.id === id)
+
+    if(foundCartItem){
+
+        for (let i = 0; i < getCartData.length; i++) {
+            if (getCartData[i].id === foundCartItem.id) {
+                getCartData[i] = {
+                    id: foundCartItem.id,
+                    name: foundCartItem.name,
+                    price: foundCartItem.price,
+                    quantity: foundCartItem.quantity + 1,
+                    image: foundCartItem.image,
+                    total: foundCartItem.price * (foundCartItem.quantity + 1)
+                }
+                localStorage.setItem('cart', JSON.stringify(getCartData));
+            }
+        }
+        addcart.value =  JSON.parse(localStorage.getItem('cart'))
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
+
+    }else{
+        getCartData.push(addData)
+        localStorage.setItem('cart', JSON.stringify(getCartData))
+        addcart.value = JSON.parse(localStorage.getItem('cart'))
+        
+        // Cart Subtotal Count
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
+    } 
+}
+
+// =============== Add To cart ===============//
+
+
 
 </script>
 
