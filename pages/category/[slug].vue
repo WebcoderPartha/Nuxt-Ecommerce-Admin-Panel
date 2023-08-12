@@ -18,7 +18,7 @@
             :class="` text-red-700 duration-300 cursor-pointer group-hover:right-4 text-2xl p-1 rounded-full bg-[#79bc62] hover:text-red-600 absolute top-8 -right-16`" />
           <Icon v-else @click="wishlistHandler(hProduct.id)" name="heroicons-solid:heart"
             :class="` text-white duration-300 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-8 -right-16`" />
-          <Icon @click="$emit('addToCart', hProduct.id)" name="ri:shopping-basket-fill"
+          <Icon @click="addToCartHandler(hProduct.id)" name="ri:shopping-basket-fill"
             :class="` text-white duration-500 cursor-pointer group-hover:right-4 rounded-full bg-[#79bc62] p-1 text-2xl hover:text-red-600 absolute top-20 -right-16`" />
           <NuxtLink :to="`/product/${hProduct.slug}`"
             class="group-hover:bottom-0 absolute -bottom-10 duration-300 bg-[#79bc62] w-full text-center py-2 text-white font-semibold">
@@ -72,6 +72,25 @@
 definePageMeta({
   layout: 'ecommerce'
 })
+
+
+// ===========Sweet Alert Use =============//
+const { $swal } = useNuxtApp();
+    const Toast = $swal.mixin({
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: false,
+        didOpen: (toast) => {
+            toast.addEventListener("mouseenter", $swal.stopTimer);
+            toast.addEventListener("mouseleave", $swal.resumeTimer);
+        },
+    });
+// ===========Sweet Alert Use =============//
+
+const {data:authUser, status} = useAuth()
+
 // Category Slug
 const categorySlug = useRoute().params.slug
 
@@ -124,7 +143,7 @@ if (process.client) {
   addcart.value = JSON.parse(localStorage.getItem('cart')) || []
 }
 
-// =============== Add To cart ===============//
+// =============== Start Add To cart ===============//
 const addToCartHandler = async (id) => {
   const { data: cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
     method: 'GET'
@@ -166,7 +185,7 @@ const addToCartHandler = async (id) => {
   }
 }
 
-// =============== Add To cart ===============//
+// =============== End Add To cart ===============//
 
 
 </script>
