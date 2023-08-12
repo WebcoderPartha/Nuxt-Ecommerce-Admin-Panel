@@ -144,45 +144,57 @@ if (process.client) {
 }
 
 // =============== Start Add To cart ===============//
-const addToCartHandler = async (id) => {
-  const { data: cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
-    method: 'GET'
-  })
+const addToCartHandler =  async (id) => {
+    const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
+        method: 'GET'
+    })
 
-  const addData = {
-    id: cartProduct.value.id,
-    name: cartProduct.value.name,
-    price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
-    quantity: 1,
-    total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
-    image: cartProduct.value.image
-  }
-
-  const getCartData = JSON.parse(localStorage.getItem('cart')) || []
-  const foundCartItem = getCartData.find(item => item.id === id)
-
-  if (foundCartItem) {
-
-    for (let i = 0; i < getCartData.length; i++) {
-      if (getCartData[i].id === foundCartItem.id) {
-        getCartData[i] = {
-          id: foundCartItem.id,
-          name: foundCartItem.name,
-          price: foundCartItem.price,
-          quantity: foundCartItem.quantity + 1,
-          image: foundCartItem.image,
-          total: foundCartItem.price * (foundCartItem.quantity + 1)
-        }
-        localStorage.setItem('cart', JSON.stringify(getCartData));
-      }
+    const addData = {
+        id: cartProduct.value.id,
+        name: cartProduct.value.name,
+        price: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price,
+        quantity: 1,
+        image: cartProduct.value.image,
+        total: (cartProduct.value.discount === '0') ? cartProduct.value.regular_price : cartProduct.value.discount_price
     }
 
-  } else {
-    getCartData.push(addData)
-    localStorage.setItem('cart', JSON.stringify(getCartData))
-    addcart.value = JSON.parse(localStorage.getItem('cart'))
+    const getCartData = JSON.parse(localStorage.getItem('cart')) || []
+    const foundCartItem = getCartData.find(item => item.id === id)
 
-  }
+    if(foundCartItem){
+
+        for (let i = 0; i < getCartData.length; i++) {
+            if (getCartData[i].id === foundCartItem.id) {
+                getCartData[i] = {
+                    id: foundCartItem.id,
+                    name: foundCartItem.name,
+                    price: foundCartItem.price,
+                    quantity: foundCartItem.quantity + 1,
+                    image: foundCartItem.image,
+                    total: foundCartItem.price * (foundCartItem.quantity + 1)
+                }
+                localStorage.setItem('cart', JSON.stringify(getCartData));
+            }
+        }
+        addcart.value =  JSON.parse(localStorage.getItem('cart'))
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
+
+    }else{
+        getCartData.push(addData)
+        localStorage.setItem('cart', JSON.stringify(getCartData))
+        addcart.value = JSON.parse(localStorage.getItem('cart'))
+        
+        // Cart Subtotal Count
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
+    } 
 }
 // =============== End Add To cart ===============//
 
@@ -212,8 +224,6 @@ if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated
             icon: "success",
             title: rmvWishlist.value.success
         });
-        sliderPtRefresh()
-        allProductRefresh()
 
     } else {
         // Added to wishlist
@@ -228,8 +238,6 @@ if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated
             icon: "success",
             title: "Added to wishlist",
         });
-        sliderPtRefresh()
-        allProductRefresh()
 
     }
 

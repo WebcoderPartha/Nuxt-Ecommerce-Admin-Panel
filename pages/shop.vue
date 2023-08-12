@@ -138,7 +138,7 @@ const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
     })
- 
+
     const addData = {
         id: cartProduct.value.id,
         name: cartProduct.value.name,
@@ -186,7 +186,6 @@ const addToCartHandler =  async (id) => {
         localStorage.setItem('subtotal', JSON.stringify(price))
     } 
 }
-
 // =============== End Add To cart ===============//
 
 // =============== Start Add Wishlist ============== //
@@ -215,9 +214,7 @@ if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated
             icon: "success",
             title: rmvWishlist.value.success
         });
-        sliderPtRefresh()
-        allProductRefresh()
-
+        
     } else {
         // Added to wishlist
         const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
@@ -231,8 +228,6 @@ if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated
             icon: "success",
             title: "Added to wishlist",
         });
-        sliderPtRefresh()
-        allProductRefresh()
 
     }
 
