@@ -23,7 +23,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(order, idx) in getAllOrder?.todayOrders" :key="order.id">
+              <tr v-for="(order, idx) in getTodayOrder?.todayOrders" :key="order.id">
                 <td class="border">{{ order.tcn }}</td>
                 <td class="border">{{ order.user.fullname }}</td>
                 <td class="border">BDT {{ order.total_price }}</td>
@@ -70,14 +70,14 @@
   
       </div>
       <div class="pt-3">
-        <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
+        <!-- <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" /> -->
       </div>
     </div>
   </template>
   
   <script setup>
       useHead({
-          title: 'All Order'
+          title: 'Toa Order'
       })
       const {status, data:userData} = useAuth() 
       // Admin 
@@ -98,28 +98,28 @@
   const skip  = ref(0)
   
   //=========== Fetch All Product =============//
-  const getAllOrder = useState(() => []);
-  const { data: orderData, refresh, pending } = await useFetch("/api/backend/order/getallorder", { 
+  const getTodayOrder = useState(() => []);
+  const { data: orderData, refresh, pending } = await useFetch("/api/backend/order/gettodayorder", { 
       method: "POST",
       body: {
           skip:skip.value,
           take: perPage.value
       } 
   })
-  getAllOrder.value = orderData
-  total.value = getAllOrder?.value?.total
+  getTodayOrder.value = orderData
+  total.value = getTodayOrder?.value?.total
   //=========== Fetch All Product =============//
   
   //=============== Pagination Handler ================//
   const paginateHandler = async (skip) => {
-    const { data: PgorderData, refresh, pending } = await useFetch("/api/backend/order/getallorder", { 
+    const { data: pagiTodayorder, refresh, pending } = await useFetch("/api/backend/order/gettodayorder", { 
       method: "POST",
       body: {
           skip:skip,
           take: perPage.value
       } 
   })
-  getAllOrder.value = PgorderData
+  getTodayOrder.value = pagiTodayorder
   
   }
   //=============== Pagination Handler ================//

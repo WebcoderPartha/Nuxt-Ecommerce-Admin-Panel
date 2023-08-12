@@ -15,6 +15,7 @@ export default defineEventHandler( async (event) => {
     }
 
     const prisma = new PrismaClient()
+    const getBody = await readBody(event)
 
     // Today date format
     const todayOrderDate = moment().format('DD-MMM-Y')
@@ -25,11 +26,14 @@ export default defineEventHandler( async (event) => {
            order_date: todayOrderDate
         },
         include: {
-            orderdetail: true
+            orderdetail: true,
+            user: true
         },
         orderBy: {
             id: "desc"
-        }
+        },
+        take: getBody?.take,
+        skip: getBody?.skip, 
     })
 
     // Today Order total Count
