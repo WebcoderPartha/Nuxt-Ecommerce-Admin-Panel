@@ -12,11 +12,13 @@
         <WishlistProduct :wishlist="getWishlistProduct" @rmvWishlist="rmvWishListHandler" />
       <!-- End Product Item -->
     </div>
-    <h3 class="text-center my-4">You don't have wishlist product.</h3>
+    <h3 v-else class="text-center my-4">You don't have wishlist product.</h3>
+  
   </div>
 </template>
 
 <script setup>
+
     useHead({
     title: "Wishlist",
     });

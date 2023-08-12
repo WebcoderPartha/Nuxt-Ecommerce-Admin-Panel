@@ -10,7 +10,7 @@
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Customer</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+            <div class="text-4xl font-semibold pt-4">{{totalCustomer}}</div>
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Total Order</h3>
@@ -42,6 +42,17 @@
         }
        
     })
+
+    // ================= Total Customer ============= //
+    const totalCustomer = ref(0)
+    const {data:customer} = await useFetch("/api/backend/dashboard/countcustomer", {
+        method: "GET"
+    })
+    totalCustomer.value = customer.value.customerCount
+    // ================= Total Customer ============= //
+
+  
+
     
 
 </script>
