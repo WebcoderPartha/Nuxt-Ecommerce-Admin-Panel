@@ -184,8 +184,66 @@ const addToCartHandler = async (id) => {
 
   }
 }
-
 // =============== End Add To cart ===============//
+
+// =============== Start Add Wishlist ============== //
+const wishlistHandler = async (product_id) => {
+
+if(authUser?.value?.user?.role === 'customer' && status.value === "authenticated"){
+
+    // Find exist wishlist product
+    const {data:existWishList} = await useFetch('/api/frontend/wishlist/getwishlistbyid',{
+        method: 'POST',
+        body: {
+            product_id: product_id
+        }
+    })
+
+    // Check exist wishlist
+    if (existWishList.value) {
+        const {data:rmvWishlist} = await useFetch('/api/frontend/wishlist/removewishlist', {
+            method: "DELETE", 
+            body: {
+                product_id: product_id
+            }
+        })
+          // Sweet toast alert 
+        Toast.fire({
+            icon: "success",
+            title: rmvWishlist.value.success
+        });
+        sliderPtRefresh()
+        allProductRefresh()
+
+    } else {
+        // Added to wishlist
+        const {data:wishdata} = await useFetch('/api/frontend/wishlist/insert', {
+            method: 'POST',
+            body: {
+                product_id: product_id
+            }
+        })
+        // Sweet toast alert
+        Toast.fire({
+            icon: "success",
+            title: "Added to wishlist",
+        });
+        sliderPtRefresh()
+        allProductRefresh()
+
+    }
+
+}else{
+    Toast.fire({
+        icon: "warning",
+        title: "Please login!",
+    });
+    navigateTo('/auth/login')
+}
+
+}
+// =============== End Add Wishlist ============== //
+
 
 
 </script>

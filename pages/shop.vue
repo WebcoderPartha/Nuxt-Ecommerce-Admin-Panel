@@ -133,7 +133,7 @@ if(process.client){
 }
 // Get Cart data from Local storage with client side
 
-// =============== Add To cart ===============//
+// =============== Start Add To cart ===============//
 const addToCartHandler =  async (id) => {
     const {data:cartProduct } = await useFetch(`/api/frontend/product/${id}`, {
         method: 'GET'
@@ -187,7 +187,7 @@ const addToCartHandler =  async (id) => {
     } 
 }
 
-// =============== Add To cart ===============//
+// =============== End Add To cart ===============//
 
 // =============== Start Add Wishlist ============== //
 const wishlistHandler = async (product_id) => {
