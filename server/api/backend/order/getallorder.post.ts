@@ -30,15 +30,15 @@ export default defineEventHandler( async (event) => {
     })
 
     // total Order Count
-    const todayOrderCount = await prisma.order.aggregate({
+    const allOrderCount = await prisma.order.aggregate({
         _count: {
            tcn: true
         }
     })
 
     return {
-        todayOrders: allOrder,
-        total: todayOrderCount._count.tcn
+        allOrder: allOrder,
+        total: allOrderCount._count.tcn
     }
 
 })

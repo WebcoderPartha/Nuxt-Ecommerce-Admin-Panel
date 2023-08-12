@@ -23,7 +23,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(order, idx) in getAllOrder?.todayOrders" :key="order.id">
+            <tr v-for="(order, idx) in getAllOrder?.allOrder" :key="order.id">
               <td class="border">{{ order.tcn }}</td>
               <td class="border">{{ order.user.fullname }}</td>
               <td class="border">BDT {{ order.total_price }}</td>
