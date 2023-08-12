@@ -1,5 +1,4 @@
 
-import moment from 'moment'
 import {Prisma, PrismaClient} from '@prisma/client'
 import {getServerSession} from '#auth'
 
@@ -16,14 +15,8 @@ export default defineEventHandler( async (event) => {
 
     const prisma = new PrismaClient()
 
-    // Today date format
-    const todayOrderDate = moment().format('DD-MMM-Y')
-
-    // Get Today Orders
-    const todayOrder = await prisma.order.findMany({
-        where: {
-           order_date: todayOrderDate
-        },
+    // Get All Orders
+    const allOrder = await prisma.order.findMany({
         include: {
             orderdetail: true
         },
@@ -32,18 +25,15 @@ export default defineEventHandler( async (event) => {
         }
     })
 
-    // Today Order total Count
+    // total Order Count
     const todayOrderCount = await prisma.order.aggregate({
-        where: {
-           order_date: todayOrderDate
-        },
         _count: {
            tcn: true
         }
     })
 
     return {
-        todayOrders: todayOrder,
+        todayOrders: allOrder,
         total: todayOrderCount._count.tcn
     }
 
