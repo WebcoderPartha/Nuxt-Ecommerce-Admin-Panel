@@ -14,11 +14,15 @@ export default defineEventHandler( async (event) => {
     }
 
     const prisma = new PrismaClient()
+    const getBody = await readBody(event)
 
     // Get All Orders
     const allOrder = await prisma.order.findMany({
+        take: getBody?.take,
+        skip: getBody?.skip, 
         include: {
-            orderdetail: true
+            orderdetail: true,
+            user: true
         },
         orderBy: {
             id: "desc"
