@@ -12,7 +12,7 @@
       }" :breakpoints="{
   '320': {
     slidesPerView: 1,
-    spaceBetween: 4,
+    spaceBetween: 10,
   },
   '640': {
     slidesPerView: 2,
@@ -24,7 +24,7 @@
   },
   '1024': {
     slidesPerView: 4,
-    spaceBetween: 10,
+    spaceBetween: 6,
   },
 }" :spaceBetween="4" :grabCursor="true" :modules="[SwiperAutoplay,SwiperNavigation]" class="homeSwiper">
         <!-- Product Item -->

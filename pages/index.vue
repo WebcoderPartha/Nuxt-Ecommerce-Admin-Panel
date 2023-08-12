@@ -12,8 +12,14 @@
                 <li class="py-3 border-b" v-for="(hmcat,idx) in homeCategories" :key="idx">
                     <NuxtLink :to="`/category/${hmcat.slug}`">
                         <div class="flex items-center justify-between">
-                        <span class="text-sm">{{ hmcat.name }}</span>
-                        <Icon name="fa6-solid:arrow-right" />
+                        <div>
+                            <div class="flex gap-3">
+                                <nuxt-img class="w-6 h-6" :src="hmcat.image" />
+                                <span class="text-sm">{{ hmcat.name }}</span>
+                            </div>
+                        </div>
+                        <!-- <Icon name="fa6-solid:arrow-right" /> -->
+                        <span>❯</span>
                     </div>
                     </NuxtLink>
                 </li>
