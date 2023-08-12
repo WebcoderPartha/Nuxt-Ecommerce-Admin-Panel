@@ -49,11 +49,9 @@
 
 <script setup>
 
-
 definePageMeta({
     layout:'ecommerce'
 })
-
 
 // ===========Sweet Alert Use =============//
     const { $swal } = useNuxtApp();
@@ -69,7 +67,6 @@ definePageMeta({
         },
     });
 // ===========Sweet Alert Use =============//
-
 
 const {data:authUser, status} = useAuth()
 
@@ -128,7 +125,6 @@ const addToCartHandler =  async (id) => {
         method: 'GET'
     })
 
- 
     const addData = {
         id: cartProduct.value.id,
         name: cartProduct.value.name,
@@ -233,9 +229,9 @@ const wishlistHandler = async (product_id) => {
         });
         navigateTo('/auth/login')
     }
-   
+      
 }
-
+// =============== Add Wishlist ============== //
 
 </script>
 
