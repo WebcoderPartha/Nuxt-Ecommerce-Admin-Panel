@@ -48,8 +48,7 @@
                 Product Detail</NuxtLink>
             </div>
             <div class="text-center flex flex-col gap-1 mt-2">
-              <h2 class="text-sm font-semibold h-14 text-neutral-500 px-2">{{ hProduct.name.substring(0, 50) + '...' }}
-              </h2>
+              <h2 class="text-sm font-semibold h-14 text-neutral-500 px-2 hover:text-[#79bc62]"><NuxtLink :to="`/product/${hProduct.slug}`">{{ hProduct.name.substring(0, 50) + '...' }}</NuxtLink></h2>
               <div class="flex flex-col gap-2" v-if="hProduct.discount !== '0'">
                 <!-- <span class="line-through text-red-600 text-sm">BDT {{ hProduct.regular_price }}</span> BDT {{ hProduct.discount_price }} -->
                 <span class="font-extrabold text-neutral-600">BDT {{ hProduct.regular_price }}</span>
