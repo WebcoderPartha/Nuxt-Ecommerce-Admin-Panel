@@ -1,8 +1,8 @@
 <template>
     <div class=" grid grid-cols-1 md:grid-cols-4 items-center gap-6 text-center my-8 mx-8">
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Category</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+            <h3 class="text-xl font-semibold pt-4">Today Order</h3>
+            <div class="text-4xl font-semibold pt-4">{{ todayOrder }}</div>
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Product</h3>
@@ -65,6 +65,14 @@
         method: "GET"
     })
     totalOrder.value = order.value.orderCount
+    // ================= Total Order ============= //
+
+    // ================= Today Total Order ============= //
+    const todayOrder = ref(0)
+    const {data:todayCount} = await useFetch("/api/backend/dashboard/counttodayorder", {
+        method: "GET"
+    })
+    todayOrder.value = todayCount.value.todayOrderCount
     // ================= Total Order ============= //
 
     
