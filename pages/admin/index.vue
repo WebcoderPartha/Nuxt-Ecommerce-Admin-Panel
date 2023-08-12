@@ -6,15 +6,15 @@
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Product</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+            <div class="text-4xl font-semibold pt-4">{{totalProduct}}</div>
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Customer</h3>
             <div class="text-4xl font-semibold pt-4">{{totalCustomer}}</div>
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
-            <h3 class="text-xl font-semibold pt-4">Total Total Order</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+            <h3 class="text-xl font-semibold pt-4"> Order</h3>
+            <div class="text-4xl font-semibold pt-4">{{ totalOrder }}</div>
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Earn</h3>
@@ -51,7 +51,21 @@
     totalCustomer.value = customer.value.customerCount
     // ================= Total Customer ============= //
 
-  
+    // ================= Total Product ============= //
+    const totalProduct = ref(0)
+    const {data:prodouct} = await useFetch("/api/backend/dashboard/countproduct", {
+        method: "GET"
+    })
+    totalProduct.value = prodouct.value.productCount
+    // ================= Total Product ============= //
+
+    // ================= Total Product ============= //
+    const totalOrder = ref(0)
+    const {data:order} = await useFetch("/api/backend/dashboard/countorder", {
+        method: "GET"
+    })
+    totalOrder.value = order.value.orderCount
+    // ================= Total Product ============= //
 
     
 
