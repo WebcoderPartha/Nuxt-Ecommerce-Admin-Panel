@@ -95,6 +95,24 @@
                 link: '/admin/product',
             }
         ]
+    },
+    {
+        title: 'Order',
+        link: '/',
+        icon: 'mdi:monitor',
+        plusIcon: 'ic:round-plus',
+        minusIcon: 'ic:round-minus',
+        submenu: true,
+        submenuItems: [
+            {
+                title: 'Today Order',
+                link: '/admin/order/today',
+            },
+            {
+                title: 'All Order',
+                link: '/admin/order/all',
+            }
+        ]
     }
    ]
 
