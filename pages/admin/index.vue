@@ -59,13 +59,13 @@
     totalProduct.value = prodouct.value.productCount
     // ================= Total Product ============= //
 
-    // ================= Total Product ============= //
+    // ================= Total Order ============= //
     const totalOrder = ref(0)
     const {data:order} = await useFetch("/api/backend/dashboard/countorder", {
         method: "GET"
     })
     totalOrder.value = order.value.orderCount
-    // ================= Total Product ============= //
+    // ================= Total Order ============= //
 
     
 
