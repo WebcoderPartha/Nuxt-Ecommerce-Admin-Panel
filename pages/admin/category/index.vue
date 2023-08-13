@@ -29,7 +29,7 @@
                                     <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white">
                                         <Icon name="fa6-regular:pen-to-square" @click="getIdData(category.id)" />
                                     </button>&nbsp;
-                                    <button @click="openDeletePopup"
+                                    <button @click="openDeletePopup(category.id)"
                                         class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white">
                                         <Icon name="fa6-regular:trash-can" />
                                     </button>
@@ -73,7 +73,7 @@
             <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
         </div>
         <!-- Delete Popup Message -->
-        <BankendPopupDelete />
+        <BankendPopupDelete @delete="deleteHander" :id="categoryId" />
         <!-- / Delete Popup Message -->
     </div>
 </template>
@@ -278,8 +278,29 @@ const updateData = async (e) => {
 // ================== Update Category ================
 
 const deletePopupVisible = useDeletePopup()
-const openDeletePopup = () => {
+const categoryId = useState(()=> 0)
+
+const openDeletePopup = (id) => {
     deletePopupVisible.value = true
+    categoryId.value = id
+}
+
+const deleteHander = async () => {
+    const { data: deleteData } = await useFetch('/api/category/category', {
+        method: 'DELETE',
+        body: {
+            id: categoryId.value
+        }
+    })
+
+    // Notification
+    Toast.fire({
+        icon: "success",
+        title: deleteData.value.success
+    });
+    // Reload category
+    refresh()
+    deletePopupVisible.value = false
 }
 
 </script>
