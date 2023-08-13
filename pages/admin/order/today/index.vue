@@ -1,5 +1,5 @@
 <template>
-    <div class="items-center gap-6 text-center my-8 mx-8">
+    <div class="items-center gap-6 text-center my-8 mx-8 relative">
       <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 pb-5 text-white">
   
         <Head>
@@ -75,6 +75,7 @@
       <!-- Change Order Status -->
       <BankendOrderUpdateStatus :orderdata="getOrderData" v-if="isVisible" @updateOrderStatus="updateStatusHandler" />
       <!-- Change Order Status -->
+    
     </div>
   </template>
   
@@ -127,16 +128,20 @@
 
   const isVisible = useOrderStatusForm()
   const getOrderData = useState(()=> "")
+  //========== Fetching Order BY ID Data ==================
   const modelHandler = async (order_id) => {
-
     isVisible.value = true
     const {data:getorderbyid} = await useFetch("/api/backend/order/getorderbytcn",{
-    method: "POST"
+    method: "POST",
+      body: {
+        orderid: order_id
+      }
     })
     getOrderData.value = getorderbyid
-
   }
+  //========== Fetching Order BY ID Data ==================
 
+  //============= Update Order Status Handler ====================// 
   const updateStatusHandler = async (orderStatus) => {
     const {data:res} = await useFetch("/api/backend/order/updateorderstatus", {
       method: "PUT", 
@@ -148,6 +153,7 @@
     refresh()
     console.log(res.value)
   }
+  // ========== Update Order Status Handler ======================//
     
   </script>
   

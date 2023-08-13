@@ -1,5 +1,5 @@
 <template>
-    <div @click="bodyClose" id="closeWrapper" class=" fixed inset-0 bg-black flex justify-center items-center bg-opacity-25  backdrop-blur-sm">
+    <div @click="bodyClose" id="closeWrapper" class="justify-center items-center mr-4 duration-300 fixed inset-0 bg-black flex  bg-opacity-25  backdrop-blur-sm">
     
         <div class=" bg-gray-500 px-3 py-4 flex flex-col w-[600px]">
             <Icon @click="closeHandler" name="ri:close-fill" class="text-red-500 place-self-end cursor-pointer text-2xl" />
@@ -30,6 +30,7 @@
                 </form>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -56,12 +57,15 @@
             isVisible.value = false
         }  
     }
+
+    // ========== Update order status Handler ================
     const emit = defineEmits(['updateOrderStatus'])
     const updateOrderStatusHandler = () => {
         const status = order_status.value
         emit('updateOrderStatus', status)
         isVisible.value = false
     }
+    // ========== Update order status Handler ================
 
     
 </script>

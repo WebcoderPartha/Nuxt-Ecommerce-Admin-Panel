@@ -52,11 +52,11 @@
                 >Cancelled</span
               >
             </td>
-              <td class="border">
-                <NuxtLink class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
-                  :to="`/admin/`">
-                  <Icon name="fa6-regular:pen-to-square" />
-                </NuxtLink>&nbsp;
+              <td class="border flex gap-1 item-center justify-center">
+                <div @click="modelHandler(order.tcn)" class="px-2 py-1 cursor-pointer rounded-md bg-blue-400 text-white">
+                    Order Status
+                    <Icon name="fa6-regular:pen-to-square" />
+                </div>&nbsp;
                 <button
                   class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white">
                   <Icon name="fa6-regular:trash-can" />
@@ -72,6 +72,9 @@
     <div class="pt-3">
       <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
     </div>
+    <!-- Change Order Status -->
+         <BankendOrderUpdateStatus :orderdata="getOrderData" v-if="isVisible" @updateOrderStatus="updateStatusHandler" />
+    <!-- Change Order Status -->
   </div>
 </template>
 
@@ -120,9 +123,37 @@ const paginateHandler = async (skip) => {
     } 
 })
 getAllOrder.value = PgorderData
-
 }
 //=============== Pagination Handler ================//
+
+const isVisible = useOrderStatusForm()
+  const getOrderData = useState(()=> "")
+  //========== Fetching Order BY ID Data ==================
+  const modelHandler = async (order_id) => {
+    isVisible.value = true
+    const {data:getorderbyid} = await useFetch("/api/backend/order/getorderbytcn",{
+    method: "POST",
+      body: {
+        orderid: order_id
+      }
+    })
+    getOrderData.value = getorderbyid
+  }
+  //========== Fetching Order BY ID Data ==================
+
+  //============= Update Order Status Handler ====================// 
+  const updateStatusHandler = async (orderStatus) => {
+    const {data:res} = await useFetch("/api/backend/order/updateorderstatus", {
+      method: "PUT", 
+      body: {
+        order_status: orderStatus,
+        id: getOrderData.value.id
+      }
+    })
+    refresh()
+    console.log(res.value)
+  }
+  // ========== Update Order Status Handler ======================//
 
 
 </script>
