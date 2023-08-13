@@ -277,14 +277,17 @@ const updateData = async (e) => {
 }
 // ================== Update Category ================
 
+//================== Delete Popup ======================
 const deletePopupVisible = useDeletePopup()
-const categoryId = useState(()=> 0)
+const categoryId = useState(() => 0)
 
 const openDeletePopup = (id) => {
     deletePopupVisible.value = true
     categoryId.value = id
 }
+//================== Delete Popup ======================
 
+//============= Delete Category =====================//
 const deleteHander = async () => {
     const { data: deleteData } = await useFetch('/api/category/category', {
         method: 'DELETE',
@@ -293,15 +296,18 @@ const deleteHander = async () => {
         }
     })
 
-    // Notification
-    Toast.fire({
-        icon: "success",
-        title: deleteData.value.success
-    });
-    // Reload category
-    refresh()
+    const { data: categories, refresh, pending } = await useFetch("/api/category/getallcategory", {
+        method: "POST",
+        body: {
+            skip: skip.value,
+            take: perPage.value
+        }
+    })
+    getCategory.value = categories
+
     deletePopupVisible.value = false
 }
+//============= Delete Category =====================//
 
 </script>
 

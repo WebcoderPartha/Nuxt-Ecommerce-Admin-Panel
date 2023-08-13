@@ -13,7 +13,9 @@
 </template>
 
 <script setup>
+
 const deletePopupVisible = useDeletePopup()
+//============ Popup Close ==================//
 const bodyCloseHandler = (e) => {
     const deleteId = e.target.id
     if (deleteId === 'deleteWrapper') {
@@ -23,6 +25,7 @@ const bodyCloseHandler = (e) => {
 const buttonClose = () => {
     deletePopupVisible.value = false
 }
+//============ Popup Close ==================//
 
 const emit = defineEmits(['delete'])
 
