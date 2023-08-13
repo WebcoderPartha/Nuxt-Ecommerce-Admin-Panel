@@ -42,7 +42,7 @@ model order {
   payment_method String?
   order_date     String
   tran_id        String
-  order_status   String?
+  order_status   Int?
   user           user          @relation(fields: [userId], references: [id], map: "Order_userId_fkey")
   orderdetail    orderdetail[]
 

@@ -33,17 +33,17 @@
                 <td class="text-center border border-slate-200">
                 <span
                   class="bg-yellow-400 text-sm text-black px-2 py-1 rounded-md"
-                  v-if="order.order_status === '1'"
+                  v-if="order.order_status === 1"
                   >Pending</span
                 >
                 <span
                   class="bg-blue-400 text-sm px-2 py-1 rounded-md"
-                  v-else-if="order.order_status === '2'"
+                  v-else-if="order.order_status === 2"
                   >Processing</span
                 >
                 <span
                   class="bg-green-400 text-sm px-2 py-1 rounded-md"
-                  v-else-if="order.order_status === '3'"
+                  v-else-if="order.order_status === 3"
                   >Delivered</span
                 >
                 <span
@@ -73,7 +73,7 @@
         <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
       </div>
       <!-- Change Order Status -->
-      <BankendOrderUpdateStatus :orderdata="getOrderData" v-if="isVisible" />
+      <BankendOrderUpdateStatus :orderdata="getOrderData" v-if="isVisible" @updateOrderStatus="updateStatusHandler" />
       <!-- Change Order Status -->
     </div>
   </template>
@@ -135,6 +135,18 @@
     })
     getOrderData.value = getorderbyid
 
+  }
+
+  const updateStatusHandler = async (orderStatus) => {
+    const {data:res} = await useFetch("/api/backend/order/updateorderstatus", {
+      method: "PUT", 
+      body: {
+        order_status: orderStatus,
+        id: getOrderData.value.id
+      }
+    })
+    refresh()
+    console.log(res.value)
   }
     
   </script>

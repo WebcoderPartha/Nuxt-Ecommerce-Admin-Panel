@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
             payment_method: payment_method,
             order_date: order_date,
             tran_id: trans_id,
-            order_status: '1',
+            order_status: 1,
             orderdetail: {
                 create: details as any
             }

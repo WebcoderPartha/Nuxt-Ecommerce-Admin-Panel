@@ -38,17 +38,17 @@
             <td class="text-center border border-slate-200">
               <span
                 class="bg-yellow-400 text-sm px-2 py-1 rounded-md"
-                v-if="order.order_status === '1'"
+                v-if="order.order_status === 1"
                 >Pending</span
               >
               <span
                 class="bg-blue-400 text-sm px-2 py-1 rounded-md"
-                v-else-if="order.order_status === '2'"
+                v-else-if="order.order_status === 2"
                 >Processing</span
               >
               <span
                 class="bg-green-400 text-sm px-2 py-1 rounded-md"
-                v-else-if="order.order_status === '3'"
+                v-else-if="order.order_status === 3"
                 >Delivered</span
               >
               <span
