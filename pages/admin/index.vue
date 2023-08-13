@@ -75,14 +75,14 @@
     todayOrder.value = todayCount.value.todayOrderCount
     // ================= Total Order ============= //
 
-        // ================= Total Earn ============= //
-        const totalearnorder = ref(0)
+    // ================= Total Earn ============= //
+    const totalearnorder = ref(0)
     const {data:totalearn} = await useFetch("/api/backend/dashboard/totalearn", {
         method: "GET"
     })
     totalearnorder.value = totalearn.value.totalPrice
     console.log(totalearn.value)
-    // ================= Total Order ============= //
+    // ================= Total Earn ============= //
 
     
 
