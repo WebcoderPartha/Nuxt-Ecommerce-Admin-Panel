@@ -32,7 +32,7 @@
                 <td class="border">{{ order.order_date }}</td>
                 <td class="text-center border border-slate-200">
                 <span
-                  class="bg-yellow-400 text-sm px-2 py-1 rounded-md"
+                  class="bg-yellow-400 text-sm text-black px-2 py-1 rounded-md"
                   v-if="order.order_status === '1'"
                   >Pending</span
                 >
@@ -52,14 +52,14 @@
                   >Cancelled</span
                 >
               </td>
-                <td class="border">
-                  <NuxtLink class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white"
-                    :to="`/admin/`">
+                <td class="border flex gap-1 items-center justify-center">
+                  <div @click="modelHandler" class="px-2 py-1 cursor-pointer rounded-md bg-blue-400 text-white">
+                    Order Status
                     <Icon name="fa6-regular:pen-to-square" />
-                  </NuxtLink>&nbsp;
+                </div>&nbsp;
                   <button
-                    class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white">
-                    <Icon name="fa6-regular:trash-can" />
+                    class="px-2 py-1 cursor-pointer rounded-md bg-orange-600 text-white">
+                    <Icon name="entypo:eye" />
                   </button>
                 </td>
               </tr>
@@ -70,8 +70,11 @@
   
       </div>
       <div class="pt-3">
-        <!-- <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" /> -->
+        <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
       </div>
+      <!-- Change Order Status -->
+      <BankendOrderUpdateStatus v-if="isVisible" />
+      <!-- Change Order Status -->
     </div>
   </template>
   
@@ -90,9 +93,7 @@
           }
          
       })
-  
-  
-      
+       
   const total = ref(0)
   const perPage = ref(10)
   const skip  = ref(0)
@@ -123,6 +124,11 @@
   
   }
   //=============== Pagination Handler ================//
+
+  const isVisible = useOrderStatusForm()
+  const modelHandler = () => {
+    isVisible.value = true
+  }
   
   
   </script>

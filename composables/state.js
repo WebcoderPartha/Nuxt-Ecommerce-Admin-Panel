@@ -38,3 +38,6 @@ export const useHomeLoader = () => {
     return useState(()=>  false)
 }
 
+export const useOrderStatusForm = () => {
+    return useState(()=>  false)
+}
