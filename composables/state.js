@@ -41,3 +41,7 @@ export const useHomeLoader = () => {
 export const useOrderStatusForm = () => {
     return useState(()=>  false)
 }
+
+export const useDeletePopup = () => {
+    return useState(()=>  false)
+}

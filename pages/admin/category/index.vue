@@ -29,7 +29,7 @@
                                     <button class="px-2 py-1 cursor-pointer rounded-md bg-yellow-400 text-white">
                                         <Icon name="fa6-regular:pen-to-square" @click="getIdData(category.id)" />
                                     </button>&nbsp;
-                                    <button @click="deleteData(category.id)"
+                                    <button @click="openDeletePopup"
                                         class="px-2 py-1 cursor-pointer rounded-md bg-red-600 text-white">
                                         <Icon name="fa6-regular:trash-can" />
                                     </button>
@@ -276,6 +276,12 @@ const updateData = async (e) => {
     }
 }
 // ================== Update Category ================
+
+const deletePopupVisible = useDeletePopup()
+const openDeletePopup = () => {
+    deletePopupVisible.value = true
+}
+
 </script>
 
 <style lang="scss" scoped></style>
