@@ -21,8 +21,6 @@ export default defineEventHandler( async (event) => {
         where: {
            tcn: getBody?.orderid
         },
-       
-   
     })
 
     return getOrderById

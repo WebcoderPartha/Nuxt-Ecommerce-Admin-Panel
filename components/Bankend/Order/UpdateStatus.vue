@@ -5,7 +5,7 @@
             <div class="">
                 <h2>Update Order Status</h2>
                 <form action="">
-                    
+                    {{ orderdata }}
                 </form>
             </div>
         </div>
@@ -13,15 +13,19 @@
 </template>
 
 <script setup>
+    const {orderdata} = defineProps(['orderdata'])
     const isVisible = useOrderStatusForm()
     const closeHandler = () => {
         isVisible.value = false
     }
+
     const bodyClose = (e) => {
         if(e.target.id === 'closeWrapper'){
             isVisible.value = false
         }  
     }
+
+    
 </script>
 
 <style lang="scss" scoped></style>

@@ -53,7 +53,7 @@
                 >
               </td>
                 <td class="border flex gap-1 items-center justify-center">
-                  <div @click="modelHandler" class="px-2 py-1 cursor-pointer rounded-md bg-blue-400 text-white">
+                  <div @click="modelHandler(order.tcn)" class="px-2 py-1 cursor-pointer rounded-md bg-blue-400 text-white">
                     Order Status
                     <Icon name="fa6-regular:pen-to-square" />
                 </div>&nbsp;
@@ -73,7 +73,7 @@
         <BankendPagination :per_page="perPage" :total="total" @paginate="paginateHandler" />
       </div>
       <!-- Change Order Status -->
-      <BankendOrderUpdateStatus v-if="isVisible" />
+      <BankendOrderUpdateStatus :orderdata="getOrderData" v-if="isVisible" />
       <!-- Change Order Status -->
     </div>
   </template>
@@ -126,11 +126,17 @@
   //=============== Pagination Handler ================//
 
   const isVisible = useOrderStatusForm()
-  const modelHandler = () => {
+  const getOrderData = ref('')
+  const modelHandler = async (order_id) => {
+
     isVisible.value = true
+    const {data:getorderbyid} = await useFetch("/api/backend/order/getorderbytcn",{
+    method: "POST"
+    })
+    getOrderData.value = getorderbyid
+
   }
-  
-  
+    
   </script>
   
   <style lang="scss" scoped>
