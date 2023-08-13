@@ -9,7 +9,6 @@
                 <form @submit.prevent="updateOrderStatusHandler">
                     <h2>Customer Name: {{ orderdata?.user?.fullname }}</h2>
                     <h4>Order ID : {{ orderdata?.tcn }}</h4>
-                    <h4>Order ID : {{ orderdata?.order_status }}</h4>
                     <div class=" flex-col flex py-2">
                          <label for="status" class="text-xl font-semibold">Order Status</label>
                          

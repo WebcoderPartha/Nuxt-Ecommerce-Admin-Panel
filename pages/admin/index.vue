@@ -18,7 +18,7 @@
         </div>
         <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 h-32 text-white">
             <h3 class="text-xl font-semibold pt-4">Total Earn</h3>
-            <div class="text-4xl font-semibold pt-4">35</div>
+            <div class="text-4xl font-semibold pt-4">BDT {{ totalearnorder }}</div>
       
         </div>
     
@@ -73,6 +73,15 @@
         method: "GET"
     })
     todayOrder.value = todayCount.value.todayOrderCount
+    // ================= Total Order ============= //
+
+        // ================= Total Earn ============= //
+        const totalearnorder = ref(0)
+    const {data:totalearn} = await useFetch("/api/backend/dashboard/totalearn", {
+        method: "GET"
+    })
+    totalearnorder.value = totalearn.value.totalPrice
+    console.log(totalearn.value)
     // ================= Total Order ============= //
 
     
