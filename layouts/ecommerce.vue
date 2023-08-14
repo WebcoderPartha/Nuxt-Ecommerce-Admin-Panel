@@ -2,10 +2,11 @@
     <div class="overflow-hidden">
         <Header />
         <MobileHeader />
-        <div class="main mt-[13rem] md:mt-32 py-4">
+        <div class="main mt-24 md:mt-32 py-4">
             <slot/>
         </div>
         <Footer/>
+        <MobileMenuContent />
     </div>
 </template>
 
