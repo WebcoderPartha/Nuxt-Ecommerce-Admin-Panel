@@ -1,15 +1,15 @@
 <template>
-    <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full z-10 md:hidden px-2">
+    <div class="bg-white shadow-sm shadow-slate-200 fixed top-0 w-full z-10 md:hidden px-4 py-2">
                 <header class="">
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mb-2">
                     
-                        <div>
+                        <div class="flex gap-4 items-center justify-center">
+                            <div class="bg-[#79bc62] text-white px-1 rounded-sm">
+                                <Icon class="text-2xl" name="ic:baseline-menu" />
+                            </div>
                             <NuxtLink to="/">
                                 <img class="mx-auto w-24" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" alt="">
                             </NuxtLink>
-                        </div>
-                        <div class="md:w-[500px] w-[200px] mx-auto mt-3 md:mt-0">
-                            <input  type="text" class="bg-gray-100 text-gray-400 px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
                         </div>
                         <div class="flex gap-2 justify-center item-center">
                             <NuxtLink to="/wishlist" class="h-full mt-2">
@@ -33,6 +33,9 @@
                             <Icon @click="logoutHander" v-if="isAuthenticated" name="ph:sign-out-fill" class="text-xl mt-3 cursor-pointer" />
                         </div>
                     </div>
+                    <div class="md:w-[500px] w-full mx-auto">
+                            <input  type="text" class="bg-gray-100 text-gray-400 px-3 py-2 rounded-md w-full focus:outline-none" placeholder="Search">
+                        </div>
                     
                    
                 </header>    
