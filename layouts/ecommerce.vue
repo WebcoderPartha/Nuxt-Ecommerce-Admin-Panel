@@ -1,6 +1,7 @@
 <template>
     <div class="overflow-hidden">
         <Header />
+        <MobileHeader />
         <div class="main mt-[13rem] md:mt-32 py-4">
             <slot/>
         </div>
