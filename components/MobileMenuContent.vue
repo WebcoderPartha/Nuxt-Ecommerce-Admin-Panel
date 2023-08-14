@@ -7,8 +7,11 @@
             class="mt-1 text-black text-2xl cursor-pointer"
           />
         </div>
-        <div class=" grid grid-cols-2 gap-3">
-            
+        <div class=" grid grid-cols-3 gap-4 py-8">
+            <div class="flex flex-col gap-2" v-for="category in mobileCategories" :key="category.id">
+                <nuxt-img :src="category.image" class="w-10 place-self-center" />
+                <p class="text-center text-sm">{{ category.name }}</p>
+            </div>
         </div>
     </div>
 </template>
