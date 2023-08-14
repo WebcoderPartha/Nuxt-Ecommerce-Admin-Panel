@@ -1,5 +1,5 @@
 <template>
-    <div class=" md:hidden fixed inset-0 w-72 z-40 bg-[#f3fee3] shadow-md shadow-gray-200 px-6 py-6">
+    <div :class="`${isVisible === true ? '-left-0' : '-left-72'} md:hidden fixed inset-0 w-72 z-40 duration-300 bg-[#f3fee3] shadow-md shadow-gray-200 px-6 py-6`">
         <div class="flex gap-3 justify-between">
             <h2 class="text-xl font-semibold">Categories</h2>
             <Icon @click="removeCart(index)"
@@ -8,10 +8,10 @@
           />
         </div>
         <div class=" grid grid-cols-3 gap-4 py-8">
-            <div class="flex flex-col gap-2" v-for="category in mobileCategories" :key="category.id">
+            <NuxtLink :to="`/category/${category.slug}`" class="flex flex-col gap-2" v-for="category in mobileCategories" :key="category.id">
                 <nuxt-img :src="category.image" class="w-10 place-self-center" />
                 <p class="text-center text-sm">{{ category.name }}</p>
-            </div>
+            </NuxtLink>
         </div>
     </div>
 </template>
@@ -23,6 +23,8 @@ const mobileCategories = useState(() => [])
 const {data:res} = await useFetch('/api/frontend/category/category', {method: 'GET'})
 mobileCategories.value = res
 // Fetch Category
+const isVisible = mobileMenu()
+
 
 </script>
 

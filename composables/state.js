@@ -45,3 +45,7 @@ export const useOrderStatusForm = () => {
 export const useDeletePopup = () => {
     return useState(()=>  false)
 }
+
+export const mobileMenu = () => {
+    return useState(()=>  false)
+}

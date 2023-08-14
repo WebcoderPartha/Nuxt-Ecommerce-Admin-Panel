@@ -5,7 +5,7 @@
 
                 <div class="flex gap-4 items-center justify-center">
                     <div class="bg-[#79bc62] cursor-pointer text-white px-1 rounded-sm">
-                        <Icon class="text-2xl" name="ic:baseline-menu" />
+                        <Icon @click="mobileMenuOpen" class="text-2xl" name="ic:baseline-menu" />
                     </div>
                     <NuxtLink to="/">
                         <img class="mx-auto w-24"
@@ -80,8 +80,14 @@ const logoutHander = async () => {
         title: "Logout successfully!"
     });
 }
-
 const addCart = useCarts()
+
+const isVisible = mobileMenu()
+const mobileMenuOpen = () => {
+    isVisible.value = true
+}
+
+
 </script>
 
 <style lang="scss" scoped></style>
