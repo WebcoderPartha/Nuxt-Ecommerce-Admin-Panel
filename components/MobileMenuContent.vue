@@ -1,8 +1,9 @@
 <template>
-    <div :class="`${isVisible === true ? '-left-0' : '-left-72'} md:hidden fixed inset-0 w-72 z-40 duration-300 bg-[#f3fee3] shadow-md shadow-gray-200 px-6 py-6`">
+    <div @click="closeOutside" id="mobileMenu" :class="`${isVisible === true ? '-left-0' : '-left-[28rem]'} z-50  md:hidden fixed inset-0 w-full duration-300`">
+        <div :class="` w-72 h-screen z-40  bg-[#f3fee3] shadow-md shadow-gray-200 px-6 py-6`">
         <div class="flex gap-3 justify-between">
             <h2 class="text-xl font-semibold">Categories</h2>
-            <Icon @click="removeCart(index)"
+            <Icon @click="closeButton"
             name="material-symbols:close"
             class="mt-1 text-black text-2xl cursor-pointer"
           />
@@ -14,6 +15,7 @@
             </NuxtLink>
         </div>
     </div>
+    </div>
 </template>
 
 <script setup>
@@ -24,6 +26,17 @@ const {data:res} = await useFetch('/api/frontend/category/category', {method: 'G
 mobileCategories.value = res
 // Fetch Category
 const isVisible = mobileMenu()
+const closeButton = () => {
+    isVisible.value = false
+}
+const closeOutside = (e) => {
+  
+    const id = e.target.id
+    if(id === 'mobileMenu'){
+        isVisible.value = false
+    }
+}
+
 
 
 </script>
