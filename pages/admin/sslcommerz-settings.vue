@@ -11,14 +11,29 @@
                 <div class="mb-2 flex flex-col gap-2">
                     <label for="">Api Sicret Store Key</label>
 
-                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none" v-model="apiKey"
-                        placeholder="Api store id" />
+
+                    <div class="flex items-center justify-center relative">
+                        <input type="password"
+                            class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none" id="storeId"
+                            v-model="apiKey" placeholder="Api store id" />
+                        <Icon class="text-2xl absolute right-[150px] cursor-pointer text-green-600" v-if="isStoreId"
+                            @click="storeIdHandler" name="entypo:eye" />
+                        <Icon class="text-2xl absolute right-[150px] cursor-pointer" v-else @click="storeIdHandler"
+                            name="entypo:eye-with-line" />
+                    </div>
                 </div>
 
                 <div class="mb-2 flex flex-col gap-2">
                     <label for="">Store Password</label>
-                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none" v-model="password"
-                        placeholder="Store password" />
+                    <div class="flex items-center justify-center relative">
+                        <input type="password"
+                            class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none"
+                            v-model="password" placeholder="Store password" id="storePass" />
+                        <Icon class="text-2xl absolute right-[150px] cursor-pointer text-green-600" v-if="isStorePassword"
+                            @click="passwordHandler" name="entypo:eye" />
+                        <Icon class="text-2xl absolute right-[150px] cursor-pointer" v-else @click="passwordHandler"
+                            name="entypo:eye-with-line" />
+                    </div>
                 </div>
 
 
@@ -77,24 +92,54 @@ password.value = categories.value.store_password
 //=================== Get SSLCommerz ================== //
 
 //=================== Update SSLCommerz ================== //
-    const updateSSLCommerz = async () => {
-        const { data: res } = await useFetch("/api/backend/sslcommerz/sslcommerz", {
-            method: "PUT",
-            body: {
-                store_id: apiKey.value,
-                store_password: password.value
-            }
-        })
+const updateSSLCommerz = async () => {
 
-        apiKey.value = ''
-        password.value = ''
-        Toast.fire({
-            icon: 'success',
-            text: res.value.success
-        })
-    }
+    const { data: res } = await useFetch("/api/backend/sslcommerz/sslcommerz", {
+        method: "PUT",
+        body: {
+            store_id: apiKey.value,
+            store_password: password.value
+        }
+    })
+
+    apiKey.value = ''
+    password.value = ''
+    Toast.fire({
+        icon: 'success',
+        text: res.value.success
+    })
+
+}
 
 //=================== Update SSLCommerz ================== //
+
+// Store ID Show / Hide
+const isStoreId = ref(true)
+
+const storeIdHandler = () => {
+    if (isStoreId.value === false) {
+        document.getElementById('storeId').type = 'password'
+        isStoreId.value = true
+    } else {
+        document.getElementById('storeId').type = 'text'
+        isStoreId.value = false
+    }
+}
+// Store Password Show / Hide
+
+// Store Password Show / Hide
+const isStorePassword = ref(true)
+
+const passwordHandler = () => {
+    if (isStorePassword.value === false) {
+        document.getElementById('storePass').type = 'password'
+        isStorePassword.value = true
+    } else {
+        document.getElementById('storePass').type = 'text'
+        isStorePassword.value = false
+    }
+}
+// Store Password Show / Hide
 
 
 
