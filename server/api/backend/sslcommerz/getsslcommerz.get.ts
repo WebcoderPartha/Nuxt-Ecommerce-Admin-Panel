@@ -14,22 +14,16 @@ export default defineEventHandler( async (event) => {
     }
 
     const prisma = new PrismaClient()
-    const getBody = await readBody(event)
+ 
 
-    const sslcommerz = await prisma.sslcommerz.update({
+    const sslcommerz = await prisma.sslcommerz.findUnique({
         where: {
             id: 1
-        },
-        data: {
-            store_id: getBody?.store_id,
-            store_password: getBody?.store_password
         }
     })
 
 
-    return {
-        success: 'SSLCommerz setting updated'
-    }
+    return sslcommerz
 
 })
 
