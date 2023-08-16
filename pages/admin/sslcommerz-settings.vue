@@ -84,8 +84,15 @@ getCategory.value = categories
                 store_password: password.value
             }
         })
+
+        apiKey.value = ''
+        password.value = ''
+        Toast.fire({
+            icon: 'success',
+            text: res.value.success
+        })
     }
-getCategory.value = categories
+
 //=================== Update SSLCommerz ================== //
 
 
