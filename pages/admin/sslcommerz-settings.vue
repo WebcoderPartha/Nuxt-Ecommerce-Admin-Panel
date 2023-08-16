@@ -67,12 +67,26 @@ const Toast = $swal.mixin({
 const apiKey = ref('')
 const password = ref('')
 
-//=================== Get Category ================== //
+//=================== Get SSLCommerz ================== //
 const getCategory = useState(() => [])
 const { data: categories, refresh } = await useFetch('/api/backend/homecategoryproduct/getall', {
     method: 'GET'
 })
 getCategory.value = categories
+//=================== Get SSLCommerz ================== //
+
+//=================== Update SSLCommerz ================== //
+    const updateSSLCommerz = async () => {
+        const { data: res } = await useFetch("/api/backend/sslcommerz/sslcommerz", {
+            method: "PUT",
+            body: {
+                store_id: apiKey.value,
+                store_password: password.value
+            }
+        })
+    }
+getCategory.value = categories
+//=================== Update SSLCommerz ================== //
 
 
 

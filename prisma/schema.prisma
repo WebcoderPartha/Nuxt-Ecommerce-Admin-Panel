@@ -112,3 +112,9 @@ model gallery {
 
   @@index([productId], map: "Gallery_productId_fkey")
 }
+
+model sslcommerz {
+  id        Int     @id @default(autoincrement())
+  store_id String @db.LongText
+  store_password String @db.LongText
+}
