@@ -7,7 +7,7 @@
 
         <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7">
             <h3 class="text-xl font-semibold pt-4 mb-3">SSLCommers Setting</h3>
-            <form autocomplete="off">
+            <form @submit.prevent="updateSSLCommerz" autocomplete="off">
                 <div class="mb-2 flex flex-col gap-2">
                     <label for="">Api Sicret Store Key</label>
 
@@ -91,24 +91,34 @@ apiKey.value = categories.value.store_id
 password.value = categories.value.store_password
 //=================== Get SSLCommerz ================== //
 
+
 //=================== Update SSLCommerz ================== //
 const updateSSLCommerz = async () => {
 
-    const { data: res } = await useFetch("/api/backend/sslcommerz/sslcommerz", {
-        method: "PUT",
-        body: {
-            store_id: apiKey.value,
-            store_password: password.value
-        }
-    })
+    if(apiKey.value.length === 0){
+        Toast.fire({
+            icon: 'warning',
+            text: 'Store ID is required!'
+        })
+    }else if(password.value.length === 0){
+        Toast.fire({
+            icon: 'warning',
+            text: 'Store password is required!'
+        })
+    }else{
+        const { data: res } = await useFetch("/api/backend/sslcommerz/sslcommerz", {
+            method: "PUT",
+            body: {
+                store_id: apiKey.value,
+                store_password: password.value
+            }
+        })
 
-    apiKey.value = ''
-    password.value = ''
-    Toast.fire({
-        icon: 'success',
-        text: res.value.success
-    })
-
+        Toast.fire({
+            icon: 'success',
+            text: res.value.success
+        })
+    }
 }
 
 //=================== Update SSLCommerz ================== //
