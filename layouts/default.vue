@@ -42,6 +42,12 @@
                             
                         </div>
                     </li>
+                    <li :class="``">
+                        <NuxtLink to="/admin/sslcommerz-settings" class="cursor-pointer px-6 py-3 hover:bg-[#262930] text-white flex">
+                            <Icon name="mdi:monitor" class="text-2xl mr-3 text-white" />
+                            <span :class="``">SSLCommerz Settings</span>
+                        </NuxtLink>
+                    </li>
                 </ul>
             </nav>
         </div>
