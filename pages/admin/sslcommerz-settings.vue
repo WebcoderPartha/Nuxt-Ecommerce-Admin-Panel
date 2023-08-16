@@ -68,11 +68,12 @@ const apiKey = ref('')
 const password = ref('')
 
 //=================== Get SSLCommerz ================== //
-const getCategory = useState(() => [])
-const { data: categories, refresh } = await useFetch('/api/backend/homecategoryproduct/getall', {
+
+const { data: categories, refresh } = await useFetch("/api/backend/sslcommerz/getsslcommerz", {
     method: 'GET'
 })
-getCategory.value = categories
+apiKey.value = categories.value.store_id
+password.value = categories.value.store_password
 //=================== Get SSLCommerz ================== //
 
 //=================== Update SSLCommerz ================== //
