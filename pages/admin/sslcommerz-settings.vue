@@ -1,28 +1,35 @@
 <template>
-    <div class=" bg-gray-800 shadow-md rounded-sm shadow-gray-500 px-5 py-4 text-white w-[800px] mx-auto mt-5">
+    <div class="w-[600px] text-center my-8 mx-auto ">
 
         <Head>
-            <Title>SSL Commerz Settings</Title>
+            <Title>SSLCommers Setting</Title>
         </Head>
-        <h3 class="text-xl font-semibold py-4 text-center">Home Product Category</h3>
 
-        <div class="px-2 py-4">
-            <div class="flex gap-6">
-                <div v-for="(skip, idx) in skipLoop" >
-                    <div v-for="category in getCategory.categories.slice(skip.skip, skip.take)" :key="category.id">
-                        <div class="flex gap-3">
-                            <input v-if="category.homecategory === 1" checked @click="homeCategoryHandler(category.id)" :id="`category-${category.id}`" type="checkbox" :value="category.id">
-                            <input v-else  @click="homeCategoryHandler(category.id)" :id="`category-${category.id}`" type="checkbox" :value="category.id">
-                            <label :for="`category-${category.id}`">{{ category.name }}</label>
-                        </div>
-                    </div>
+        <div class="bg-gray-800 shadow-md rounded-sm shadow-gray-500 text-white pb-7">
+            <h3 class="text-xl font-semibold pt-4 mb-3">SSLCommers Setting</h3>
+            <form autocomplete="off">
+                <div class="mb-2 flex flex-col gap-2">
+                    <label for="">Api Sicret Key</label>
+
+                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center" v-model="apiKey"
+                        placeholder="Product name" />
                 </div>
-            </div>
+
+                <div class="mb-2 flex flex-col gap-2">
+                    <label for="">Password</label>
+                    <input type="psasword" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center" v-model="password"
+                        placeholder="" />
+                </div>
+
+
+                <div class="mb-2 mt-5">
+                    <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
+                        value="Submit" />
+                </div>
+
+            </form>
         </div>
-        
-        <div class="flex justify-center">
-            <button @click="updateHomeCategoryHandler" class=" bg-zinc-900 px-3 py-2 hover:bg-zinc-600 hover:text-black rounded-md">Save Change</button>
-        </div>
+
     </div>
 </template>
 
@@ -57,6 +64,9 @@ const Toast = $swal.mixin({
 //=========== Sweet Alert Use =============//
 
 
+const apiKey = ref('')
+const password = ref('')
+
 //=================== Get Category ================== //
 const getCategory = useState(() => [])
 const { data: categories, refresh } = await useFetch('/api/backend/homecategoryproduct/getall', {
@@ -64,63 +74,7 @@ const { data: categories, refresh } = await useFetch('/api/backend/homecategoryp
 })
 getCategory.value = categories
 
-//=================== Get Category ================== //
-const perpage = ref(6)
-const total = getCategory.value.total
-const page = Math.ceil(total / perpage.value)
-const skipLoop = useState(() => [])
-const skip = ref(0)
-const storeTake = ref(0)
 
-storeTake.value = perpage.value
-for (let i = 0; i < page; i++) {
-    if (i === 0) {
-        const data = {
-            skip: 0,
-            take: perpage.value
-        }
-        skipLoop.value.push(data)
-    } else {
-        skip.value += perpage.value
-     
-        storeTake.value = parseInt(storeTake.value + perpage.value)
-        const data = {
-            skip: skip.value,
-            take: storeTake.value
-        }
-        skipLoop.value.push(data)
-    }
-}
-
-// Unique Array 
-skipLoop.value = [...new Map(skipLoop.value.map(item=> [item['skip'],item])).values()]
-// Unique Array 
-
-const categoryIds = useState(()=> [])
-const homeCategoryHandler = (category_id) => {
-    const data = {
-        categoryId: category_id
-    }
-    categoryIds.value.push(data)
-    categoryIds.value = [...new Map(categoryIds.value.map(item=> [item['categoryId'], item])).values()]
-
-}
-
-const updateHomeCategoryHandler = async () => {
-    const {data:updateCat} = await useFetch('/api/backend/homecategoryproduct/updatecat',{
-        method: 'PUT',
-        body: {
-            categories: categoryIds.value
-        }
-    })
-
-    Toast.fire({
-        icon: 'success',
-        text: updateCat.value.success
-    })
-    categoryIds.value = []
-    refresh()
-}
 
 
 </script>
