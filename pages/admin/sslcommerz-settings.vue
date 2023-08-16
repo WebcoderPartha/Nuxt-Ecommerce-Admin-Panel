@@ -9,16 +9,16 @@
             <h3 class="text-xl font-semibold pt-4 mb-3">SSLCommers Setting</h3>
             <form autocomplete="off">
                 <div class="mb-2 flex flex-col gap-2">
-                    <label for="">Api Sicret Key</label>
+                    <label for="">Api Sicret Store Key</label>
 
-                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center" v-model="apiKey"
-                        placeholder="Product name" />
+                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none" v-model="apiKey"
+                        placeholder="Api store id" />
                 </div>
 
                 <div class="mb-2 flex flex-col gap-2">
-                    <label for="">Password</label>
-                    <input type="psasword" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center" v-model="password"
-                        placeholder="" />
+                    <label for="">Store Password</label>
+                    <input type="password" class="w-80 bg-gray-900 rounded-md px-3 py-2 place-self-center focus:outline-none" v-model="password"
+                        placeholder="Store password" />
                 </div>
 
 
