@@ -35,8 +35,14 @@
                             name="entypo:eye-with-line" />
                     </div>
                 </div>
-
-
+                <div class="mb-2">
+                <select
+                    class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300"
+                    v-model="sendbox">
+                    <option value="1">Live</option>
+                    <option value="0">Test</option>
+                </select>
+                </div>
                 <div class="mb-2 mt-5">
                     <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
                         value="Submit" />
@@ -81,14 +87,16 @@ const Toast = $swal.mixin({
 
 const apiKey = ref('')
 const password = ref('')
+const sendbox = ref(false)
 
 //=================== Get SSLCommerz ================== //
 
 const { data: categories, refresh } = await useFetch("/api/backend/sslcommerz/getsslcommerz", {
     method: 'GET'
 })
-apiKey.value = categories.value.store_id
-password.value = categories.value.store_password
+apiKey.value = categories?.value?.store_id
+password.value = categories?.value?.store_password
+sendbox.value = categories?.value?.sendbox
 //=================== Get SSLCommerz ================== //
 
 
