@@ -22,7 +22,8 @@ export default defineEventHandler( async (event) => {
         },
         data: {
             store_id: getBody?.store_id,
-            store_password: getBody?.store_password
+            store_password: getBody?.store_password,
+            sandbox: getBody?.sandbox
         }
     })
 

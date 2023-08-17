@@ -35,17 +35,18 @@
                             name="entypo:eye-with-line" />
                     </div>
                 </div>
-                <div class="mb-2">
+                <div class="mb-2 flex flex-col gap-2">
+                    <label for="">Sandbox</label>
                 <select
                     class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300"
-                    v-model="sendbox">
+                    v-model="sandbox">
                     <option value="1">Live</option>
                     <option value="0">Test</option>
                 </select>
                 </div>
                 <div class="mb-2 mt-5">
                     <input type="submit" class="w-80 bg-black hover:bg-gray-900 cursor-pointer rounded-md px-3 py-2"
-                        value="Submit" />
+                        value="Save" />
                 </div>
 
             </form>
@@ -87,7 +88,7 @@ const Toast = $swal.mixin({
 
 const apiKey = ref('')
 const password = ref('')
-const sendbox = ref(false)
+const sandbox = ref('')
 
 //=================== Get SSLCommerz ================== //
 
@@ -96,7 +97,8 @@ const { data: categories, refresh } = await useFetch("/api/backend/sslcommerz/ge
 })
 apiKey.value = categories?.value?.store_id
 password.value = categories?.value?.store_password
-sendbox.value = categories?.value?.sendbox
+sandbox.value = categories?.value?.sandbox
+
 //=================== Get SSLCommerz ================== //
 
 
@@ -118,7 +120,8 @@ const updateSSLCommerz = async () => {
             method: "PUT",
             body: {
                 store_id: apiKey.value,
-                store_password: password.value
+                store_password: password.value,
+                sandbox: sandbox.value
             }
         })
 

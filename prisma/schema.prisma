@@ -117,4 +117,5 @@ model sslcommerz {
   id        Int     @id @default(autoincrement())
   store_id String @db.LongText
   store_password String @db.LongText
+  sandbox String?
 }
