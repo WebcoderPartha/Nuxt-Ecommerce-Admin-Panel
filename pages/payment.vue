@@ -18,6 +18,9 @@ definePageMeta({
     console.log(data.value)
     // navigateTo(data.value.GatewayPageURL, {external:true})
     }
+
+
+
 </script>
 
 <style lang="scss" scoped>

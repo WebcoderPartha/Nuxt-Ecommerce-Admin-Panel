@@ -30,24 +30,13 @@
           <div class="flex gap-2">
             <input
               @change="onClickPayMethod"
-              id="cheque"
-              class="cursor-pointer"
-              type="radio"
-              name="payment_method"
-              value="Cheque"
-            />
-            <label for="cheque" class="cursor-pointer">Cheque</label>
-          </div>
-          <div class="flex gap-2">
-            <input
-              @change="onClickPayMethod"
               id="bank"
               class="cursor-pointer"
               type="radio"
               name="payment_method"
-              value="Bank Transfer"
+              value="SSLCommerz"
             />
-            <label for="bank" class="cursor-pointer">Bank Transfer</label>
+            <label for="bank" class="cursor-pointer">Online Payment (SSLCommerz)</label>
           </div>
         </div>
         <button
@@ -106,32 +95,55 @@ const { data: shipAdresGet, refresh } = await useFetch(
 const orderNowHandler = async (e) => {
   refresh();
   if (shipAdresGet?.value) {
+
     if (payMethod.value.length > 0) {
+      
       const formData = {
         carts: JSON.parse(localStorage.getItem('cart')),
         payment_method: payMethod.value,
         userId: authUser?.value?.user?.id
       }
 
-      const {data:orderNow, error} = await useFetch("/api/frontend/order/successorder", {
-        method: 'POST',
-        body: formData
-      })
-      const addCart = useCarts()
-      const cartPrice = useCartPrice()
-      cartPrice.value = 0
-      addCart.value = []
-      localStorage.removeItem('cart')
-      localStorage.removeItem('subtotal')
-      navigateTo(`/order/${orderNow.value.order.tcn}/success`)
-      // navigateTo('/order-success')
-     console.log(orderNow.value)
+      // const {data:orderNow, error} = await useFetch("/api/frontend/order/successorder", {
+      //   method: 'POST',
+      //   body: formData
+      // })
+      // const addCart = useCarts()
+      // const cartPrice = useCartPrice()
+      // cartPrice.value = 0
+      // addCart.value = []
+      // localStorage.removeItem('cart')
+      // localStorage.removeItem('subtotal')
+
+      // navigateTo(`/order/${orderNow.value.order.tcn}/success`)
+
+      // If Select SSL Commerz
+      if (payMethod.value === 'SSLCommerz') {
+        alert('ssl')
+      }else{
+        const {data:orderNow, error} = await useFetch("/api/frontend/order/successorder", {
+          method: 'POST',
+          body: formData
+        })
+        const addCart = useCarts()
+        const cartPrice = useCartPrice()
+        cartPrice.value = 0
+        addCart.value = []
+        localStorage.removeItem('cart')
+        localStorage.removeItem('subtotal')
+
+        navigateTo(`/order/${orderNow.value.order.tcn}/success`)
+      }
+
+
     } else {
       Toast.fire({
         icon: "warning",
         title: "Select payment method!",
       });
     }
+
+
   } else {
     Toast.fire({
         icon: "warning",

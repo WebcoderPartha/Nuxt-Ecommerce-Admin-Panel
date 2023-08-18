@@ -27,10 +27,10 @@
               BDT {{ order.total_price }}
             </td>
             <td class="text-center border border-slate-200">
-              {{ order.payment_method }}
+              {{ order.tran_id }}
             </td>
             <td class="text-center border border-slate-200">
-              {{ order.tran_id }}
+              {{ order.payment_method }}
             </td>
             <td class="text-center border border-slate-200">
               {{ order.order_date }}
