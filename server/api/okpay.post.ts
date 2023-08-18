@@ -1,7 +1,5 @@
 import SSLCommerzPayment from 'sslcommerz-lts'
-const store_id = 'parth618ea06215436'
-const store_passwd = 'parth618ea06215436@ssl'
-const is_live = false //true for live, false for sandbox
+import { PrismaClient } from '@prisma/client';
 
 export default defineEventHandler( async (event) => {
 
@@ -36,6 +34,16 @@ export default defineEventHandler( async (event) => {
         ship_postcode: 1000,
         ship_country: 'Bangladesh',
     };
+
+    const prisma = new PrismaClient()
+    const ssl = await prisma.sslcommerz.findUnique({
+        where: {
+            id: 1
+        }
+    }) 
+    const store_id = ssl?.store_id
+    const store_passwd = ssl?.store_password
+    const is_live = ssl?.sandbox === '1' ? true : false``
     const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
     return sslcz.init(data)
     // const ok =   sslcz.init(data)

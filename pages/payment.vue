@@ -5,6 +5,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+    layout:"ecommerce"
+})
     const payment = async () => {
         const {data} = await useFetch("/api/okpay",{
         method: "POST",
@@ -12,8 +15,8 @@
         //     ok: 'sdfsdf'
         // }
     })
-    console.log(data.value.GatewayPageURL)
-    navigateTo(data.value.GatewayPageURL, {external:true})
+    console.log(data.value)
+    // navigateTo(data.value.GatewayPageURL, {external:true})
     }
 </script>
 
