@@ -1,10 +1,10 @@
 <template>
-    <div class="max-w-[500px] mx-auto md:py-16 py-6 px-4 md:px-0">
-      <h3 class="text-xl font-semibold text-center">
-        Your placed order confirmation details below:
-      </h3>
-  
-      <ClientOnly>
+  <div class="max-w-[500px] mx-auto md:py-16 py-6 px-4 md:px-0">
+    <h3 class="text-xl font-semibold text-center">
+      Your placed order confirmation details below:
+    </h3>
+
+    <ClientOnly>
       <div class="my-4">
         <table class="border-collapse border border-slate-500 w-full text-center">
           <tr>
@@ -25,8 +25,10 @@
           </tr>
           <tr>
             <td class="border border-slate-700">Payment Status</td>
-            <td class="border border-slate-700" v-if="placeOrder.payment_status === 'Paid'"><span class=" bg-green-500 px-2 py-1 inline-block text-white rounded-md text-sm">Paid</span></td>
-            <td class="border border-slate-700" v-else><span class=" bg-red-700 px-2 py-1 inline-block text-white rounded-md text-sm">Unpaid</span></td>
+            <td class="border border-slate-700" v-if="placeOrder.payment_status === 'Paid'"><span
+                class=" bg-green-500 px-2 py-1 inline-block text-white rounded-md text-sm">Paid</span></td>
+            <td class="border border-slate-700" v-else><span
+                class=" bg-red-700 px-2 py-1 inline-block text-white rounded-md text-sm">Unpaid</span></td>
           </tr>
           <tr>
             <td class="border border-slate-700">Transation ID</td>
@@ -38,53 +40,56 @@
           </tr>
           <tr class=" h-1">
             <td class="border border-slate-700">Order Status</td>
-            <td class="border border-slate-700"><span class=" bg-orange-500 px-2 py-1 inline-block text-white rounded-md text-sm">Pending</span></td>
+            <td class="border border-slate-700"><span
+                class=" bg-orange-500 px-2 py-1 inline-block text-white rounded-md text-sm">Pending</span></td>
           </tr>
         </table>
       </div>
-  </ClientOnly>
-    </div>
-  </template>
+    </ClientOnly>
+  </div>
+</template>
   
   
 <script setup>
-  definePageMeta({
-    layout: "ecommerce",
-  });
-  useHead({
-    title: "Order Success",
-  });
-  const { data: authData } = useAuth();
-  
-  const orderid = useRoute().params.orderid
+definePageMeta({
+  layout: "ecommerce",
+});
+useHead({
+  title: "Order Success",
+});
+const { data: authData } = useAuth();
 
-  onBeforeMount(() => {
-    if (authData && authData?.value?.user?.role !== "customer") {
-      navigateTo("/auth/login");
-    }
-    if(placeOrder.value){
+const orderid = useRoute().params.orderid
+
+onBeforeMount(() => {
+  if (authData && authData?.value?.user?.role !== "customer") {
+    navigateTo("/auth/login");
+  }
+  if (placeOrder.value) {
     setTimeout(() => {
       navigateTo('/'),
-      placeOrder.value = ''
-    },6000)
+        placeOrder.value = ''
+    }, 6000)
   }
-  });
-  
-const {data: res} = await useFetch('/api/frontend/order/paymentsuccess', {
-    method: 'POST',
-    body: {
-        tcn: orderid
-    }
-})
+});
 
-  const placeOrder = useState(()=> '')
-  const {data:orderdetail} = await useFetch('/api/frontend/order/ordersuccess', {
-    method: "POST",
-    body: {
-        orderid: orderid
-    }
-  })
-  placeOrder.value = orderdetail
+// Payment Status Paid
+const { data: res } = await useFetch('/api/frontend/order/paymentsuccess', {
+  method: 'POST',
+  body: {
+    tcn: orderid
+  }
+})
+// Payment Status Paid
+
+const placeOrder = useState(() => '')
+const { data: orderdetail } = await useFetch('/api/frontend/order/ordersuccess', {
+  method: "POST",
+  body: {
+    orderid: orderid
+  }
+})
+placeOrder.value = orderdetail
 
 </script>
   

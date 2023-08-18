@@ -17,7 +17,8 @@ export default defineEventHandler(async (event) => {
     const getBody = await readBody(event)
     const paid = await prisma.order.updateMany({
         where: {
-            tcn: getBody?.tcn
+            tcn: getBody?.tcn,
+            payment_method: 'SSLCommerz'
         },
         data: {
             payment_status: 'Paid'

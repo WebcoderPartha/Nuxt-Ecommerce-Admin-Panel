@@ -28,13 +28,17 @@ export default defineEventHandler(async (event) => {
             categoryId:category?.id
         },
         skip: getBody?.skip,
-        take: getBody?.take
+        take: getBody?.take,
+        include: {
+            category: true
+        }
     })
 
 
     return {
         products: products,
         total: total,
+        category: category
     };
 
 })

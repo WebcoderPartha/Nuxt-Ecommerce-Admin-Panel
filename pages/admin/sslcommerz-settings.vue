@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="mb-2 flex flex-col gap-2">
-                    <label for="">Sandbox</label>
+                    <label for="">API Mode</label>
                 <select
                     class="w-80 bg-gray-900 mx-auto rounded-md px-3 py-2 border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5 text-blue-300"
                     v-model="sandbox">
