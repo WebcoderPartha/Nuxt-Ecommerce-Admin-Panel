@@ -7,8 +7,8 @@
           <tr>
             <th class="border border-slate-300">Order ID</th>
             <th class="border border-slate-300">Total Price</th>
-            <th class="border border-slate-300">Transation ID</th>
             <th class="border border-slate-300">Payment Method</th>
+            <th class="border border-slate-300">Payment Status</th>
             <th class="border border-slate-300">Order Date</th>
             <th class="border border-slate-300">Order Status</th>
             <th class="border border-slate-300">Detail</th>
@@ -27,10 +27,10 @@
               BDT {{ order.total_price }}
             </td>
             <td class="text-center border border-slate-200">
-              {{ order.tran_id }}
+              {{ order.payment_method }}
             </td>
             <td class="text-center border border-slate-200">
-              {{ order.payment_method }}
+              {{ order.payment_status }}
             </td>
             <td class="text-center border border-slate-200">
               {{ order.order_date }}

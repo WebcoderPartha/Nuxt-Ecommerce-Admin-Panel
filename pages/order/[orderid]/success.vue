@@ -24,6 +24,11 @@
             <td class="border border-slate-700">{{ placeOrder.payment_method }}</td>
           </tr>
           <tr>
+            <td class="border border-slate-700">Payment Status</td>
+            <td class="border border-slate-700" v-if="placeOrder.payment_status === 'Paid'"><span class=" bg-green-500 px-2 py-1 inline-block text-white rounded-md text-sm">Paid</span></td>
+            <td class="border border-slate-700" v-else><span class=" bg-red-700 px-2 py-1 inline-block text-white rounded-md text-sm">Unpaid</span></td>
+          </tr>
+          <tr>
             <td class="border border-slate-700">Transation ID</td>
             <td class="border border-slate-700">{{ placeOrder.tran_id }}</td>
           </tr>
@@ -41,7 +46,8 @@
     </div>
   </template>
   
-  <script setup>
+  
+<script setup>
   definePageMeta({
     layout: "ecommerce",
   });
@@ -64,9 +70,14 @@
   }
   });
   
+const {data: res} = await useFetch('/api/frontend/order/paymentsuccess', {
+    method: 'POST',
+    body: {
+        tcn: orderid
+    }
+})
 
   const placeOrder = useState(()=> '')
-
   const {data:orderdetail} = await useFetch('/api/frontend/order/ordersuccess', {
     method: "POST",
     body: {
@@ -75,10 +86,7 @@
   })
   placeOrder.value = orderdetail
 
- 
-
-
-  </script>
+</script>
   
-  <style lang="scss" scoped></style>
+<style lang="scss" scoped></style>
   
