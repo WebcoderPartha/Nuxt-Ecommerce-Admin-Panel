@@ -119,7 +119,21 @@ const orderNowHandler = async (e) => {
 
       // If Select SSL Commerz
       if (payMethod.value === 'SSLCommerz') {
-        alert('ssl')
+
+          const {data:resSSL, error} = await useFetch("/api/frontend/order/sslcommerz", {
+            method: 'POST',
+            body: formData
+          })
+
+          const addCart = useCarts()
+          addCart.value = []
+          const cartPrice = useCartPrice()
+          cartPrice.value = 0
+          localStorage.removeItem('cart')
+          localStorage.removeItem('subtotal')
+
+          navigateTo(`${resSSL.value.checkoutUrl}`, {external:true})
+
       }else{
         const {data:orderNow, error} = await useFetch("/api/frontend/order/successorder", {
           method: 'POST',

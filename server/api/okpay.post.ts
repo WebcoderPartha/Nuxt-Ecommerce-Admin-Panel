@@ -43,7 +43,7 @@ export default defineEventHandler( async (event) => {
     }) 
     const store_id = ssl?.store_id
     const store_passwd = ssl?.store_password
-    const is_live = ssl?.sandbox === '1' ? true : false``
+    const is_live = ssl?.sandbox === '1' ? true : false
     const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
     return sslcz.init(data)
     // const ok =   sslcz.init(data)

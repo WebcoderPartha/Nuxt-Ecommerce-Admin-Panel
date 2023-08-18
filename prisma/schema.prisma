@@ -58,7 +58,7 @@ model orderdetail {
   quantity     String
   price        String
   subtotal     String
-  order        order  @relation(fields: [orderId], references: [id], map: "OrderDetail_orderId_fkey")
+  order        order  @relation(fields: [orderId], references: [id], onDelete: Cascade, map: "OrderDetail_orderId_fkey")
 
   @@index([orderId], map: "OrderDetail_orderId_fkey")
 }
