@@ -4,7 +4,7 @@ import { NuxtAuthHandler } from "#auth";
 import { PrismaClient } from "@prisma/client";
 
 export default NuxtAuthHandler({
-  secret: "asdklfjsdlkfjsd",
+  secret: "z8M8/O12fqA3K+I7Ia+vygtx+c7X5i4pxmOnn/bnLUE=",
   pages: {
     signIn: "/auth/login",
   },
