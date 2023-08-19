@@ -119,4 +119,5 @@ model sslcommerz {
   store_id String @db.LongText
   store_password String @db.LongText
   sandbox String?
+  callback_url String?
 }

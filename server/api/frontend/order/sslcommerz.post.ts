@@ -71,17 +71,23 @@ export default defineEventHandler(async (event) => {
     })
 
 
-    const config = useRuntimeConfig()
+    // const config = useRuntimeConfig()
     // SSLCommerz Payment
+        // Get SSL Commerz Credentials 
+    const ssl = await prisma.sslcommerz.findUnique({
+        where: {
+            id: 1
+        }
+    }) 
 
     const data = {
         total_amount: totalPrice,
         currency: 'BDT',
         tran_id: trans_id, // use unique tran_id for each api call
-        success_url: `${config.public.baseurl}/success/${tracking_number}`,
-        fail_url:  `${config.public.baseurl}/payment/fail/${tracking_number}`,
-        cancel_url:  `${config.public.baseurl}/success/${tracking_number}/cancel`,
-        ipn_url: `${config.public.baseurl}/success/${tracking_number}/ipn`,
+        success_url: `${ssl?.callback_url}/success/${tracking_number}`,
+        fail_url: `${ssl?.callback_url}/payment/fail/${tracking_number}`,
+        cancel_url: `${ssl?.callback_url}/success/${tracking_number}/cancel`,
+        ipn_url: `${ssl?.callback_url}/success/${tracking_number}/ipn`,
         shipping_method: 'Courier',
         product_name: 'Ecommerce.',
         product_category: 'Electronic',
@@ -105,12 +111,7 @@ export default defineEventHandler(async (event) => {
         ship_country: 'Bangladesh',
     };
 
-    // Get SSL Commerz Credentials 
-    const ssl = await prisma.sslcommerz.findUnique({
-        where: {
-            id: 1
-        }
-    }) 
+
     const store_id = ssl?.store_id
     const store_passwd = ssl?.store_password
     const is_live = ssl?.sandbox === '1' ? true : false
