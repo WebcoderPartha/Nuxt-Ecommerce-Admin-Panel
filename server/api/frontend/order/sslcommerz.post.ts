@@ -79,9 +79,9 @@ export default defineEventHandler(async (event) => {
         currency: 'BDT',
         tran_id: trans_id, // use unique tran_id for each api call
         success_url: `${config.public.baseurl}/success/${tracking_number}`,
-        fail_url:  `${config}/payment/fail/${tracking_number}`,
-        cancel_url:  `${config}/success/${tracking_number}/cancel`,
-        ipn_url: `${config}/success/${tracking_number}/ipn`,
+        fail_url:  `${config.public.baseurl}/payment/fail/${tracking_number}`,
+        cancel_url:  `${config.public.baseurl}/success/${tracking_number}/cancel`,
+        ipn_url: `${config.public.baseurl}/success/${tracking_number}/ipn`,
         shipping_method: 'Courier',
         product_name: 'Ecommerce.',
         product_category: 'Electronic',
