@@ -17,6 +17,7 @@ onBeforeMount(() => {
 });
 
 const orderid = useRoute().params.orderid
+navigateTo(`/order/fail/${orderid}`)
 
 
 </script>
