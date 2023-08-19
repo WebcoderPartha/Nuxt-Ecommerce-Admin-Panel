@@ -156,12 +156,24 @@ const addToCart = async (id) => {
                 quantity.value = 1
             }
         }
+        addcart.value =  JSON.parse(localStorage.getItem('cart'))
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
+        
 
     } else {
         getCartData.push(addData)
         localStorage.setItem('cart', JSON.stringify(getCartData))
         addcart.value = JSON.parse(localStorage.getItem('cart'))
         quantity.value = 1
+        let price = 0
+        addcart.value.forEach(ct => {
+            price += parseInt(ct.total)
+        })
+        localStorage.setItem('subtotal', JSON.stringify(price))
     }
 
 }
